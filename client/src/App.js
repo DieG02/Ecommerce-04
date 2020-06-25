@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Products from './components/Products.js';
+import data from './data.js';
+import Nav from './components/Nav';
 
 function App() {
-  return (
+  
+  const onSearch = function(productName){
+    //----- ADD -----
+    // fetch(`http://localhost:3000/products?name=${productName}`)
+    fetch(`https://randomuser.me/api/`) //----- DELETE
+      .then(res => res.json())
+      .then((data) => {
+        if(data !== undefined){
+          //---- ADD -----
+          //<Products items={data}/>
+          console.log(data.results[0]); //----- DELETE ------
+          console.log(productName)      //----- MODIFY ------
+        } else {
+          alert("No se encontraron productos con este nombre");
+        }
+      }
+    )
+  }
+
+  return (    
     <div className="App">
+      <Nav onSearch={onSearch}/>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      {/*----- DELETE -----*/}
+        <Products items={data}/>
       </header>
     </div>
   );
 }
-
 export default App;
+
