@@ -8,13 +8,10 @@ export default function Products({ items }) {
     <div className='products'>
       {items.map(p => 
         <Product
-        //----- MODIFY -----
-        
-        //En base a lo que devuelve el BE
-          name={p.name}
-          price={p.price}
+          name={p.nombre + " " + p.color}
+          price={p.precio}
           // img={p.img}
-          description={p.description}
+          description={"Talle: " + p.talle}
         />
       )}
     </div>

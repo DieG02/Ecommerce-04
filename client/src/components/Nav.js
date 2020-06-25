@@ -36,7 +36,7 @@ function Nav({ onSearch }) {
           {/* <li className="nav-item"><a className="nav-link disabled" href="#">Disabled</a></li> */}
         </ul>
         <SearchBar onSearch={onSearch}/>
-        <LogBar/>
+        {/* <LogBar/> */}
       </div>
     </nav>
   );
