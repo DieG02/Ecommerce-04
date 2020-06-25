@@ -10,12 +10,23 @@ const router = Router();
 // i.e: router.use('/auth', authRouter);
 router.use('/auth', authRouter);
 // router.use('/products', productRouter);
-router.get('/productos', function (req, res) {
-    Product.findAll()
-        .then(function(product) {
-            res.send(product);
+router.get('/productos', function(req, res) {
+    var word = req.query.search;
+    if (word) {
+        Product.findAll({
+            where: {
+                nombre: word
+            }
+        }).then(function(products) {
+            return res.json(products);
+        })
+    } else {
+        Product.findAll()
+        .then(function(products) {
+            return res.json(products);
         });
+    }
 });
 
-
 module.exports = router;
+
