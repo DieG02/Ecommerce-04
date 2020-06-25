@@ -5,7 +5,7 @@ const Product = (sequelize, S) => {
       type: S.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
 
     nombre: {
