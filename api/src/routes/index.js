@@ -1,7 +1,7 @@
 const { Router } = require('express');
 // import all routers;
 const authRouter = require('./auth.js');
-const {Product} = require ('../models');
+const pRouter = require ('./products.js');
 
 
 const router = Router();
@@ -10,23 +10,8 @@ const router = Router();
 // i.e: router.use('/auth', authRouter);
 router.use('/auth', authRouter);
 // router.use('/products', productRouter);
-router.get('/productos', function(req, res) {
-    var word = req.query.search;
-    if (word) {
-        Product.findAll({
-            where: {
-                nombre: word
-            }
-        }).then(function(products) {
-            return res.json(products);
-        })
-    } else {
-        Product.findAll()
-        .then(function(products) {
-            return res.json(products);
-        });
-    }
-});
+router.use('/productos', pRouter);
+
 
 module.exports = router;
 

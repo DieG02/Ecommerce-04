@@ -1,0 +1,49 @@
+const server = require('express').Router();
+const { Product } = require('../models');
+
+server.get('/', function(req, res) {
+    var word = req.query.search;
+    if (word) {
+        Product.findAll({
+            where: {
+                nombre: word,
+            }
+        }).then(function(products) {
+            return res.json(products);
+        })
+    } else {
+        Product.findAll()
+        .then(function(products) {
+            return res.json(products);
+        });
+    }
+});
+
+server.get('/:idproducto', function(req, res) {
+    var id = req.params.idproducto;
+    Product.findOne({
+        where: {
+            id: id,
+        }
+    }).then(function(product) {
+        return res.json(product)
+    })
+})
+
+server.post('/', function (req, res){
+    Product.create(req.body);
+    res.send('Se agrego un producto nuevo!');
+});
+
+server.put('/:id', function(req, res){   
+    var id = req.params.id;
+    Product.findOne({
+        where: {
+            id: id
+        }}).then(function(product){
+        product.update(req.body)
+    })
+    res.send('Se actualizo el producto!');
+});
+
+module.exports = server;
