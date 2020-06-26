@@ -17,5 +17,3 @@ export default function Products({ items }) {
     </div>
   );
 }
-
-//products deberia traer un array para poder aplicarle .map.

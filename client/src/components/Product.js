@@ -1,20 +1,27 @@
 import React from 'react';
-import image from '../images/tshirt.jpg'
+import image from '../images/zapatillas.jpg';
+import edit from '../images/iconEdit.png';
 import './Product.css'
 
 //Componente de muestra en el catálogo
-export default function Product ({ name, price, description }) {
-    return (
-    <div className="productContainer">
-        <img src={image} className="image" alt="logo" />
-        <h3 className="texto">{name}</h3>
-        <h5 className="texto">{price}</h5>
-        <p className="texto">{description}</p>
-    </div>
-   )
-};
+export default function Product ({ name }) {
 
-// imagen (tiene que ser un link)
-// Titulo
-// precio
-// Descripcion
+  return (
+    <div className="card-deck productCard">
+      <div className="card">
+        <div>
+          <a title="Editar" className="icon" href="http://localhost:3000/producto/edit"><img src={edit} alt="Editar"/></a>
+          <a href="http://localhost:3000/producto/detail">
+            <img className="card-img-top productView" src={image} alt="Product View"/>
+          </a>
+        </div>
+
+        <div className="card-body">
+          <a title="Ver" href="http://localhost:3000/producto/detail">
+            <h6 className="card-title" style={{color: '#000'}}>{name}</h6>
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+};
