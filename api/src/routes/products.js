@@ -1,12 +1,16 @@
 const server = require('express').Router();
 const { Product } = require('../models');
+const Sequelize = require ('sequelize');
+const Op = Sequelize.Op;
 
 server.get('/', function(req, res) {
     var word = req.query.search;
     if (word) {
         Product.findAll({
             where: {
-                nombre: word,
+                nombre: {
+                    [Op.iLike]: '%' + word + '%'
+                }
             }
         }).then(function(products) {
             return res.json(products);
