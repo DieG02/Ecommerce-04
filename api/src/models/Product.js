@@ -1,6 +1,7 @@
+const S = require('sequelize');
+
 const Product = (sequelize, S) => {
-  // defino el modelo
-  const P = sequelize.define('product', {
+  const modelP = sequelize.define('product', {
     id: {
       type: S.INTEGER,
       allowNull: false,
@@ -41,10 +42,8 @@ const Product = (sequelize, S) => {
       allowNull: false
     }
 
-
   });
-  
-  return P;
+  return modelP;
 };
 
 module.exports = Product;
