@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Product } = require('../models');
+const { Product } = require('../models/index');
 const Sequelize = require ('sequelize');
 const Op = Sequelize.Op;
 
@@ -48,6 +48,19 @@ server.put('/:id', function(req, res){
         product.update(req.body)
     })
     res.send('Se actualizo el producto!');
+});
+
+server.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    Product.destroy({
+            where: { 
+                id: id 
+            }
+        })
+        .then(productoEliminado => {
+            res.json(productoEliminado);
+        })
+        res.send('Se elimino el producto!');
 });
 
 module.exports = server;
