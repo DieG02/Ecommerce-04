@@ -1,10 +1,11 @@
 import React from 'react';
+// import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
-import LogBar from './LogBar';
+// import LogBar from './LogBar';
 
 
 function Nav({ onSearch }) {
-  //Dentro de los props debeía tener el estado de los botones?
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">eCommerce_ft02_G4</a>
@@ -17,10 +18,17 @@ function Nav({ onSearch }) {
           <li className="nav-item active">
             <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
           </li>
-          <li className="nav-item">
-            {/* <a className="nav-link" href="/">Link</a> */}
-            <a className="nav-link" href="/products">Productos <span className="sr-only"></span></a>
+
+          <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Productos
+            </a>
+            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a className="dropdown-item" href="/producto/add">Añadir</a> 
+              <a className="dropdown-item" href="/producto/delete">Eliminar</a>
+            </div>
           </li>
+          
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Categorias
@@ -33,7 +41,6 @@ function Nav({ onSearch }) {
               <a className="dropdown-item" href="/">Temporada</a>
             </div>
           </li>
-          {/* <li className="nav-item"><a className="nav-link disabled" href="#">Disabled</a></li> */}
         </ul>
         <SearchBar onSearch={onSearch}/>
         {/* <LogBar/> */}
