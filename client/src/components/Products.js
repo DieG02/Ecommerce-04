@@ -8,10 +8,8 @@ export default function Products({ items }) {
     <div className='products'>
       {items.map(p => 
         <Product
-          name={p.nombre + " " + p.color}
-          price={p.precio}
-          // img={p.img}
-          description={"Talle: " + p.talle}
+          name={p.nombre}
+          id={p.id}
         />
       )}
     </div>

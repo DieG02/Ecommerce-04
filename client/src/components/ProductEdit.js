@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 
-export default function ProductAdd({ addProduct }){
+export default function ProductEdit({ id, editProduct}){
 
-  const [id, setId] = useState(0);
+  const [datos, setDatos] = useState({});
+
+  //Busca por Id
+  if(Object.keys(datos).length === 0){
+    fetch(`http://localhost:1337/productos/${id}`)
+      .then(res => res.json())
+      .then(data => setDatos(data))
+  }
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [stock, setStock] = useState(0);
@@ -13,36 +21,35 @@ export default function ProductAdd({ addProduct }){
 
   const data = {
     id: id,
-    nombre: name,
-    descripcion: description,
-    talle: talle,
-    color: color,
-    precio: price,
-    imagen: img,
-    stock: stock,
-    createdAt: null
+    nombre: name || datos.nombre,
+    descripcion: description || datos.descripcion,
+    talle: talle || datos.talle,
+    color: color || datos.color,
+    precio: price || datos.precio,
+    imagen: img || datos.imagen,
+    stock: stock || datos.stock,
+    updatedAt: null
   }
-    
+
   return(
     <div>
       <form onSubmit={
           (e) => {
             e.preventDefault();
-            //llamamos a una función en la API con los parámetros
-            addProduct(data);
+            //llamamos a una función en la API con los nuevos parámetros
+            editProduct(data);
       }}>
         <div className="form-row">
           <div className="form-group col-md-2">
-            <label>Id</label>
+          <label>Id</label>
             <input 
               type="number" 
               className="form-control" 
               min="0" 
               placeholder="Ej: 1"
-              // id="idNumber" 
-              // value={id} 
-              onChange={e => setId(e.target.value)}
-              required
+              id="idNumber" 
+              value={datos.id} 
+              disabled
             />
           </div>
           <div className="form-group col-md-10">
@@ -50,8 +57,8 @@ export default function ProductAdd({ addProduct }){
             <input 
               className="form-control" 
               placeholder="Nombre del producto"
-              // id="name"
-              // value={name} 
+              id="name"
+              value={name || datos.nombre} 
               onChange={e => setName(e.target.value)}
               required
             />
@@ -64,8 +71,8 @@ export default function ProductAdd({ addProduct }){
           <input 
             className="form-control" 
             placeholder="Descripción del producto"
-            // id="description" 
-            // value={description} 
+            id="description" 
+            value={description || datos.descripcion} 
             onChange={e => setDescription(e.target.value)}
             required
           />
@@ -89,6 +96,8 @@ export default function ProductAdd({ addProduct }){
                 className="form-control"
                 aria-label="" 
                 aria-describedby="basic-addon1"
+                id="color"
+                value={color || datos.color} 
                 onChange={e => setColor(e.target.value)} 
                 required/>  
             </div>
@@ -98,8 +107,8 @@ export default function ProductAdd({ addProduct }){
             <input 
               className="form-control" 
               placeholder="Cant. disponible" 
-              // id="stock" 
-              // value={stock} 
+              id="stock" 
+              value={stock || datos.stock} 
               onChange={e => setStock(e.target.value)} 
               required/>
           </div>
@@ -113,8 +122,8 @@ export default function ProductAdd({ addProduct }){
                 className="form-control" 
                 aria-label="Default" 
                 aria-describedby="inputGroup-sizing-default" 
-                // id="price" 
-                // value={price} 
+                id="price" 
+                value={price || datos.precio} 
                 onChange={e => setPrice(e.target.value)} 
                 required/>
             </div>
@@ -124,8 +133,8 @@ export default function ProductAdd({ addProduct }){
             <input 
               className="form-control" 
               placeholder="Ej: 14,16,18" 
-              // id="stock" 
-              // value={stock} 
+              id="talle" 
+              value={talle || datos.talle} 
               onChange={e => setTalle(e.target.value)} 
               required/>
           </div>
@@ -146,14 +155,14 @@ export default function ProductAdd({ addProduct }){
               aria-describedby="inputGroup-sizing-sm" 
               placeholder="Añadir imágen por URL"
               id="img"
-              // value={img}
+              value={img || datos.imagen}
               onChange={e => {
                 setImg(e.target.value)
               }}
             />
         </div>
     
-        <button type="submit" className="btn btn-primary">Añadir</button>
+        <button type="submit" className="btn btn-primary">Guardar Cambios</button>
       </form>
     </div>
   )
