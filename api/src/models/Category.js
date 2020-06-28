@@ -18,7 +18,8 @@ const Category = (sequelize, S) => {
         descripcion: {
             type: S.TEXT,
         },
-    });
+    }
+    , {timestamps: false});
     return modelC;
 
 };
