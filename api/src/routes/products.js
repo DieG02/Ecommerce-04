@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Product } = require('../models/index');
+const { Product, Category } = require('../models/index');
 const Sequelize = require ('sequelize');
 const Op = Sequelize.Op;
 
@@ -41,13 +41,53 @@ server.post('/', function (req, res){
 
 server.put('/:id', function(req, res){   
     var id = req.params.id;
-    Product.findOne({
-        where: {
-            id: id
-        }}).then(function(product){
-        product.update(req.body)
-    })
-    res.send('Se actualizo el producto!');
+    var accion = req.query.accion;
+    var nombre = req.query.categoria;
+
+    var producto = function () {
+        return Product.findOne({
+            where: {
+                id: id
+            }});
+    };
+
+    var categoria = function () {
+        return Category.findOne({
+            where: {
+                nombre: nombre
+            }
+        })
+    };
+
+    if (accion) {
+        if (accion = "agregar") {
+            Promise.all([producto(), categoria()]).then((response ) => {
+                if (response[0] && response[1]) {
+                    response[0].addCategory(response[1]);
+                    res.send("Categoria agregada!");
+                } else {
+                    res.status(404).send("Categoria o producto invalidos!");
+                };
+            }).catch(() => res.sendStatus(400));   
+        }
+        
+        if (accion = "eliminar") {
+            Promise.all([producto(), categoria()]).then((response) => {
+                if (response[0] && response[1]) {
+                    response[0].removeCategory(response[1]);
+                    res.send("Categoria eliminada!");
+                } else {
+                    res.status(404).send("Categoria o producto invalidos!");
+                };
+            }).catch(() => res.sendStatus(400));
+        } else { res.status(400).send("La accion debe ser agregar o eliminar!") }
+    } else {
+            producto().then(function(product){
+            product.update(req.body)
+        })
+        res.send('Se actualizo el producto!');
+    }
+    
 });
 
 server.delete('/:id', (req, res) => {

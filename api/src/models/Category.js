@@ -12,12 +12,14 @@ const Category = (sequelize, S) => {
         nombre: {
             type: S.STRING,
             allowNull: false,
+            unique: true
         },
 
         descripcion: {
             type: S.TEXT,
         },
-    });
+    }
+    , {timestamps: false});
     return modelC;
 
 };

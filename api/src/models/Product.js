@@ -42,7 +42,8 @@ const Product = (sequelize, S) => {
       allowNull: false
     }
 
-  });
+  }
+  , {timestamps: false});
   return modelP;
 };
 
