@@ -13,6 +13,7 @@ function Nav({ onSearch, addCategory }) {
       const name = prompt('¿El nombre de la Categoría?');
       if(name === null) return alert('Se ha cancelado la operación');
       const description = prompt('¿Una descripción?', 'Opcional...');
+
       const data = {
         id: id,
         nombre: name,
