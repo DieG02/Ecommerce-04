@@ -8,15 +8,22 @@ function Nav({ onSearch, addCategory }) {
 
   function getDataCategory(){
     setTimeout(() => {
-      const id = prompt('ID de la nueva categoría', 'Ej: 1');
-      const name = prompt('¿El nombre de la Categoría?', 'Ej: Remeras');
-      const description = prompt('¿Una descripción?', 'Es una categoría para niños...');
+      const id = prompt('ID de la nueva categoría');
+      if(id === null) return alert('Se ha cancelado la operación');
+      const name = prompt('¿El nombre de la Categoría?');
+      if(name === null) return alert('Se ha cancelado la operación');
+      const description = prompt('¿Una descripción?', 'Opcional...');
+
       const data = {
         id: id,
         nombre: name,
         descripcion: description
       }
-      addCategory(data)
+      if(data.id === "" || data.nombre === ""){
+        return prompt('Id y Nombre son obligatorios, No se ha podido crear la Categoría');
+      } else{
+        addCategory(data)
+      }
     }, 1000)
   }
 
