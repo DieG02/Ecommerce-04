@@ -1,5 +1,6 @@
 import React from 'react';
 import Product from './Product.js';
+import './Product.css'
 
 export default function Products({ items }) {
   if(!items) return <div message="notFoundMessage">Su producto no ha sido encontrado</div>;
@@ -8,8 +9,9 @@ export default function Products({ items }) {
     <div className='products'>
       {items.map(p => 
         <Product
-          name={p.nombre}
           id={p.id}
+          name={p.nombre}
+          img={p.imagen}
         />
       )}
     </div>

@@ -4,7 +4,21 @@ import SearchBar from './SearchBar';
 // import LogBar from './LogBar';
 
 
-function Nav({ onSearch }) {
+function Nav({ onSearch, addCategory }) {
+
+  function getDataCategory(){
+    setTimeout(() => {
+      const id = prompt('ID de la nueva categoría', 'Ej: 1');
+      const name = prompt('¿El nombre de la Categoría?', 'Ej: Remeras');
+      const description = prompt('¿Una descripción?', 'Es una categoría para niños...');
+      const data = {
+        id: id,
+        nombre: name,
+        descripcion: description
+      }
+      addCategory(data)
+    }, 1000)
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,7 +30,7 @@ function Nav({ onSearch }) {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+            <a className="nav-link" href="/">Catálogo<span className="sr-only">(current)</span></a>
           </li>
 
           <li className="nav-item dropdown">
@@ -34,11 +48,11 @@ function Nav({ onSearch }) {
               Categorias
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="/">Remeras</a>
-              <a className="dropdown-item" href="/">Pantalones</a>
-              <a className="dropdown-item" href="/">Calzado</a>
+              <a className="dropdown-item" href="/categorias/remeras">Remeras</a>
+              <a className="dropdown-item" href="/categorias/pantalones">Pantalones</a>
+              <a className="dropdown-item" href="/categorias/calzado">Calzado</a>
               <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="/">Temporada</a>
+              <a className="dropdown-item" href="#" onClick={() => getDataCategory()}>Agregar Categoría</a>
             </div>
           </li>
         </ul>

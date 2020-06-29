@@ -16,7 +16,7 @@ export default function SearchBar({onSearch}) {
       <input 
         className="form-control mr-sm-2" 
         type="search" 
-        placeholder="Search" 
+        placeholder="¿Qué estás buscando?" 
         aria-label="Search"
         value={name}
         onChange={e => setName(e.target.value)}
@@ -25,7 +25,7 @@ export default function SearchBar({onSearch}) {
       <button 
         className="btn btn-outline-dark my-2 my-sm-0" 
         style={{border: 'none'}} 
-        type="submit">Search
+        type="submit">Buscar
       </button>
     </form>
   );
