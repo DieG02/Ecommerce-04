@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Color from './Color'
+import Talle from './Talle'
 // import image from '../images/zapatillas.jpg';
 
 export default function ProductDetail ({ match }) {
@@ -29,9 +31,9 @@ export default function ProductDetail ({ match }) {
           </div>
         </div>
         <div class="col-4">        
-          COLORES
+          <Color />
           <br/>
-          TALLES
+          <Talle />
         </div>
       </div>
     </div>
