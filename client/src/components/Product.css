@@ -1,7 +1,14 @@
-.productCard{
-    max-width: 250px;
-    max-height: 350px;
+.products{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.productCard{
+    width: 200px;
+    height: 300px;
+    margin: 0px 10px;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
   }
 .icon{
@@ -11,6 +18,10 @@
 }
 .productView{
     background-size: cover;
+}
+.card{
+    margin-left: 0px !important;
+    margin-right: 0px !important;    
 }
 
 

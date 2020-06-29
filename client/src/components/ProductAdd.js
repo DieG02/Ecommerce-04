@@ -53,7 +53,7 @@ export default function ProductAdd({ addProduct }){
               // id="name"
               // value={name} 
               onChange={e => setName(e.target.value)}
-              required
+              
             />
           </div>
         </div>
@@ -67,7 +67,6 @@ export default function ProductAdd({ addProduct }){
             // id="description" 
             // value={description} 
             onChange={e => setDescription(e.target.value)}
-            required
           />
         </div>
 
@@ -90,7 +89,7 @@ export default function ProductAdd({ addProduct }){
                 aria-label="" 
                 aria-describedby="basic-addon1"
                 onChange={e => setColor(e.target.value)} 
-                required/>  
+                />  
             </div>
           </div>
           <div className="form-group col-md-4">
@@ -101,7 +100,7 @@ export default function ProductAdd({ addProduct }){
               // id="stock" 
               // value={stock} 
               onChange={e => setStock(e.target.value)} 
-              required/>
+              />
           </div>
           <div className="form-group col-md-4">
             <label>Precio</label>
