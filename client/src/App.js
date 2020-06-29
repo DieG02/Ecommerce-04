@@ -5,6 +5,7 @@ import './App.css';
 import Products from './components/Products.js';
 import ProductAdd from './components/ProductAdd.js';
 import ProductEdit from './components/ProductEdit.js';
+import ProductDetail from './components/ProductDetail.js';
 import Nav from './components/Nav.js';
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
   const addProduct = function(data){
     console.log(JSON.stringify(data));
     fetch('http://localhost:1337/productos', {
-      method: 'POST', 
+      method: 'POST', // or 'PUT'
       body: JSON.stringify(data), 
       headers:{
         'Content-Type': 'application/json'
@@ -33,6 +34,7 @@ function App() {
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', response));
+    alert('Se ha agregado el producto!')
   }
   
   //Edita un producto
@@ -44,13 +46,27 @@ function App() {
       headers:{
         'Content-Type': 'application/json'
       },
-    }).then(res => res.json())
+    }).then(res => res.json());
+    alert('Se ha modificado el producto!')
   }
 
+   //Añade Categoría
+   const addCategory = function(data){
+    console.log(JSON.stringify(data));
+    fetch('http://localhost:1337/categorias', {
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(data), 
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => alert('Se ha agregado la categoría!', response));
+  }
 
   return ( 
     <div className="App">
-      <Nav onSearch={onSearch}/>
+      <Nav onSearch={onSearch} addCategory={addCategory}/>
       <header className="App-header">
 
       <Route
@@ -74,6 +90,10 @@ function App() {
             editProduct={editProduct}
           />
         }
+      />
+       <Route
+        path='/producto/detail/:id'
+        component={ProductDetail}      
       />
 
       </header>

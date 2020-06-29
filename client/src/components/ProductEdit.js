@@ -74,7 +74,6 @@ export default function ProductEdit({ id, editProduct}){
             id="description" 
             value={description || datos.descripcion} 
             onChange={e => setDescription(e.target.value)}
-            required
           />
         </div>
 
@@ -99,7 +98,7 @@ export default function ProductEdit({ id, editProduct}){
                 id="color"
                 value={color || datos.color} 
                 onChange={e => setColor(e.target.value)} 
-                required/>  
+                />  
             </div>
           </div>
           <div className="form-group col-md-4">
@@ -110,7 +109,7 @@ export default function ProductEdit({ id, editProduct}){
               id="stock" 
               value={stock || datos.stock} 
               onChange={e => setStock(e.target.value)} 
-              required/>
+              />
           </div>
           <div className="form-group col-md-4">
             <label>Precio</label>
