@@ -42,12 +42,12 @@ server.post('/', function (req, res){
 server.put('/:id', function(req, res){   
     var id = req.params.id;
     var accion = req.body.accion;
-    var idCategoria = req.body.categoria;
+    var nameCat = req.body.categoria;
 
     var producto = function () {
         return Product.findOne({
             where: {
-                id: id
+                nombre: nameCat
             }});
     };
 

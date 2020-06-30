@@ -35,6 +35,7 @@ const Product = (sequelize, S) => {
 
     imagen: {
       type: S.STRING,
+      allowNull: false
     },
 
     stock: {
