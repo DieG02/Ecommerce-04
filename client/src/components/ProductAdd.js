@@ -39,8 +39,6 @@ export default function ProductAdd({ addProduct }){
               className="form-control" 
               min="0" 
               placeholder="Ej: 1"
-              // id="idNumber" 
-              // value={id} 
               onChange={e => setId(e.target.value)}
               required
             />
@@ -50,10 +48,7 @@ export default function ProductAdd({ addProduct }){
             <input 
               className="form-control" 
               placeholder="Nombre del producto"
-              // id="name"
-              // value={name} 
               onChange={e => setName(e.target.value)}
-              
             />
           </div>
         </div>
@@ -64,15 +59,12 @@ export default function ProductAdd({ addProduct }){
           <input 
             className="form-control" 
             placeholder="Descripción del producto"
-            // id="description" 
-            // value={description} 
             onChange={e => setDescription(e.target.value)}
           />
         </div>
 
-
         <div className="form-row">
-          <div className="form-group col-md-2">
+          <div className="form-group col-md-3">
             <label>Colores</label>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
@@ -92,39 +84,19 @@ export default function ProductAdd({ addProduct }){
                 />  
             </div>
           </div>
-          <div className="form-group col-md-4">
+          <div className="form-group col-md-5">
             <label>Stock</label>
             <input 
               className="form-control" 
               placeholder="Cant. disponible" 
-              // id="stock" 
-              // value={stock} 
               onChange={e => setStock(e.target.value)} 
               />
           </div>
           <div className="form-group col-md-4">
-            <label>Precio</label>
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-default">$</span>
-              </div>
-              <input 
-                className="form-control" 
-                aria-label="Default" 
-                aria-describedby="inputGroup-sizing-default" 
-                // id="price" 
-                // value={price} 
-                onChange={e => setPrice(e.target.value)} 
-                required/>
-            </div>
-          </div>
-          <div className="form-group col-md-2">
             <label>Talla</label>
             <input 
               className="form-control" 
               placeholder="Ej: 14,16,18" 
-              // id="stock" 
-              // value={stock} 
               onChange={e => setTalle(e.target.value)} 
               required/>
           </div>
@@ -145,7 +117,6 @@ export default function ProductAdd({ addProduct }){
               aria-describedby="inputGroup-sizing-sm" 
               placeholder="Añadir imágen por URL"
               id="img"
-              // value={img}
               onChange={e => {
                 setImg(e.target.value)
               }}

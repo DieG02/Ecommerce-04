@@ -35,22 +35,24 @@ function App() {
     )
   }
 
-
   //Añade un producto
   const addProduct = function(data){
     console.log(JSON.stringify(data));
     fetch('http://localhost:1337/productos', {
-      method: 'POST', // or 'PUT'
+      method: 'POST', 
       body: JSON.stringify(data), 
       headers:{
         'Content-Type': 'application/json'
       }
-    }).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
-    alert('Se ha agregado el producto!')
+    }).then((res)=>{
+      if(res.status === 200){
+        return window.location.replace('http://localhost:3000')
+      } else {
+        alert('No se agrego el producto!');
+      }
+    })
   }
-  
+
   //Edita un producto
   const editProduct = function(data){
     console.log(JSON.stringify(data));
@@ -60,11 +62,16 @@ function App() {
       headers:{
         'Content-Type': 'application/json'
       },
-    }).then(res => res.json());
-    alert('Se ha modificado el producto!')
+    }).then((res)=>{
+      if(res.status === 200){
+        return window.location.replace('http://localhost:3000')
+      } else {
+        alert('No se agrego el producto!');
+      }
+    })
   }
 
-  //Añade Categoría
+  //Añade Nueva Categoría
   const addCategory = function(data){
     console.log(JSON.stringify(data));
     fetch('http://localhost:1337/categorias', {
@@ -73,11 +80,16 @@ function App() {
       headers:{
         'Content-Type': 'application/json'
       }
-    }).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => alert('Se ha agregado la categoría!'));
+    }).then((res)=>{
+      if(res.status === 200){
+        return window.location.replace('http://localhost:3000')
+      } else {
+        alert('No se agrego el producto!');
+      }
+    })
   }
 
+  
   return ( 
     <div className="App">
       <Nav onSearch={onSearch}/>
@@ -88,7 +100,7 @@ function App() {
         path='/'
         component={() => <Products items={product}/>}
       />
-      
+
       <Route
         exact
         path='/catalogo'
