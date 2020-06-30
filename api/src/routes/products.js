@@ -41,8 +41,8 @@ server.post('/', function (req, res){
 
 server.put('/:id', function(req, res){   
     var id = req.params.id;
-    var accion = req.query.accion;
-    var nombre = req.query.categoria;
+    var accion = req.body.accion;
+    var idCategoria = req.body.categoria;
 
     var producto = function () {
         return Product.findOne({
@@ -52,19 +52,18 @@ server.put('/:id', function(req, res){
     };
 
     var categoria = function () {
-        return Category.findOne({
-            where: {
-                nombre: nombre
-            }
-        })
+            return Category.findOne({
+                where: {
+                    id: idCategoria
+                }
+            });
     };
 
     if (accion) {
         if (accion = "agregar") {
             Promise.all([producto(), categoria()]).then((response ) => {
                 if (response[0] && response[1]) {
-                    response[0].addCategory(response[1]);
-                    res.send("Categoria agregada!");
+                    (response[0]).addCategory(response[1])
                 } else {
                     res.status(404).send("Categoria o producto invalidos!");
                 };
@@ -74,13 +73,12 @@ server.put('/:id', function(req, res){
         if (accion = "eliminar") {
             Promise.all([producto(), categoria()]).then((response) => {
                 if (response[0] && response[1]) {
-                    response[0].removeCategory(response[1]);
-                    res.send("Categoria eliminada!");
+                    (response[0]).removeCategory(response[1])
                 } else {
                     res.status(404).send("Categoria o producto invalidos!");
                 };
             }).catch(() => res.sendStatus(400));
-        } else { res.status(400).send("La accion debe ser agregar o eliminar!") }
+        }
     } else {
             producto().then(function(product){
             product.update(req.body)

@@ -19,7 +19,7 @@ const Product = (sequelize, S) => {
     },
 
     talle: {
-      type: S.INTEGER,
+      type: S.STRING,
       allowNull: false,
     },
 
@@ -29,7 +29,7 @@ const Product = (sequelize, S) => {
     },
 
     precio: {
-      type: S.INTEGER,
+      type: S.REAL,
       allowNull: false
     },
 
@@ -40,7 +40,7 @@ const Product = (sequelize, S) => {
     stock: {
       type: S.INTEGER,
       allowNull: false
-    }
+    },
 
   }
   , {timestamps: false});
