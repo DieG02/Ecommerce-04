@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Color from './Color'
+import Talle from './Talle'
 // import image from '../images/zapatillas.jpg';
 
 export default function ProductDetail ({ match }) {
@@ -25,13 +27,14 @@ export default function ProductDetail ({ match }) {
               <h2 style={{color:`black`, alignSelf:`right`}}> {product.nombre}</h2>
               <img className="card-img-top productView" src={product.imagen} alt="Product View"/>
               <p style={{color:`black`}}> $ {product.precio} </p>
+              <p style={{color:`black`}}> $ {product.descripcion} </p>
             </div>
           </div>
         </div>
         <div class="col-4">        
-          COLORES
+          <Color />
           <br/>
-          TALLES
+          <Talle />
         </div>
       </div>
     </div>
