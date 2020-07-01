@@ -136,6 +136,7 @@ function App() {
     </div>
   );
 }
+<<<<<<< HEAD
 export default App;
 
 
@@ -150,3 +151,6 @@ export default App;
 // precio: "5000"
 // stock: "30"
 // talle: "20"
+=======
+export default App;
+>>>>>>> master
