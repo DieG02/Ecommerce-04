@@ -38,7 +38,7 @@ export default function ProductEdit({ id, editProduct}){
       <form onSubmit={
           (e) => {
             e.preventDefault();
-            editProduct(data, category, action);
+            editProduct(data, action, category);
       }}>
         <div className="form-row">
           <div className="form-group col-md-2">

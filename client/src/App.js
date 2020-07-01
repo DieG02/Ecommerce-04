@@ -7,6 +7,7 @@ import ProductAdd from './components/ProductAdd.js';
 import ProductEdit from './components/ProductEdit.js';
 import ProductDetail from './components/ProductDetail.js';
 import AddCategory from './components/AddCategory.js';
+import ProductByCategory from './components/ProductByCategory.js';
 import Nav from './components/Nav.js';
 
 function App() {
@@ -53,7 +54,7 @@ function App() {
   }
 
   //Edita un producto
-  const editProduct = function(data, categoria, accion){
+  const editProduct = function(data, accion, categoria){
     console.log(JSON.stringify(data));
     fetch(`http://localhost:1337/productos/${data.id}/${accion}/${categoria}`, {
       method: 'PUT',
@@ -133,6 +134,12 @@ function App() {
         exact
         path='/categorias/add'
         component={() => <AddCategory addCategory={addCategory}/>}
+      />
+
+      <Route
+        exact
+        path='/categorias/:id'
+        component={ProductByCategory}
       />
       </header>
     </div>
