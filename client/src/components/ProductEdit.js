@@ -15,6 +15,8 @@ export default function ProductEdit({ id, editProduct}){
   const [description, setDescription] = useState("");
   const [stock, setStock] = useState(0);
   const [talle, setTalle] = useState(0);
+  const [category, setCategory] = useState("");
+  const [action, setAction] = useState("");
   const [color, setColor] = useState("");
   const [price, setPrice] = useState(0);
   const [img, setImg] = useState("");
@@ -26,6 +28,8 @@ export default function ProductEdit({ id, editProduct}){
     talle: talle || datos.talle,
     color: color || datos.color,
     precio: price || datos.precio,
+    categoria: category,
+    accion: action,
     imagen: img || datos.imagen,
     stock: stock || datos.stock,
     updatedAt: null
@@ -79,6 +83,54 @@ export default function ProductEdit({ id, editProduct}){
 
 
         <div className="form-row">
+          <div className="form-group col-md-7">
+            <label>Categoría</label>
+            <div className="input-group mb-3"> 
+              <div className="input-group-prepend">
+                <span className="text-dark input-group-text" id="inputGroup-sizing-default">Acción</span>         
+                <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span className="sr-only">Toggle Dropdown</span>
+                </button>
+                <div className="dropdown-menu">             
+                  <option 
+                    className="dropdown-item" 
+                    value='agregar'
+                    onMouseOver={e => e.target.style.cursor = 'pointer'} 
+                    onClick={e => setAction(e.target.value)}> Agregar </option>     
+                  <option 
+                    className="dropdown-item" 
+                    value='eliminar'
+                    onMouseOver={e => e.target.style.cursor = 'pointer'} 
+                    onClick={e => setAction(e.target.value)}> Eliminar </option>                               
+                </div>
+              </div>
+              <input 
+                className="form-control" 
+                placeholder="Ej: remeras" 
+                onChange={e => setCategory(e.target.value)} 
+                required/>
+            </div>
+          </div>       
+          <div className="form-group col-md-5">
+            <label>Precio</label>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroup-sizing-default">$</span>
+              </div>
+              <input 
+                className="form-control" 
+                 placeholder="Precio del Producto" 
+                aria-label="Default" 
+                aria-describedby="inputGroup-sizing-default" 
+                value={price || datos.precio} 
+                onChange={e => setPrice(e.target.value)} 
+                required/>
+            </div>
+          </div>
+        </div>
+
+
+        <div className="form-row">
           <div className="form-group col-md-2">
             <label>Colores</label>
             <div className="input-group mb-3">
@@ -101,7 +153,7 @@ export default function ProductEdit({ id, editProduct}){
                 />  
             </div>
           </div>
-          <div className="form-group col-md-4">
+          <div className="form-group col-md-6">
             <label>Stock</label>
             <input 
               className="form-control" 
@@ -112,22 +164,6 @@ export default function ProductEdit({ id, editProduct}){
               />
           </div>
           <div className="form-group col-md-4">
-            <label>Precio</label>
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-default">$</span>
-              </div>
-              <input 
-                className="form-control" 
-                aria-label="Default" 
-                aria-describedby="inputGroup-sizing-default" 
-                id="price" 
-                value={price || datos.precio} 
-                onChange={e => setPrice(e.target.value)} 
-                required/>
-            </div>
-          </div>
-          <div className="form-group col-md-2">
             <label>Talla</label>
             <input 
               className="form-control" 

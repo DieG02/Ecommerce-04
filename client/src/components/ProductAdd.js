@@ -6,7 +6,9 @@ export default function ProductAdd({ addProduct }){
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [stock, setStock] = useState(0);
-  const [talle, setTalle] = useState(0);
+  const [talle, setTalle] = useState("");
+  const [category, setCategory] = useState("");
+  const [action, setAction] = useState("");
   const [color, setColor] = useState("");
   const [price, setPrice] = useState(0);
   const [img, setImg] = useState("");
@@ -18,6 +20,8 @@ export default function ProductAdd({ addProduct }){
     talle: talle,
     color: color,
     precio: price,
+    categoria: category,
+    accion: action,
     imagen: img,
     stock: stock,
     createdAt: null
@@ -29,6 +33,7 @@ export default function ProductAdd({ addProduct }){
           (e) => {
             e.preventDefault();
             //llamamos a una función en la API con los parámetros
+            console.log(data);
             addProduct(data);
       }}>
         <div className="form-row">
@@ -58,9 +63,54 @@ export default function ProductAdd({ addProduct }){
           <label>Descripción</label>
           <input 
             className="form-control" 
-            placeholder="Descripción del producto"
+            placeholder="Descripción del producto (Opcional)"
             onChange={e => setDescription(e.target.value)}
           />
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col-md-7">
+            <label>Categoría</label>
+            <div className="input-group mb-3"> 
+              <div className="input-group-prepend">
+                <span className="text-dark input-group-text" id="inputGroup-sizing-default">Acción</span>         
+                <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span className="sr-only">Toggle Dropdown</span>
+                </button>
+                <div className="dropdown-menu">             
+                    <option 
+                      className="dropdown-item" 
+                      value='agregar'
+                      onMouseOver={e => e.target.style.cursor = 'pointer'} 
+                      onClick={e => setAction(e.target.value)}> Agregar </option>     
+                    <option 
+                      className="dropdown-item" 
+                      value='eliminar'
+                      onMouseOver={e => e.target.style.cursor = 'pointer'} 
+                      onClick={e => setAction(e.target.value)}> Eliminar </option>                               
+                </div>
+              </div>
+              <input 
+                className="form-control" 
+                placeholder="Ej: remeras" 
+                onChange={e => setCategory(e.target.value)}/>
+            </div>
+          </div>       
+          <div className="form-group col-md-5">
+            <label>Precio</label>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroup-sizing-default">$</span>
+              </div>
+              <input 
+                className="form-control" 
+                 placeholder="Precio del Producto" 
+                aria-label="Default" 
+                aria-describedby="inputGroup-sizing-default" 
+                onChange={e => setPrice(e.target.value)} 
+                required/>
+            </div>
+          </div>
         </div>
 
         <div className="form-row">
@@ -96,7 +146,7 @@ export default function ProductAdd({ addProduct }){
             <label>Talla</label>
             <input 
               className="form-control" 
-              placeholder="Ej: 14,16,18" 
+              placeholder="Ej: 20" 
               onChange={e => setTalle(e.target.value)} 
               required/>
           </div>
@@ -120,6 +170,7 @@ export default function ProductAdd({ addProduct }){
               onChange={e => {
                 setImg(e.target.value)
               }}
+              required
             />
         </div>
     
