@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Color from './Color'
-import Talle from './Talle'
-// import image from '../images/zapatillas.jpg';
+import './ProductDetail.css'
 
 export default function ProductDetail ({ match }) {
   const { id } = match.params;
@@ -19,23 +17,24 @@ export default function ProductDetail ({ match }) {
   }, []);
 
   return (
-    <div class="container">
+    <div className="container" >
       <div class="row">
         <div class="col-8">
           <div className="card-deck">  
             <div className="card">
-              <h2 style={{color:`black`, alignSelf:`right`}}> {product.nombre}</h2>
-              <img className="card-img-top productView" src={product.imagen} alt="Product View"/>
-              <p style={{color:`black`}}> $ {product.precio} </p>
-              <p style={{color:`black`}}> $ {product.descripcion} </p>
+              <img className="card-img-top productView" src={product.imagen} alt=""/>
             </div>
           </div>
         </div>
-        <div class="col-4">        
-          <Color />
-          <br/>
-          <Talle />
-        </div>
+          <div className="propiedades" class="col-4">
+              <h3 className="text">{product.nombre}</h3>
+              <h2 className="text">$ {product.precio}</h2>
+              <br/>
+                <p className="text"> {product.descripcion}</p>  
+              <h6 className="text">Color: {product.color} </h6>
+              <h6 className="text">Talle: {product.talle} </h6>
+            <button className="btn btn-outline-dark my-2 my-sm-0">Comprar</button>
+          </div>
       </div>
     </div>
   )

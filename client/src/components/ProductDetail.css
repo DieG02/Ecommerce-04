@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    background-color: white;
+    padding: 30px;
+
+}
+
+.text {
+    color:black;
+    display: flex;text-align: left;
+}

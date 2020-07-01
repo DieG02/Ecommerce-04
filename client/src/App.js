@@ -35,7 +35,6 @@ function App() {
     )
   }
 
-
   //Añade un producto
   const addProduct = function(data){
     console.log(JSON.stringify(data));
