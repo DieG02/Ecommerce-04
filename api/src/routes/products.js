@@ -35,8 +35,58 @@ server.get('/:idproducto', function(req, res) {
 })
 
 server.post('/', function (req, res){
-    Product.create(req.body);
-    res.send('Se agrego un producto nuevo!');
+    var id = req.body.id;
+    var accion = req.body.accion;
+    var nameCat = req.body.categoria;
+
+    var producto = function () {
+        return Product.findOne({
+            where: {
+                id: id
+            }});
+    };
+
+    var categoria = function () {
+            return Category.findOne({
+                where: {
+                    nombre: nameCat
+                }
+            });
+    };
+
+    if (accion) {
+        if (accion = "agregar") {
+            Promise.all([producto(), categoria()]).then((response ) => {
+                if (response[0] && response[1]) {
+                    (response[0]).addCategory(response[1])
+                } else {
+                    res.status(404).send("Categoria o producto invalidos!");
+                };
+            }).catch(() => res.sendStatus(400));   
+        }
+        
+        if (accion = "eliminar") {
+            Promise.all([producto(), categoria()]).then((response) => {
+                if (response[0] && response[1]) {
+                    (response[0]).removeCategory(response[1])
+                } else {
+                    res.status(404).send("Categoria o producto invalidos!");
+                };
+            }).catch(() => res.sendStatus(400));
+        }
+    } else {
+        Product.create({
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion,
+            talle: req.body.talle,
+            color: req.body.color,
+            precio: req.body.precio,
+            imagen: req.body.imagen,
+            stock: req.body.stock,
+        });
+        res.send('Se agrego un producto nuevo!');
+    }
+
 });
 
 server.put('/:id', function(req, res){   
@@ -47,14 +97,14 @@ server.put('/:id', function(req, res){
     var producto = function () {
         return Product.findOne({
             where: {
-                nombre: nameCat
+                id: id
             }});
     };
 
     var categoria = function () {
             return Category.findOne({
                 where: {
-                    id: idCategoria
+                    nombre: nameCat
                 }
             });
     };
@@ -81,7 +131,15 @@ server.put('/:id', function(req, res){
         }
     } else {
             producto().then(function(product){
-            product.update(req.body)
+            product.update({
+                nombre: req.body.nombre,
+                descripcion: req.body.descripcion,
+                talle: req.body.talle,
+                color: req.body.color,
+                precio: req.body.precio,
+                imagen: req.body.imagen,
+                stock: req.body.stock,
+            })
         })
         res.send('Se actualizo el producto!');
     }
