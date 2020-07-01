@@ -28,8 +28,6 @@ export default function ProductEdit({ id, editProduct}){
     talle: talle || datos.talle,
     color: color || datos.color,
     precio: price || datos.precio,
-    categoria: category,
-    accion: action,
     imagen: img || datos.imagen,
     stock: stock || datos.stock,
     updatedAt: null
@@ -40,8 +38,7 @@ export default function ProductEdit({ id, editProduct}){
       <form onSubmit={
           (e) => {
             e.preventDefault();
-            //llamamos a una función en la API con los nuevos parámetros
-            editProduct(data);
+            editProduct(data, category, action);
       }}>
         <div className="form-row">
           <div className="form-group col-md-2">

@@ -45,7 +45,7 @@ function App() {
       }
     }).then((res)=>{
       if(res.status === 200){      
-        console.log(JSON.stringify(data));
+        return window.location.replace('http://localhost:3000')
       } else {
         alert('No se agrego el producto!');
       }
@@ -53,9 +53,9 @@ function App() {
   }
 
   //Edita un producto
-  const editProduct = function(data){
+  const editProduct = function(data, categoria, accion){
     console.log(JSON.stringify(data));
-    fetch(`http://localhost:1337/productos/${data.id}`, {
+    fetch(`http://localhost:1337/productos/${data.id}/${accion}/${categoria}`, {
       method: 'PUT',
       body: JSON.stringify(data), 
       headers:{
@@ -122,11 +122,13 @@ function App() {
           />
         }
       />
+
       <Route
         exact
         path='/producto/detail/:id'
         component={ProductDetail}      
       />
+
       <Route 
         exact
         path='/categorias/add'
@@ -138,15 +140,3 @@ function App() {
 }
 export default App;
 
-
-// accion: "agregar"
-// categoria: "Deportes"
-// color: "#5e5e5e"
-// createdAt: null
-// descripcion: "Buzo de futbol"
-// id: "20"
-// imagen: "https://dexter.vteximg.com.br/arquivos/ids/560743-1000-1000/PU581486-03_1.jpg?v=637274812307230000"
-// nombre: "Buzo"
-// precio: "5000"
-// stock: "30"
-// talle: "20"
