@@ -47,6 +47,7 @@ function Nav({ onSearch }) {
                 {category.map(item => 
                   <CategoryList
                     name={item.nombre}
+                    id={item.id}
                   />
                 )}
               <div className="dropdown-divider"></div>

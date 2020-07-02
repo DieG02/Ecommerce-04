@@ -1,9 +1,9 @@
 import React from 'react';
 
-function CategoryList({ name }){
+function CategoryList({ name, id }){
   return (
     <div>
-        <a className="dropdown-item" href="/categorias/remeras">{name}</a>
+        <a className="dropdown-item" href={`/categorias/${id}`}>{name}</a>
     </div>
   );
 }
