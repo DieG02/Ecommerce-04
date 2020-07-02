@@ -12,19 +12,19 @@ import Nav from './components/Nav.js';
 
 function App() {
   
-  const [product, setProduct] = useState([]);
+const [product, setProduct] = useState([]);
 
   //Buscar todo
   const [all, setAll] = useState([]);
-  useEffect(() => {
-    fetch(`http://localhost:1337/productos`)
-    .then(res => res.json())
-    .then((data) => {
-      if(data !== undefined){
-        setAll(data);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://localhost:1337/productos`)
+  //   .then(res => res.json())
+  //   .then((data) => {
+  //     if(data !== undefined){
+  //       setAll(data);
+  //     }
+  //   });
+  // }, []);
 
   //Busca por nombre
   const onSearch = function(productName){
@@ -98,7 +98,7 @@ function App() {
       <Route
         exact
         path='/'
-        component={() => <Products items={product}/>}
+        component={() => <Products/>}
       />
 
       <Route
@@ -106,7 +106,7 @@ function App() {
         path='/catalogo'
         component={() => <Products items={all}/>}
       />
-     
+      
       <Route
         exact
         path='/producto/add'
@@ -146,4 +146,3 @@ function App() {
   );
 }
 export default App;
-
