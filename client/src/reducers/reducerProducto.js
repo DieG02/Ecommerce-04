@@ -1,4 +1,4 @@
-import GET_PRODUCTS from '../actions/actionsProductos'
+import {GET_PRODUCTS} from '../actions/actionsProductos'
 
 const initialState = {
     productos: []
@@ -7,6 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     if (action.type === GET_PRODUCTS) {
+        console.log("hola");
         return {
             ...state,
             productos: action.payload

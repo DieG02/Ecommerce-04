@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Product from './Product.js';
 import './Product.css';
-import {connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { getAll } from '../actions/actionsProductos.js';
 
-function Products({ props }) {
-  if(!props) return <div message="notFoundMessage">Su producto no ha sido encontrado</div>;
+function Products({ productos, getAll }) {
+  
+  useEffect(()=>{getAll()},[getAll])   
 
   return (
     <div className='products'>
-      {props.productos.map(p => 
+      {productos.map(p => 
         <Product
           id={p.id}
           name={p.nombre}
@@ -24,4 +26,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps, {getAll})(Products);
