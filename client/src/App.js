@@ -27,49 +27,49 @@ const [product, setProduct] = useState([]);
   // }, []);
 
   //Busca por nombre
-  const onSearch = function(productName){
-    fetch(`http://localhost:1337/productos?search=${productName}`)
-      .then(res => res.json())
-      .then((data) => {
-        setProduct(data)
-      }
-    )
-  }
+  // const onSearch = function(productName){
+  //   fetch(`http://localhost:1337/productos?search=${productName}`)
+  //     .then(res => res.json())
+  //     .then((data) => {
+  //       setProduct(data)
+  //     }
+  //   )
+  // }
 
   //Añade un producto
-  const addProduct = function(data){
-    fetch('http://localhost:1337/productos', {
-      method: 'POST', 
-      body: JSON.stringify(data), 
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    }).then((res)=>{
-      if(res.status === 200){      
-        return window.location.replace('http://localhost:3000')
-      } else {
-        alert('No se agrego el producto!');
-      }
-    })
-  }
+  // const addProduct = function(data){
+  //   fetch('http://localhost:1337/productos', {
+  //     method: 'POST', 
+  //     body: JSON.stringify(data), 
+  //     headers:{
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }).then((res)=>{
+  //     if(res.status === 200){      
+  //       return window.location.replace('http://localhost:3000')
+  //     } else {
+  //       alert('No se agrego el producto!');
+  //     }
+  //   })
+  // }
 
   //Edita un producto
-  const editProduct = function(data, accion, categoria){
-    console.log(JSON.stringify(data));
-    fetch(`http://localhost:1337/productos/${data.id}/${accion}/${categoria}`, {
-      method: 'PUT',
-      body: JSON.stringify(data), 
-      headers:{
-        'Content-Type': 'application/json'
-      },
-    }).then((res)=>{
-      if(res.status === 200){
-        return window.location.replace('http://localhost:3000')
-      } else {
-        alert('No se agrego el producto!');
-      }
-    })
-  }
+  // const editProduct = function(data, accion, categoria){
+  //   console.log(JSON.stringify(data));
+  //   fetch(`http://localhost:1337/productos/${data.id}/${accion}/${categoria}`, {
+  //     method: 'PUT',
+  //     body: JSON.stringify(data), 
+  //     headers:{
+  //       'Content-Type': 'application/json'
+  //     },
+  //   }).then((res)=>{
+  //     if(res.status === 200){
+  //       return window.location.replace('http://localhost:3000')
+  //     } else {
+  //       alert('No se agrego el producto!');
+  //     }
+  //   })
+  // }
 
   //Añade Nueva Categoría
   const addCategory = function(data){
@@ -92,7 +92,7 @@ const [product, setProduct] = useState([]);
   
   return ( 
     <div className="App">
-      <Nav onSearch={onSearch}/>
+      <Nav />
       <header className="App-header">
 
       <Route
@@ -110,17 +110,14 @@ const [product, setProduct] = useState([]);
       <Route
         exact
         path='/producto/add'
-        render={() => <ProductAdd addProduct={addProduct}/>}
+        render={() => <ProductAdd/>}
       />  
 
       <Route
         exact
         path='/producto/edit/:id'
         component={({match}) => 
-          <ProductEdit
-            id={match.params.id}
-            editProduct={editProduct}
-          />
+          <ProductEdit/>
         }
       />
 

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { editProduct } from '../actions/actionsProductos.js';
 
-export default function ProductEdit({ id, editProduct}){
+function ProductEdit({ producto, editProduct }){
+
+  const id = producto.id;
 
   const [datos, setDatos] = useState({});
 
@@ -199,5 +203,11 @@ export default function ProductEdit({ id, editProduct}){
     </div>
   )
 }
- 
 
+const mapStateToProps = (state) => {
+  return {
+      producto: state.producto
+  };
+};
+
+export default connect(mapStateToProps,{editProduct})(ProductEdit)

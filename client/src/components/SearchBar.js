@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { onSearch } from '../actions/actionsProductos.js';
 
-export default function SearchBar({onSearch}) {
+function SearchBar({onSearch}) {
 
   const [name, setName] = useState("");
 
@@ -11,7 +13,7 @@ export default function SearchBar({onSearch}) {
         e => {
           e.preventDefault();
           onSearch(name);
-       }}>
+        }}>
 
       <input 
         className="form-control mr-sm-2" 
@@ -31,5 +33,6 @@ export default function SearchBar({onSearch}) {
   );
 }
 
+export default connect(null,{onSearch})(SearchBar)
 
 
