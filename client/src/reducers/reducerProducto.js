@@ -1,4 +1,4 @@
-import {GET_PRODUCTS, SEARCH_PRODUCTS, ADD_PRODUCT, EDIT_PRODUCT} from '../actions/actionsProductos';
+import {GET_PRODUCTS, SEARCH_PRODUCTS, ADD_PRODUCT, EDIT_PRODUCT, DETAIL_PRODUCT} from '../actions/actionsProductos';
 
 const initialState = {
     productos: [],
@@ -29,6 +29,13 @@ export default (state = initialState, action) => {
     }
 
     if (action.type === EDIT_PRODUCT) {
+        return {
+            ...state,
+            producto: action.payload
+        };
+    }
+
+    if (action.type === DETAIL_PRODUCT) {
         return {
             ...state,
             producto: action.payload

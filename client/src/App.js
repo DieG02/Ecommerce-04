@@ -124,7 +124,7 @@ const [product, setProduct] = useState([]);
       <Route
         exact
         path='/producto/detail/:id'
-        component={ProductDetail}      
+        component={() => <ProductDetail/>}   
       />
 
       <Route 

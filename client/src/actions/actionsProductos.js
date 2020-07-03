@@ -2,6 +2,9 @@ export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
+export const DETAIL_PRODUCT = 'DETAIL_PRODUCT';
+
+
 
 //Buscar todo
 export function getAll() {
@@ -64,13 +67,13 @@ export function editProduct(data, accion, categoria){
     }
 }
 
-export function productDetail(id){
+export function detailProduct(id){
     return function(dispatch){
         return fetch(`http://localhost:1337/productos/${id}`)
         .then(res => res.json())
         .then((data) => {
         if(data !== undefined){
-            setProduct(data);
+            dispatch({ type: DETAIL_PRODUCT, payload: data })
         }
         });
     
