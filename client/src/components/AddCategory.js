@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { addCategory } from '../actions/actionsCategorias.js';
 
-export default function ProductAdd({ addCategory }){
+export function CategoryAdd({ addCategory }){
 
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
@@ -58,4 +60,6 @@ export default function ProductAdd({ addCategory }){
   )
 }
  
+export default connect(null,{addCategory})(CategoryAdd)
+
 

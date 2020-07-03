@@ -72,22 +72,22 @@ const [product, setProduct] = useState([]);
   // }
 
   //Añade Nueva Categoría
-  const addCategory = function(data){
-    console.log(JSON.stringify(data));
-    fetch('http://localhost:1337/categorias', {
-      method: 'POST', // or 'PUT'
-      body: JSON.stringify(data), 
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    }).then((res)=>{
-      if(res.status === 200){
-        return window.location.replace('http://localhost:3000')
-      } else {
-        alert('No se agrego el producto!');
-      }
-    })
-  }
+  // const addCategory = function(data){
+  //   console.log(JSON.stringify(data));
+  //   fetch('http://localhost:1337/categorias', {
+  //     method: 'POST', // or 'PUT'
+  //     body: JSON.stringify(data), 
+  //     headers:{
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }).then((res)=>{
+  //     if(res.status === 200){
+  //       return window.location.replace('http://localhost:3000')
+  //     } else {
+  //       alert('No se agrego el producto!');
+  //     }
+  //   })
+  // }
 
   
   return ( 
@@ -117,7 +117,7 @@ const [product, setProduct] = useState([]);
         exact
         path='/producto/edit/:id'
         component={({match}) => 
-          <ProductEdit/>
+          <ProductEdit id={match.params.id}/>
         }
       />
 
@@ -130,7 +130,7 @@ const [product, setProduct] = useState([]);
       <Route 
         exact
         path='/categorias/add'
-        component={() => <AddCategory addCategory={addCategory}/>}
+        component={() => <AddCategory/>}
       />
 
       <Route

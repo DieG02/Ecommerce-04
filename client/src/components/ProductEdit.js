@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { editProduct } from '../actions/actionsProductos.js';
 
-function ProductEdit({ producto, editProduct }){
-
-  const id = producto.id;
+function ProductEdit({ id, producto, editProduct }){
 
   const [datos, setDatos] = useState({});
 
@@ -205,9 +203,13 @@ function ProductEdit({ producto, editProduct }){
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
-      producto: state.producto
+      producto: state.producto.producto
   };
 };
 
 export default connect(mapStateToProps,{editProduct})(ProductEdit)
+
+// export default connect(null,{editProduct})(ProductEdit)
+

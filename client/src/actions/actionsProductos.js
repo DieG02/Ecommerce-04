@@ -56,10 +56,25 @@ export function editProduct(data, accion, categoria){
         }).then((res)=>{
         if(res.status === 200){
             dispatch({ type: EDIT_PRODUCT, payload: data }) 
-            return window.location.replace('http://localhost:3000')
+            // return window.location.replace('http://localhost:3000')
         } else {
             alert('No se edito el producto!');
         }
         })
     }
+}
+
+export function productDetail(id){
+    return function(dispatch){
+        return fetch(`http://localhost:1337/productos/${id}`)
+        .then(res => res.json())
+        .then((data) => {
+        if(data !== undefined){
+            setProduct(data);
+        }
+        });
+    
+    }
+        
+      
 }
