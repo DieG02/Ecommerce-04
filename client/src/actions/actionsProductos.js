@@ -3,8 +3,7 @@ export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const DETAIL_PRODUCT = 'DETAIL_PRODUCT';
-
-
+export const PRODUCT_BY_CATEGORY = 'PRODUCT_BY_CATEGORY';
 
 //Buscar todo
 export function getAll() {
@@ -59,7 +58,7 @@ export function editProduct(data, accion, categoria){
         }).then((res)=>{
         if(res.status === 200){
             dispatch({ type: EDIT_PRODUCT, payload: data }) 
-            // return window.location.replace('http://localhost:3000')
+            return window.location.replace('http://localhost:3000')
         } else {
             alert('No se edito el producto!');
         }
@@ -68,16 +67,25 @@ export function editProduct(data, accion, categoria){
 }
 
 export function detailProduct(id){
-    return function(dispatch){
-        return fetch(`http://localhost:1337/productos/${id}`)
+    return function (dispatch) {
+            return fetch(`http://localhost:1337/productos/${id}`)
+            .then(res => res.json())
+            .then((data) => {
+                if(data !== undefined){
+                    dispatch({ type: DETAIL_PRODUCT, payload: data })
+                }
+            });
+    }
+}
+
+export function productByCategory(id){
+    return function (dispatch) {
+        return fetch(`http://localhost:1337/categorias/${id}`)
         .then(res => res.json())
         .then((data) => {
         if(data !== undefined){
-            dispatch({ type: DETAIL_PRODUCT, payload: data })
+            dispatch({ type: PRODUCT_BY_CATEGORY, payload: data })
         }
         });
-    
     }
-        
-      
 }

@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Product from './Product.js';
 import './Product.css'
+import { connect } from 'react-redux';
+import { productByCategory } from '../actions/actionsProductos.js';
 
-export default function ProductByCategory({ match }) {
+function ProductXCategory({ id, productos, productByCategory}) {
 
-    const { id } = match.params;
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-      fetch(`http://localhost:1337/categorias/${id}`)
-      .then(res => res.json())
-      .then((data) => {
-        if(data !== undefined){
-          setProducts(data);
-        }
-      });
-    }, []);
+    useEffect(()=>{
+      productByCategory(id)},
+      [id, productByCategory])
 
   return (
     <div className='products'>
-      {products.map(p => 
+      {productos.map(p => 
         <Product
           id={p.id}
           name={p.nombre}
@@ -29,3 +22,11 @@ export default function ProductByCategory({ match }) {
     </div>
   );
 }
+
+function mapStateToProps(state){
+  return {
+      productos: state.producto.productos
+  }
+}
+
+export default connect (mapStateToProps,{productByCategory})(ProductXCategory)

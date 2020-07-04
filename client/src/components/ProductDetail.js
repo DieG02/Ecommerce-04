@@ -3,11 +3,11 @@ import './ProductDetail.css'
 import { connect } from 'react-redux';
 import { detailProduct } from '../actions/actionsProductos.js';
 
-function ProductDetail ({ match }, producto, detailProduct) {
-  const { id } = match.params;
-  console.log(producto)
-
-  useEffect(()=>{detailProduct(id)},[detailProduct, id])  
+function ProductDetail ({ id, detailProduct, producto }) {
+  
+  useEffect(()=>{
+    detailProduct(id)},
+    [id, detailProduct])
 
   return (
     <div className="container" >
@@ -33,10 +33,10 @@ function ProductDetail ({ match }, producto, detailProduct) {
   )
 };
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state){
   return {
-      producto: state.producto.producto
-  };
-};
+      producto : state.producto.producto
+  }
+}
 
-export default connect(mapStateToProps,{detailProduct})(ProductDetail)
+export default connect (mapStateToProps,{detailProduct})(ProductDetail)

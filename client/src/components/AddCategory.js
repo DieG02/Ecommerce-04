@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addCategory } from '../actions/actionsCategorias.js';
+import { addCategory } from '../actions/actionsCategorias';
 
-export function CategoryAdd({ addCategory }){
+function CategoryAdd({ addCategory }){
 
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
@@ -13,7 +13,7 @@ export function CategoryAdd({ addCategory }){
     nombre: name,
     descripcion: description,
   }
-    
+
   return(
     <div>
       <form onSubmit={ e => {
@@ -59,7 +59,6 @@ export function CategoryAdd({ addCategory }){
     </div>
   )
 }
- 
-export default connect(null,{addCategory})(CategoryAdd)
 
+export default connect(null, { addCategory })(CategoryAdd);
 

@@ -1,7 +1,7 @@
 import { ADD_CATEGORY } from '../actions/actionsCategorias';
 
 const initialState = {
-    categorias: []
+    categorias: [],
 }
 
 
@@ -13,5 +13,5 @@ export default (state = initialState, action) => {
         };
     }
 
-    return {...state};
+    return state;
 };

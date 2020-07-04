@@ -16,7 +16,7 @@ export default function Product ({ name, id, img }) {
           </a>
         </div>
         <div className="card-body">
-          <a title="Ver" href="http://localhost:3000/producto/detail">
+        <a title="Ver" href={`http://localhost:3000/producto/detail/${id}`}>
             <h6 className="card-title" style={{color: '#000'}}>{name.toUpperCase()}</h6>
           </a>
         </div>

@@ -71,7 +71,7 @@ const [product, setProduct] = useState([]);
   //   })
   // }
 
-  //Añade Nueva Categoría
+  // //Añade Nueva Categoría
   // const addCategory = function(data){
   //   console.log(JSON.stringify(data));
   //   fetch('http://localhost:1337/categorias', {
@@ -117,16 +117,18 @@ const [product, setProduct] = useState([]);
         exact
         path='/producto/edit/:id'
         component={({match}) => 
-          <ProductEdit id={match.params.id}/>
+          <ProductEdit id = {match.params.id}/>
         }
       />
 
       <Route
         exact
         path='/producto/detail/:id'
-        component={() => <ProductDetail/>}   
-      />
-
+        component={({match}) => 
+          <ProductDetail id = {match.params.id}/>
+        }
+        />
+        
       <Route 
         exact
         path='/categorias/add'
@@ -136,8 +138,11 @@ const [product, setProduct] = useState([]);
       <Route
         exact
         path='/categorias/:id'
-        component={ProductByCategory}
-      />
+        component={({match}) => 
+          <ProductByCategory id = {match.params.id}/>
+        }
+        />
+
       </header>
     </div>
   );

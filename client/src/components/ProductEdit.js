@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { editProduct } from '../actions/actionsProductos.js';
 
-function ProductEdit({ id, producto, editProduct }){
+function ProductEdit({ producto, editProduct, id }){
 
   const [datos, setDatos] = useState({});
 
@@ -67,8 +67,8 @@ function ProductEdit({ id, producto, editProduct }){
             />
           </div>
         </div>
- 
- 
+
+
         <div className="form-group">
           <label>Descripción</label>
           <input 
@@ -106,8 +106,7 @@ function ProductEdit({ id, producto, editProduct }){
               <input 
                 className="form-control" 
                 placeholder="Ej: remeras" 
-                onChange={e => setCategory(e.target.value)} 
-                required/>
+                onChange={e => setCategory(e.target.value)}/>
             </div>
           </div>       
           <div className="form-group col-md-5">
@@ -118,7 +117,7 @@ function ProductEdit({ id, producto, editProduct }){
               </div>
               <input 
                 className="form-control" 
-                 placeholder="Precio del Producto" 
+                placeholder="Precio del Producto" 
                 aria-label="Default" 
                 aria-describedby="inputGroup-sizing-default" 
                 value={price || datos.precio} 
@@ -177,7 +176,7 @@ function ProductEdit({ id, producto, editProduct }){
       
         <label>Imágenes</label>
         <div className="input-group input-group-sm mb-3">
-         <div className="input-group-prepend">
+        <div className="input-group-prepend">
             <button className="btn btn-outline-secondary" type="button" onClick={e => {
               alert('Se agrego la imagen ' + img);
             }}>+</button>
@@ -203,13 +202,9 @@ function ProductEdit({ id, producto, editProduct }){
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
-      producto: state.producto.producto
+      producto: state.producto.productos
   };
 };
 
 export default connect(mapStateToProps,{editProduct})(ProductEdit)
-
-// export default connect(null,{editProduct})(ProductEdit)
-
