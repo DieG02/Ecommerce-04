@@ -47,22 +47,34 @@ export function addProduct (data){
     }
 }
 
-export function editProduct(data, accion, categoria){
+export function editProduct(id, input, category){
     return function (dispatch) {
-        return fetch(`http://localhost:1337/productos/${data.id}/${accion}/${categoria}`, {
+        return fetch(`http://localhost:1337/productos/${id}`, {
             method: 'PUT',
-            body: JSON.stringify(data), 
+            body: JSON.stringify(input), 
             headers:{
             'Content-Type': 'application/json'
         },
         }).then((res)=>{
         if(res.status === 200){
-            dispatch({ type: EDIT_PRODUCT, payload: data }) 
-            return window.location.replace('http://localhost:3000')
+            fetch(`http://localhost:1337/productos/pxcategoria/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(category), 
+                headers:{
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => {
+            if (res.status === 200){
+                dispatch({ type: EDIT_PRODUCT })
+                return window.location.replace('http://localhost:3000')
+            } else {
+                alert("no se realizo la accion!")
+            }
+        })
         } else {
             alert('No se edito el producto!');
         }
-        })
+    })
     }
 }
 

@@ -1,46 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { editProduct } from '../actions/actionsProductos.js';
+import { editProduct, detailProduct } from '../actions/actionsProductos.js';
 
-function ProductEdit({ producto, editProduct, id }){
+function ProductEdit({ id, producto, editProduct, detailProduct }){
 
-  const [datos, setDatos] = useState({});
+const [input, setInput] = useState({
+  nombre: "",
+  descripcion: "",
+  talle: "",
+  color: "",
+  precio: "",
+  imagen: "",
+  stock: "",
+});
 
-  //Busca por Id
-  if(Object.keys(datos).length === 0){
-    fetch(`http://localhost:1337/productos/${id}`)
-      .then(res => res.json())
-      .then(data => setDatos(data))
-  }
+const[category, setCategory] = useState({
+  nombre:"",
+  accion:""
+})
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [stock, setStock] = useState(0);
-  const [talle, setTalle] = useState(0);
-  const [category, setCategory] = useState("");
-  const [action, setAction] = useState("");
-  const [color, setColor] = useState("");
-  const [price, setPrice] = useState(0);
-  const [img, setImg] = useState("");
+const inputChange = function(e){
+    setInput({
+        ...input,
+        [e.target.name] : e.target.value
+    })
+}
 
-  const data = {
-    id: id,
-    nombre: name || datos.nombre,
-    descripcion: description || datos.descripcion,
-    talle: talle || datos.talle,
-    color: color || datos.color,
-    precio: price || datos.precio,
-    imagen: img || datos.imagen,
-    stock: stock || datos.stock,
-    updatedAt: null
-  }
+const setCategoryChange = function(e){
+    setCategory({
+        ...category,
+        [e.target.name] : e.target.value
+    })
+}
+
+useEffect( () => {
+  detailProduct(id)},
+  [detailProduct, id])
 
   return(
     <div>
       <form onSubmit={
           (e) => {
             e.preventDefault();
-            editProduct(data, action, category);
+            editProduct(id, input, category);
       }}>
         <div className="form-row">
           <div className="form-group col-md-2">
@@ -49,9 +51,9 @@ function ProductEdit({ producto, editProduct, id }){
               type="number" 
               className="form-control" 
               min="0" 
-              placeholder="Ej: 1"
-              id="idNumber" 
-              value={datos.id} 
+              placeholder= {producto.id}
+              name="id" 
+              value={producto.id} 
               disabled
             />
           </div>
@@ -59,10 +61,10 @@ function ProductEdit({ producto, editProduct, id }){
             <label>Nombre</label>
             <input 
               className="form-control" 
-              placeholder="Nombre del producto"
-              id="name"
-              value={name || datos.nombre} 
-              onChange={e => setName(e.target.value)}
+              type= "text"
+              placeholder={producto.nombre}
+              name="nombre"
+              onChange= {inputChange}
               required
             />
           </div>
@@ -73,10 +75,10 @@ function ProductEdit({ producto, editProduct, id }){
           <label>Descripción</label>
           <input 
             className="form-control" 
-            placeholder="Descripción del producto"
-            id="description" 
-            value={description || datos.descripcion} 
-            onChange={e => setDescription(e.target.value)}
+            type= "text"
+            placeholder= {producto.descripcion}
+            name="descripcion" 
+            onChange= {inputChange}
           />
         </div>
 
@@ -95,18 +97,18 @@ function ProductEdit({ producto, editProduct, id }){
                     className="dropdown-item" 
                     value='agregar'
                     onMouseOver={e => e.target.style.cursor = 'pointer'} 
-                    onClick={e => setAction(e.target.value)}> Agregar </option>     
+                    onClick={setCategoryChange}> Agregar </option>     
                   <option 
                     className="dropdown-item" 
                     value='eliminar'
                     onMouseOver={e => e.target.style.cursor = 'pointer'} 
-                    onClick={e => setAction(e.target.value)}> Eliminar </option>                               
+                    onClick={setCategoryChange}> Eliminar </option>                               
                 </div>
               </div>
               <input 
                 className="form-control" 
                 placeholder="Ej: remeras" 
-                onChange={e => setCategory(e.target.value)}/>
+                onChange= {setCategoryChange}/>
             </div>
           </div>       
           <div className="form-group col-md-5">
@@ -117,11 +119,10 @@ function ProductEdit({ producto, editProduct, id }){
               </div>
               <input 
                 className="form-control" 
-                placeholder="Precio del Producto" 
+                placeholder= {producto.precio}
                 aria-label="Default" 
-                aria-describedby="inputGroup-sizing-default" 
-                value={price || datos.precio} 
-                onChange={e => setPrice(e.target.value)} 
+                aria-describedby="inputGroup-sizing-default"
+                onChange= {inputChange}
                 required/>
             </div>
           </div>
@@ -136,7 +137,7 @@ function ProductEdit({ producto, editProduct, id }){
                 <button 
                   className="btn btn-outline-secondary"
                   onClick={e => {
-                    alert('Se agrego el color ' + color)
+                    alert('Se agrego el color ' + input.color)
                   }} type="button">+
                 </button>
               </div>
@@ -145,9 +146,8 @@ function ProductEdit({ producto, editProduct, id }){
                 className="form-control"
                 aria-label="" 
                 aria-describedby="basic-addon1"
-                id="color"
-                value={color || datos.color} 
-                onChange={e => setColor(e.target.value)} 
+                name="color"
+                onChange= {inputChange} 
                 />  
             </div>
           </div>
@@ -155,20 +155,20 @@ function ProductEdit({ producto, editProduct, id }){
             <label>Stock</label>
             <input 
               className="form-control" 
-              placeholder="Cant. disponible" 
-              id="stock" 
-              value={stock || datos.stock} 
-              onChange={e => setStock(e.target.value)} 
+              type= "number"
+              placeholder= {producto.stock} 
+              name="stock"
+              onChange= {inputChange} 
               />
           </div>
           <div className="form-group col-md-4">
             <label>Talla</label>
             <input 
-              className="form-control" 
-              placeholder="Ej: 14,16,18" 
-              id="talle" 
-              value={talle || datos.talle} 
-              onChange={e => setTalle(e.target.value)} 
+              className="form-control"
+              type= "text"
+              placeholder= {producto.talle} 
+              name="talle" 
+              onChange= {inputChange} 
               required/>
           </div>
         </div>
@@ -178,7 +178,7 @@ function ProductEdit({ producto, editProduct, id }){
         <div className="input-group input-group-sm mb-3">
         <div className="input-group-prepend">
             <button className="btn btn-outline-secondary" type="button" onClick={e => {
-              alert('Se agrego la imagen ' + img);
+              alert('Se agrego la imagen ' + input.img);
             }}>+</button>
           </div>
             <input 
@@ -186,12 +186,9 @@ function ProductEdit({ producto, editProduct, id }){
               className="form-control" 
               aria-label="Small" 
               aria-describedby="inputGroup-sizing-sm" 
-              placeholder="Añadir imágen por URL"
-              id="img"
-              value={img || datos.imagen}
-              onChange={e => {
-                setImg(e.target.value)
-              }}
+              placeholder= {producto.img}
+              name="imagen"
+              onChange= {inputChange}
             />
         </div>
     
@@ -203,8 +200,8 @@ function ProductEdit({ producto, editProduct, id }){
 
 const mapStateToProps = (state) => {
   return {
-      producto: state.producto.productos
+      producto: state.producto.producto
   };
 };
 
-export default connect(mapStateToProps,{editProduct})(ProductEdit)
+export default connect(mapStateToProps,{editProduct, detailProduct})(ProductEdit)
