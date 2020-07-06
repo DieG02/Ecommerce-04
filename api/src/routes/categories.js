@@ -23,16 +23,14 @@ server.get('/', function(req, res) {
     }
 });
 
-server.get('/:idcategoria', function(req, res) {
-    var id = req.params.idcategoria;
-    Category.findOne({
-        where: {
-            id: id,
-        }
-    }).then(function(categoria) {
-        return res.json(categoria)
-    })
-})
+server.get('/:id', function(req, res) {
+        Category.findByPk(req.params.id)
+            .then((categoria) => {
+                categoria.getProduct({ categoria }).then((productos) => {
+                    return res.send(productos)
+                });
+            })
+    });
 
 server.put('/:id', function(req, res){   
     var id = req.params.id;

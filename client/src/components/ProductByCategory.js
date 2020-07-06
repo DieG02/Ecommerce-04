@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { productByCategory } from '../actions/actionsProductos.js';
 
 function ProductXCategory({ id, productos, productByCategory}) {
-  console.log(productos);
   
     useEffect(()=>{
       productByCategory(id)},

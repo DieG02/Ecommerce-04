@@ -85,27 +85,13 @@ useEffect( () => {
         <div className="form-row">
           <div className="form-group col-md-7">
             <label>Categoría</label>
-            <div className="input-group mb-3"> 
-              <div className="input-group-prepend">
-                <span className="text-dark input-group-text" id="inputGroup-sizing-default">Acción</span>         
-                <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span className="sr-only">Toggle Dropdown</span>
-                </button>
-                <div className="dropdown-menu">             
-                  <option 
-                    className="dropdown-item" 
-                    value='agregar'
-                    name= "accion"
-                    onMouseOver={e => e.target.style.cursor = 'pointer'} 
-                    onClick={setCategoryChange}> Agregar </option>     
-                  <option 
-                    className="dropdown-item"
-                    value='eliminar'
-                    name= "accion"
-                    onMouseOver={e => e.target.style.cursor = 'pointer'} 
-                    onClick={setCategoryChange}> Eliminar </option>                               
-                </div>
-              </div>
+            <div className="input-group mb-3">
+            <input
+                type= "text"
+                className="form-control" 
+                placeholder="agregar/eliminar"
+                name= "accion"
+                onChange= {setCategoryChange}/>
               <input
                 type= "text"
                 className="form-control" 
