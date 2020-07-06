@@ -5,6 +5,7 @@ import { editProduct, detailProduct } from '../actions/actionsProductos.js';
 function ProductEdit({ id, producto, editProduct, detailProduct }){
 
 const [input, setInput] = useState({
+  id: id,
   nombre: "",
   descripcion: "",
   talle: "",
@@ -15,7 +16,7 @@ const [input, setInput] = useState({
 });
 
 const[category, setCategory] = useState({
-  nombre:"",
+  categoria:"",
   accion:""
 })
 
@@ -52,8 +53,7 @@ useEffect( () => {
               className="form-control" 
               min="0" 
               placeholder= {producto.id}
-              name="id" 
-              value={producto.id} 
+              name="id"
               disabled
             />
           </div>
@@ -65,7 +65,6 @@ useEffect( () => {
               placeholder={producto.nombre}
               name="nombre"
               onChange= {inputChange}
-              required
             />
           </div>
         </div>
@@ -107,7 +106,8 @@ useEffect( () => {
                     onClick={setCategoryChange}> Eliminar </option>                               
                 </div>
               </div>
-              <input 
+              <input
+                type= "text"
                 className="form-control" 
                 placeholder="Ej: remeras"
                 name= "categoria"
@@ -127,7 +127,7 @@ useEffect( () => {
                 aria-label="Default" 
                 aria-describedby="inputGroup-sizing-default"
                 onChange= {inputChange}
-                required/>
+              />
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@ useEffect( () => {
               placeholder= {producto.talle} 
               name="talle" 
               onChange= {inputChange} 
-              required/>
+            />
           </div>
         </div>
         

@@ -42,8 +42,8 @@ server.post('/', function (req, res){
 
 server.put('/pxcategoria/:id', function(req, res){   
     var id = req.params.id;
-    var accion = req.body.action;
-    var nameCat = req.body.category;
+    var accion = req.body.accion;
+    var nameCat = req.body.categoria;
 
     var producto = function () {
         return Product.findOne({

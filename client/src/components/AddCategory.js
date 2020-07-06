@@ -30,7 +30,7 @@ function CategoryAdd({ addCategory }){
               placeholder="Ej: 1"
               // value={id} 
               onChange={e => setId(e.target.value)}
-              required
+              disabled
             />
           </div>
           <div className="form-group col-md-9">
