@@ -96,18 +96,21 @@ useEffect( () => {
                   <option 
                     className="dropdown-item" 
                     value='agregar'
+                    name= "accion"
                     onMouseOver={e => e.target.style.cursor = 'pointer'} 
                     onClick={setCategoryChange}> Agregar </option>     
                   <option 
-                    className="dropdown-item" 
+                    className="dropdown-item"
                     value='eliminar'
+                    name= "accion"
                     onMouseOver={e => e.target.style.cursor = 'pointer'} 
                     onClick={setCategoryChange}> Eliminar </option>                               
                 </div>
               </div>
               <input 
                 className="form-control" 
-                placeholder="Ej: remeras" 
+                placeholder="Ej: remeras"
+                name= "categoria"
                 onChange= {setCategoryChange}/>
             </div>
           </div>       
@@ -120,6 +123,7 @@ useEffect( () => {
               <input 
                 className="form-control" 
                 placeholder= {producto.precio}
+                name= "precio"
                 aria-label="Default" 
                 aria-describedby="inputGroup-sizing-default"
                 onChange= {inputChange}
