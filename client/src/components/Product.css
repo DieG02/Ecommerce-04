@@ -11,10 +11,17 @@
     flex-wrap: wrap;
     align-items: center;
   }
-.icon{
+.iconleft{
     position: absolute;
     top: -3px;
     left: 5px;
+}
+.iconright img{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
 }
 .productView{
     background-size: cover;
@@ -23,6 +30,8 @@
     margin-left: 0px !important;
     margin-right: 0px !important;    
 }
+
+
 
 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar.js';
 import CategoryList from './CategoryList.js';
+import Settings from './Settings.js';
 
 
 function Nav({ onSearch }) {
@@ -18,7 +19,7 @@ function Nav({ onSearch }) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/">eCommerce_ft02_G4</a>
+      <a className="navbar-brand" href="/">G-04</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -56,7 +57,7 @@ function Nav({ onSearch }) {
           </li>
         </ul>
         <SearchBar onSearch={onSearch}/>
-        {/* <LogBar/> */}
+        <Settings/>
       </div>
     </nav>
   );

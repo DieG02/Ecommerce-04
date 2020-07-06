@@ -18,7 +18,11 @@ fs.readdirSync(__dirname)
 
 const {
   Product = require('./Product'),
-  Category = require('./Category')
+  Category = require('./Category'),
+  Usuario = require('./Usuario'),
+  Orden = require('./Orden'),
+  Ordenproducto = require('./Ordenproducto')
+
 } = models;
 
 // Add model relationships here
@@ -27,5 +31,10 @@ db.Sequelize = Sequelize;
 Product.belongsToMany(Category, { as: "category", through: "productByCategories" });
 Category.belongsToMany(Product, { as: "product", through: "productByCategories" });
 
+Product.belongsToMany(Orden, { as: "orden", through: Ordenproducto});
+Orden.belongsToMany(Product, { as: "product", through: Ordenproducto});
+
+Usuario.belongsToMany(Orden, { as: "usuario", through: "orden_usuario" });
+Orden.belongsTo(Usuario, { as: "orden", through: "orden_usuario"});
 
 module.exports = models;
