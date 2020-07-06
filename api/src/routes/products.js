@@ -40,10 +40,10 @@ server.post('/', function (req, res){
     }
 );
 
-server.put('/:id/:accion/:categoria', function(req, res){   
+server.put('/pxcategoria/:id', function(req, res){   
     var id = req.params.id;
-    var accion = req.params.accion;
-    var nameCat = req.params.categoria;
+    var accion = req.body.action;
+    var nameCat = req.body.category;
 
     var producto = function () {
         return Product.findOne({
@@ -82,11 +82,28 @@ server.put('/:id/:accion/:categoria', function(req, res){
                 };
             }).catch(() => res.sendStatus(400));
         }
-    } else {
-        Product.update(req.body);
-        res.send('Se actualizo el producto!');
     }
 });
+
+server.put('/:id', function(req, res){
+    const id = req.params.id;
+
+    Product.findOne({
+        where:{
+            id: id
+        }
+    }).then(function(producto){
+        producto.update(req.body)
+    })
+    .then(() => {
+        return res.send("El producto se actualizo!")
+    })
+    .catch(() => {
+        return res.status(400).send("no se ha podido actualizar el producto!")
+    })
+
+});
+
 
 server.delete('/:id', (req, res) => {
     const id = req.params.id;
