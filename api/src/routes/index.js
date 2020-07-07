@@ -3,7 +3,7 @@ const { Router } = require('express');
 const authRouter = require('./auth.js');
 const productos = require ('./products.js');
 const categorias = require ('./categories.js');
-const ordenes = require ('./changuito.js');
+const ordenes = require ('./orden');
 const usuario = require ('./usuario.js');
 
 const router = Router();

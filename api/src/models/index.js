@@ -34,7 +34,6 @@ Category.belongsToMany(Product, { as: "product", through: "productByCategories" 
 Product.belongsToMany(Orden, { as: "orden", through: Ordenproducto});
 Orden.belongsToMany(Product, { as: "product", through: Ordenproducto});
 
-Usuario.belongsToMany(Orden, { as: "usuario", through: "orden_usuario" });
-Orden.belongsTo(Usuario, { as: "orden", through: "orden_usuario"});
+Usuario.hasMany(Orden); 
 
 module.exports = models;

@@ -10,7 +10,7 @@ const Orden = (sequelize, S) => {
         },
 
         estado: {
-            type: S.BOOLEAN,   // ver si está bien el type
+            type: S.STRING,
             allowNull: false,
             unique: true,
         },

@@ -13,15 +13,10 @@ const Usuario = (sequelize, S) => {
             type: S.STRING,
             allowNull: false,
             unique: true,
+            isEmail: true,
         },
 
         nombre: {
-            type: S.STRING,
-            allowNull: false,
-            unique: true,
-        },
-
-        apellido: {
             type: S.STRING,
             allowNull: false,
             unique: true,
