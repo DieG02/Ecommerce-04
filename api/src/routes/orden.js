@@ -22,7 +22,7 @@ server.post('/:idusuario', function(req, res) {
         })
 });
 
-server.post("/changuito/:idusuario/:idproducto", function(req, res) {
+server.post("/:idusuario/:idproducto", function(req, res) {
     const idUser = req.params.idusuario;
     const idProduct = req.params.idproducto;
 
@@ -53,7 +53,6 @@ server.post("/changuito/:idusuario/:idproducto", function(req, res) {
                 return res.send('Se agrego el producto a la orden indicada!')
             })
         }
-
     })
 });
 

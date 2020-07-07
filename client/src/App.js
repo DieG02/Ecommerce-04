@@ -8,6 +8,7 @@ import ProductEdit from './components/ProductEdit.js';
 import ProductDetail from './components/ProductDetail.js';
 import AddCategory from './components/AddCategory.js';
 import ProductByCategory from './components/ProductByCategory.js';
+import AddUser from './components/AddUser.js';
 import Nav from './components/Nav.js';
 
 function App() {
@@ -141,7 +142,13 @@ const [product, setProduct] = useState([]);
         component={({match}) => 
           <ProductByCategory id = {match.params.id}/>
         }
-        />
+      />
+
+      <Route
+        exact
+        path='/usuario/add'
+        component={() => <AddUser/>}
+      />
 
       </header>
     </div>
