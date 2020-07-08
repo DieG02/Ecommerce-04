@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Orden, Product } = require('../models/Orden');
+const { Orden, Product } = require('../models/index');
 const Sequelize = require ('sequelize');
 
 server.get('/', function(req, res) {
@@ -22,15 +22,15 @@ server.post('/:idusuario', function(req, res) {
         })
 });
 
-server.post("/changuito/:idusuario/:idproducto", function(req, res) {
-    const idUser = req.params.idusuario;
+server.post('/producto/:idproducto', function(req, res) {
+    //const idUser = req.params.idusuario;
     const idProduct = req.params.idproducto;
 
     var changuito = function() {
         return Orden.findOne({
             where: {
                 estado: 'pendiente',
-                usuarioId: idUser
+                //usuarioId: idUser
             }
         })
     };
@@ -42,15 +42,16 @@ server.post("/changuito/:idusuario/:idproducto", function(req, res) {
 
     Promise.all([changuito(), producto()]).then((response) => {
         if (response[0]) {
-            response[0].addProduct(response[1])
+            console.log(response[0])
+            response[0].setProduct(response[1])
             return res.send('Se agrego el producto a la orden indicada!')
         } else {
             Orden.create({
                 estado: 'pendiente',
-                usuarioId: idUser
+                //usuarioId: idUser
             }).then(response => {
-                response.addProduct(response[1])
-                return res.send('Se agrego el producto a la orden indicada!')
+                response.setProduct(response[1])
+                return res.send('Se creo el changuito!')
             })
         }
 

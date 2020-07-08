@@ -1,7 +1,7 @@
   
 .contenedor{
   background-color: #ffffff;
-  padding: 1em 2em;
+  padding: 1em 1.5em;
   color: #666666;
   text-align: left;
   margin: 50px 20px 25px 0px;
@@ -30,7 +30,6 @@
 .subtotal div p{
   margin-bottom: 5px;
 }
-
 .total{
   margin-top: 15px;
 }
@@ -40,19 +39,28 @@
   display: flex;
   background-color: ghostwhite;
   margin: 1em 0em;
-  padding: 10px 40px;
+  padding: 10px 20px 10px 20px;
+}
+.flex-container a img{
+  width: 30px;
+  height: 30px; 
+  position: relative;
+  top: -10px;
+  right: -15px;
 }
 .imgExample{
-  width: 90px;
+  width: 100px;
   align-items: center;
 }
 .items{
   text-align: left;
   margin-right: 2em;
-  font-size: 20px;
+  font-size: 22px;
 }
 .items p{
+  margin-top: 5x;
   margin-bottom: 0px;
+  font-weight: bold;
 }
 .texto{
   color: rgb(65, 65, 65);
@@ -60,15 +68,12 @@
   max-width: 300px;
 }
 .texto span{
-  font-size: 15px;
+  font-size: 17px;
 }
-.texto p{
-  position: relative;
-  top: 20px;
-}
+
 .input{
   width: 75px;
   margin: auto 0px;
   margin-left: 1.5em;
-  
 }
+

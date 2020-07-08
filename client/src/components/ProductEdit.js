@@ -62,9 +62,9 @@ useEffect( () => {
             <input 
               className="form-control" 
               type= "text"
-              placeholder={producto.nombre}
+              value={input.nombre || producto.nombre}
               name="nombre"
-              onChange= {inputChange}
+              onChange={inputChange}
             />
           </div>
         </div>
@@ -75,9 +75,9 @@ useEffect( () => {
           <input 
             className="form-control" 
             type= "text"
-            placeholder= {producto.descripcion}
+            value={input.descripcion || producto.descripcion}
             name="descripcion" 
-            onChange= {inputChange}
+            onChange={inputChange}
           />
         </div>
 
@@ -95,7 +95,7 @@ useEffect( () => {
               <input
                 type= "text"
                 className="form-control" 
-                placeholder="Ej: remeras"
+                placeholder="Ej: Deportes"
                 name= "categoria"
                 onChange= {setCategoryChange}/>
             </div>
@@ -108,8 +108,8 @@ useEffect( () => {
               </div>
               <input 
                 className="form-control" 
-                placeholder= {producto.precio}
-                name= "precio"
+                value={input.precio || producto.precio}
+                name="precio"
                 aria-label="Default" 
                 aria-describedby="inputGroup-sizing-default"
                 onChange= {inputChange}
@@ -136,6 +136,7 @@ useEffect( () => {
                 className="form-control"
                 aria-label="" 
                 aria-describedby="basic-addon1"
+                value={input.color || producto.color}
                 name="color"
                 onChange= {inputChange} 
                 />  
@@ -146,7 +147,7 @@ useEffect( () => {
             <input 
               className="form-control" 
               type= "number"
-              placeholder= {producto.stock} 
+              value={input.stock || producto.stock} 
               name="stock"
               onChange= {inputChange} 
               />
@@ -156,7 +157,7 @@ useEffect( () => {
             <input 
               className="form-control"
               type= "text"
-              placeholder= {producto.talle} 
+              value={input.tale || producto.talle} 
               name="talle" 
               onChange= {inputChange} 
             />
@@ -176,9 +177,9 @@ useEffect( () => {
               className="form-control" 
               aria-label="Small" 
               aria-describedby="inputGroup-sizing-sm" 
-              placeholder= {producto.img}
+              value={input.imagen || producto.imagen}
               name="imagen"
-              onChange= {inputChange}
+              onChange={inputChange}
             />
         </div>
     
