@@ -14,7 +14,7 @@ export function addToCart(id){
           })
         }).then(datos => {
           if(datos !== undefined){
-            alert('Se ha agregado al carrito!', datos)
+            alert('Se ha agregado al carrito!');
             dispatch({ type: ADD_TO_CART, payload: datos })
           }
       })
@@ -33,3 +33,6 @@ export function getProductsCart(){
         });
     }
 }
+
+
+// Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed rhoncus lectus. Suspendisse potenti. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus lorem neque, ornare a dui nec, dignissim suscipit ipsum.

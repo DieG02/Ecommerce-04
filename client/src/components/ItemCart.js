@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import './Cart.css';
-import { connect } from 'react-redux';
 import close from '../images/iconCloseH.png';
 
-function ItemCart({ id, img, name, description, price}) {
+export default function ItemCart({ id, img, name, description, price}) {
 
   const [cant, setCant] = useState(0);
-  console.log(id);
+
   return (
     <div className="flex-container">
       <div className="items">
@@ -30,5 +29,3 @@ function ItemCart({ id, img, name, description, price}) {
     </div>
   );
 }
-
-export default connect(null)(ItemCart);

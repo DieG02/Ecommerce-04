@@ -55,4 +55,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {getProductsCart})(ListCart);
+export default connect(mapStateToProps, { getProductsCart })(ListCart);

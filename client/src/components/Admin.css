@@ -1,0 +1,23 @@
+.contenedor {
+  background-color: #eeeeee;
+  padding: 10px;
+  width: 1000px;
+  font-size: 0.7em;
+}
+table{
+  margin-bottom: 0px !important;
+}
+.titulos th{
+  padding: 8px 12px;
+  text-align: center;
+}
+tr:hover{
+  background-color: #7fc7f188 !important;
+}
+.botones{
+  text-align: right;
+  max-width: 150px;
+}
+.botones button{
+  min-width: 90px !important;
+}

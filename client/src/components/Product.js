@@ -31,4 +31,4 @@ export function Product ({ id, name, img }) {
   )
 };
 
-export default connect(null,{addToCart})(Product)
+export default connect(null, { addToCart })(Product)

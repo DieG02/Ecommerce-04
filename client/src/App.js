@@ -10,6 +10,7 @@ import ProductDetail from './components/ProductDetail.js';
 import AddCategory from './components/AddCategory.js';
 import ProductByCategory from './components/ProductByCategory.js';
 import ListCart from './components/ListCart.js';
+import Admin from './components/Admin.js';
 
 function App() {
   
@@ -58,6 +59,11 @@ function App() {
       <Route
         exact path='/cart'
         component={() => <ListCart/>}
+      />
+
+      <Route
+        exact path='/admin'
+        component={() => <Admin/>}
       />
     </header>
   </div>
