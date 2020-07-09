@@ -62,7 +62,8 @@ useEffect( () => {
             <input 
               className="form-control" 
               type= "text"
-              placeholder={producto.nombre}
+              placeholder= "nombre del producto"
+              value= {producto.nombre}
               name="nombre"
               onChange= {inputChange}
             />
@@ -75,7 +76,8 @@ useEffect( () => {
           <input 
             className="form-control" 
             type= "text"
-            placeholder= {producto.descripcion}
+            placeholder= "descripcion del producto"
+            value= {producto.descripcion}
             name="descripcion" 
             onChange= {inputChange}
           />
@@ -108,7 +110,8 @@ useEffect( () => {
               </div>
               <input 
                 className="form-control" 
-                placeholder= {producto.precio}
+                placeholder= "precio del producto"
+                value= {producto.precio}
                 name= "precio"
                 aria-label="Default" 
                 aria-describedby="inputGroup-sizing-default"
@@ -146,7 +149,8 @@ useEffect( () => {
             <input 
               className="form-control" 
               type= "number"
-              placeholder= {producto.stock} 
+              placeholder= "cantidad de producto disponible"
+              value= {producto.stock}
               name="stock"
               onChange= {inputChange} 
               />
@@ -156,7 +160,8 @@ useEffect( () => {
             <input 
               className="form-control"
               type= "text"
-              placeholder= {producto.talle} 
+              placeholder= "ej: M o 37"
+              value= {producto.talle} 
               name="talle" 
               onChange= {inputChange} 
             />
@@ -176,7 +181,8 @@ useEffect( () => {
               className="form-control" 
               aria-label="Small" 
               aria-describedby="inputGroup-sizing-sm" 
-              placeholder= {producto.img}
+              placeholder= "imagen del producto"
+              value= {producto.img}
               name="imagen"
               onChange= {inputChange}
             />

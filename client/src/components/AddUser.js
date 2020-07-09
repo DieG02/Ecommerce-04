@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { userAdd } from '../actions/actionsUser';
 
-function CrearUsuario({ id, addCategory }){
+function CrearUsuario({ userAdd }){
 
     const [input, setInput] = useState({
-        id: id,
         email: "",
         nombre: "",
         contraseña: "",
@@ -23,7 +22,7 @@ function CrearUsuario({ id, addCategory }){
     <div>
         <form onSubmit={ e => {
             e.preventDefault();
-            addCategory(data);
+            userAdd(input);
         }}>
         <div className="form-row">
             <div className="form-group col-md-3">
@@ -34,7 +33,6 @@ function CrearUsuario({ id, addCategory }){
                 min="0" 
                 placeholder="Ej: 1"
                 name= "id"
-                onChange={inputChange}
                 disabled
             />
         </div>
@@ -42,8 +40,30 @@ function CrearUsuario({ id, addCategory }){
             <label>Nombre</label>
             <input 
                 className="form-control" 
-                placeholder="Nombre completo"
+                placeholder="Nombre"
                 name= "nombre"
+                onChange={inputChange}
+                required
+            />
+        </div>
+
+        <div className="form-group col-md-9">
+            <label>Apellido</label>
+            <input 
+                className="form-control" 
+                placeholder="Apellido"
+                name= "apellido"
+                onChange={inputChange}
+                required
+            />
+        </div>
+
+        <div className="form-group col-md-9">
+            <label>Nombre de Usuario</label>
+            <input 
+                className="form-control" 
+                placeholder="Ej: alex93"
+                name= "nombreusuario"
                 onChange={inputChange}
                 required
             />
@@ -65,6 +85,7 @@ function CrearUsuario({ id, addCategory }){
             <input 
                 className="form-control" 
                 placeholder="Contraseña(requerido)"
+                type= "password"
                 name= "contraseña"
                 onChange= {inputChange}
                 required

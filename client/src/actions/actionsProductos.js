@@ -48,8 +48,6 @@ export function addProduct (data){
 }
 
 export function editProduct(id, input, category){
-    console.log(input);
-    console.log(category);
     return function (dispatch) {
         return fetch(`http://localhost:1337/productos/${id}`, {
             method: 'PUT',
