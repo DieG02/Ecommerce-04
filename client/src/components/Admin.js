@@ -1,7 +1,7 @@
 import React from 'react';
 import './Admin.css';
-export default function Admin(){
 
+export default function Admin(){
 
   return(
     <div className="contenedor">
