@@ -46,7 +46,7 @@ function Nav({ onSearch }) {
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <a className="dropdown-item" href="/usuario/add">Crear Usuario</a>
-              <a className="dropdown-item" href="/usuario/perfil">Ver perfil</a> 
+              <a className="dropdown-item" href="/usuario/perfil/">Ver perfil</a> 
               <a className="dropdown-item" href="/usuario/delete">Eliminar Usuario</a>
             </div>
           </li>
