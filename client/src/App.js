@@ -8,7 +8,10 @@ import ProductEdit from './components/ProductEdit.js';
 import ProductDetail from './components/ProductDetail.js';
 import AddCategory from './components/AddCategory.js';
 import ProductByCategory from './components/ProductByCategory.js';
+import AddUser from './components/AddUser.js';
 import Nav from './components/Nav.js';
+import { Product } from './components/Product';
+import Usuario from './components/Usuario'
 
 function App() {
   
@@ -141,7 +144,23 @@ const [product, setProduct] = useState([]);
         component={({match}) => 
           <ProductByCategory id = {match.params.id}/>
         }
-        />
+      />
+
+      <Route
+        exact
+        path='/usuario/add'
+        component={() => <AddUser/>}
+      />
+
+      <Route
+        exact path='/usuario/perfil'
+        component={() => <Usuario />}
+      />
+
+      <Route
+        exact path='/usuario/editar'
+        component={() => <Usuario />}
+      />
 
       </header>
     </div>
