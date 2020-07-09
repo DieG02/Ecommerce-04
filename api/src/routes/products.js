@@ -16,7 +16,13 @@ server.get('/', function(req, res) {
             return res.json(products);
         })
     } else {
-        Product.findAll()
+        Product.findAll({
+            where: {
+                stock: {
+                    [Op.gt]: 0
+                }
+            }
+        })
         .then(function(products) {
             return res.json(products);
         });
