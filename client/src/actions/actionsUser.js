@@ -1,6 +1,7 @@
 export const ADD_USER = 'ADD_USER';
+export const GET_USER = 'GET_USER';
 
-export function userAdd (input){
+export function addUser (input){
     return function (dispatch){
         return fetch('http://localhost:1337/usuario', {
             method: 'POST', 
@@ -15,6 +16,20 @@ export function userAdd (input){
         } else {
             alert('No se creo el usuario!');
         }
+        })
+    }
+}
+
+//Falta completar
+export function getUser(id){
+    return function(dispatch){
+        return fetch(`http://localhost:1337/usuario/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            if(data !== undefined){
+                alert('Se ha agregado al carrito!');            
+                dispatch({ type: GET_USER, payload: data })
+            }
         })
     }
 }

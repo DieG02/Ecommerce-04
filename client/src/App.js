@@ -12,6 +12,7 @@ import ProductByCategory from './components/ProductByCategory.js';
 import ListCart from './components/ListCart.js';
 import Admin from './components/Admin.js';
 import AddUser from './components/AddUser.js';
+import Usuario from './components/Usuario.js';
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
         render={() => <Products/>}
       />
       
+
       <Route
         exact path='/producto/add'
         render={() => <ProductAdd/>}
@@ -46,6 +48,7 @@ function App() {
         }                   
       />
 
+
       <Route 
         exact path='/categorias/add'
         render={() => <AddCategory/>}
@@ -57,16 +60,27 @@ function App() {
         }
       />
 
+
       <Route
         exact path='/cart'
         component={() => <ListCart/>}
       />
 
+
+      <Route
+        exact path='/usuario/perfil'
+        component={() => <Usuario />}
+      />    
       <Route
         exact path='/usuario/add'
         component={() => <AddUser/>}
       />
-      
+      <Route
+        exact path='/usuario/editar'
+        component={() => <Usuario />}
+      />
+  
+
       <Route
         exact path='/admin'
         component={() => <Admin/>}

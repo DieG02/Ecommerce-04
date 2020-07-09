@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { userAdd } from '../actions/actionsUser';
+import { addUser } from '../actions/actionsUser';
 
-function CrearUsuario({ userAdd }){
+function CrearUsuario({ addUser }){
 
     const [input, setInput] = useState({
         email: "",
@@ -22,7 +22,7 @@ function CrearUsuario({ userAdd }){
     <div>
         <form onSubmit={ e => {
             e.preventDefault();
-            userAdd(input);
+            addUser(input);
         }}>
         <div className="form-row">
             <div className="form-group col-md-3">
@@ -98,5 +98,5 @@ function CrearUsuario({ userAdd }){
     </div>
 )}
 
-export default connect(null, { userAdd })(CrearUsuario);
+export default connect(null, { addUser })(CrearUsuario);
 
