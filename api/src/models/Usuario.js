@@ -19,13 +19,11 @@ const Usuario = (sequelize, S) => {
         nombre: {
             type: S.STRING,
             allowNull: false,
-            unique: true,
         },
 
         apellido: {
             type: S.STRING,
             allowNull: false,
-            unique: true,
         },
 
         nombreusuario: {
@@ -36,8 +34,11 @@ const Usuario = (sequelize, S) => {
         
         contraseña: {
             type: S.STRING,
-            allowNull: false,
-            unique: true,
+            allowNull: false
+        },
+
+        foto: {
+            type: S.STRING,
         }
 
     },
