@@ -58,16 +58,15 @@ function App() {
       />
 
       <Route
-        exact
-        path='/usuario/add'
-        component={() => <AddUser/>}
-      />
-
-      <Route
         exact path='/cart'
         component={() => <ListCart/>}
       />
 
+      <Route
+        exact path='/usuario/add'
+        component={() => <AddUser/>}
+      />
+      
       <Route
         exact path='/admin'
         component={() => <Admin/>}

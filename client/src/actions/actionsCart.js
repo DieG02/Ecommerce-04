@@ -25,13 +25,14 @@ export function addToCart(id){
   return function (dispatch){
     return fetch(`http://localhost:1337/changuito/producto/${id}`, {
         method: 'POST', 
-        headers:{'Content-Length': '0'}
+        headers:{'Content-Length': 0}
     }).then(() => {
       fetch(`http://localhost:1337/productos/${id}`)
         .then(res => res.json())
         .then(data => {
           if(data !== undefined){
-            return  dispatch({ type: ADD_TO_CART, payload: data })
+            alert('Se ha agregado al carrito!');            
+            dispatch({ type: ADD_TO_CART, payload: data })
           }
         })
     })

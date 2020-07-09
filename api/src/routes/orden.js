@@ -1,7 +1,6 @@
 const server = require('express').Router();
-const { Orden, Product } = require('../models/index');
+const { Orden, Product, Ordenproducto } = require('../models/index');
 const Sequelize = require ('sequelize');
-const Orden_producto = require('../models/Ordenproducto');
 
 server.get('/', function(req, res) {
     Orden.findAll()
@@ -24,7 +23,6 @@ server.post('/:idusuario', function(req, res) {
 });
 
 server.post('/producto/:idproducto', function(req, res) {
-    //const idUser = req.params.idusuario;
     const idProduct = req.params.idproducto;
     
     Orden.findOrCreate({
@@ -32,16 +30,14 @@ server.post('/producto/:idproducto', function(req, res) {
             estado: 'pendiente'
         }
     })
-    .then((orden) => {
-        console.log(orden);
+    .then(orden => {
         Ordenproducto.create({
             cantidad: 1,
             productId: idProduct,
             ordenId: orden[0].dataValues.id
         })
     })
-    .then((response) => {
-        console.log(response);
+    .then(() => {
         res.send('Se agrego el producto a la carrito');
     })
 })

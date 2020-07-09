@@ -1,8 +1,8 @@
 const S = require('sequelize');
 
 
-const Orden_producto = (sequelize, S) => { 
-    const modelOP = sequelize.define('orden_producto', {
+const Ordenproducto = (sequelize, S) => { 
+    const modelOP = sequelize.define('ordenproducto', {
         cantidad: {
             type: S.INTEGER,
             allowNull: false,
@@ -12,4 +12,4 @@ const Orden_producto = (sequelize, S) => {
     return modelOP;
 };
 
-module.exports = Orden_producto;
+module.exports = Ordenproducto;

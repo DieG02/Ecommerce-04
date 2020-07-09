@@ -6,7 +6,7 @@ import shop from '../images/iconShop.png';
 import defecto from '../images/default.jpg';
 import './Product.css';
 
-export function Product ({ id, name, img }) {
+export function Product ({ id, name, img, addToCart }) {
   return (
     <div className="card-deck productCard">
       <div className="card">
@@ -14,7 +14,7 @@ export function Product ({ id, name, img }) {
           <a title="Editar" className="iconleft" href={`http://localhost:3000/producto/edit/${id}`}>
             <img src={edit} alt="Editar"/>
           </a>
-          <a title="Agregar" className="iconright" onMouseOver={e => e.target.style.cursor = 'pointer'} onClick={addToCart(id)}>
+          <a title="Agregar" className="iconright" onMouseOver={e => e.target.style.cursor = 'pointer'} onClick={() => addToCart(id)}>
             <img src={shop} alt="Agregar"/>
           </a>
           <a href={`http://localhost:3000/producto/detail/${id}`}>
@@ -31,4 +31,10 @@ export function Product ({ id, name, img }) {
   )
 };
 
-export default connect(null, { addToCart })(Product)
+function mapStateToProps(state){
+  return {
+      carrito : state.carrito.carrito
+  }
+}
+
+export default connect(mapStateToProps, { addToCart })(Product)
