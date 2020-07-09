@@ -152,14 +152,16 @@ const [product, setProduct] = useState([]);
       />
 
       <Route
-        exact path='/usuario/perfil'
-        component={() => <Usuario />}
+        exact path='/usuario/perfil/:id'
+        component={({match}) => 
+        <Usuario id = {match.params.id} />}
       />
 
       <Route
-        exact path='/usuario/perfil/editar'
-        component={() => <Usuario />}
-      />
+        exact path='/usuario/perfil/edit/:id'
+        component={({match}) => 
+        <Usuario id = {match.params.id}/>}
+        />
 
       </header>
     </div>
