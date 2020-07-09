@@ -21,6 +21,18 @@ const Usuario = (sequelize, S) => {
             allowNull: false,
             unique: true,
         },
+
+        apellido: {
+            type: S.STRING,
+            allowNull: false,
+            unique: true,
+        },
+
+        nombreusuario: {
+            type: S.STRING,
+            allowNull: false,
+            unique: true,
+        },
         
         contraseña: {
             type: S.STRING,

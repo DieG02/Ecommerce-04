@@ -1,12 +1,10 @@
 const server = require('express').Router();
 const { Usuario } = require('../models/index');
 const Sequelize = require ('sequelize');
-const Op = Sequelize.Op;
 
 server.get('/', function (req, res){
     Usuario.findAll()
         .then(function(usuarios) {
-            console.log(JSON.stringify(usuarios)); 
             return res.status(200).json(usuarios);
         });
 });

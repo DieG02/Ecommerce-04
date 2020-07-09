@@ -11,6 +11,7 @@ import AddCategory from './components/AddCategory.js';
 import ProductByCategory from './components/ProductByCategory.js';
 import ListCart from './components/ListCart.js';
 import Admin from './components/Admin.js';
+import AddUser from './components/AddUser.js';
 
 function App() {
   
@@ -54,6 +55,12 @@ function App() {
         component={({match}) => 
           <ProductByCategory id={match.params.id}/>
         }
+      />
+
+      <Route
+        exact
+        path='/usuario/add'
+        component={() => <AddUser/>}
       />
 
       <Route
