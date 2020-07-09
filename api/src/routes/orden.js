@@ -39,18 +39,16 @@ server.post('/producto/:idproducto', function(req, res) {
         return Product.findByPk(idProduct);
     };
 
-
     Promise.all([changuito(), producto()]).then((response) => {
         if (response[0]) {
-            console.log(response[0])
-            response[0].setProduct(response[1])
+            response[0].addProduct(response[1])
             return res.send('Se agrego el producto a la orden indicada!')
         } else {
             Orden.create({
                 estado: 'pendiente',
                 //usuarioId: idUser
             }).then(response => {
-                response.setProduct(response[1])
+                response.addProduct(response[1])
                 return res.send('Se creo el changuito!')
             })
         }
