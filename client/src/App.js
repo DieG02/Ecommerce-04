@@ -10,6 +10,7 @@ import AddCategory from './components/AddCategory.js';
 import ProductByCategory from './components/ProductByCategory.js';
 import AddUser from './components/AddUser.js';
 import Nav from './components/Nav.js';
+import Usuario from './components/Usuario'
 
 function App() {
   
@@ -148,6 +149,16 @@ const [product, setProduct] = useState([]);
         exact
         path='/usuario/add'
         component={() => <AddUser/>}
+      />
+
+      <Route
+        exact path='/usuario/perfil'
+        component={() => <Usuario />}
+      />
+
+      <Route
+        exact path='/usuario/perfil/editar'
+        component={() => <Usuario />}
       />
 
       </header>

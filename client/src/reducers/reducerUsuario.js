@@ -1,7 +1,8 @@
-import { ADD_USER } from '../actions/actionsUser';
+import { ADD_USER, GET_USER, EDIT_USER } from '../actions/actionsUser';
 
 const initialState = {
     usuarios: [],
+    usuario: {}
 }
 
 
@@ -13,5 +14,20 @@ export default (state = initialState, action) => {
         };
     }
 
+    if (action.type === GET_USER) {
+        return {
+            ...state,
+            usuario: action.payload
+        }
+    }
+
+    if (action.type === EDIT_USER) {
+        return {
+            ...state,
+            usuario: action.payload
+        };
+    }
+
     return state;
 };
+
