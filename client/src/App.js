@@ -11,8 +11,9 @@ import AddCategory from './components/AddCategory.js';
 import ProductByCategory from './components/ProductByCategory.js';
 import ListCart from './components/ListCart.js';
 import Admin from './components/Admin.js';
-import AddUser from './components/AddUser.js';
 import Usuario from './components/Usuario.js';
+import AddUser from './components/AddUser.js';
+import EditarUsuario from './components/EditarUsuario.js';
 
 function App() {
   
@@ -80,13 +81,24 @@ function App() {
         component={() => <Usuario />}
       />
   
+  
+      <Route
+        exact path='/usuario/perfil/:id'
+        component={({match}) => 
+        <Usuario id = {match.params.id} />}
+      />
+      <Route
+        exact path='/usuario/perfil/edit/:id'
+        component={({match}) => 
+        <EditarUsuario id = {match.params.id}/>}
+      />
 
       <Route
         exact path='/admin'
         component={() => <Admin/>}
       />
-    </header>
-  </div>
+      </header>
+    </div>
   );
 }
 export default App;
