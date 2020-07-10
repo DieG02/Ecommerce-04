@@ -11,54 +11,18 @@ server.get('/', function (req, res){
         });
 });
 
-<<<<<<< HEAD
-server.post('/', function (req, res){
-        Usuario.create(req.body);
-        res.send(req.body);
-});
-
-server.put('/:idUsuario', function(req, res){
-    const id = req.params.idUsuario;
-
-=======
 server.get('/:idUsuario', function (req, res){
     const id = req.params.idUsuario;
->>>>>>> VerYEditarUsuario
     Usuario.findOne({
         where:{
             id: id
         }
-<<<<<<< HEAD
-    }).then(function(usuario){ 
-        usuario.update(req.body)
-    })
-    .then(() => {
-        return res.send("El usuario se editó!")
-    })
-    .catch(() => {
-        return res.status(400).send("no se ha podido editar el usuario!")
-    })
-});
-
-// Ruta para eliminar al usuario funcionando.
-server.delete('/:idUsuario', (req, res) => {
-    const id = req.params.idUsuario;
-    Usuario.destroy({
-            where: { 
-                id: id 
-            }
-        })
-        .then(usuarioEliminado => {
-            res.json(usuarioEliminado);
-=======
     }).then(function(usuario) {
             return res.status(200).json(usuario);
         })
         .catch(() => {
             return res.status(400).send("El usuario no existe!")
->>>>>>> VerYEditarUsuario
         })
-        res.send('Se elimino el usuario!');
 });
 
 server.post('/', function (req, res){

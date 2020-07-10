@@ -49,17 +49,17 @@ server.get('/productos', function(req, res) {
     Orden.findOne({
         where: {
             estado: 'pendiente'
+        },
+        include: {
+            model: Product, as: 'product'
         }
     }) 
     .then(carrito => {
-        Ordenproducto.findAll({
-            where: {
-                ordenId: carrito.id
-            }
-        })
-        .then(products => {
-            return res.status(200).send(products);    
-        })
+        if(carrito !== null){
+            return res.send(carrito.product)
+        } else{
+            return res.send([])
+        }
     });        
 });
 

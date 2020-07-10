@@ -1,8 +1,7 @@
 import { ADD_TO_CART, GET_PRODUCTS_CART, CART} from '../actions/actionsCart';
 
 const initialState = {
-    carrito: [],
-    productosCarrito: []
+    carrito: []
 }
 
 
@@ -19,11 +18,6 @@ export default (state = initialState, action) => {
             carrito: action.payload
         };
     }
-    if (action.type === CART) {
-        return {
-            ...state,
-            productoCarrito: action.payload
-        };
-    }
+
     return state;
 }

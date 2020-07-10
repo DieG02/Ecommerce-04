@@ -1,6 +1,5 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS';
-export const CART = 'CART';
 
 // Buscamos la data con la ID y lo agregamos al carrito
 
@@ -30,25 +29,5 @@ export function getProductsCart(){
     });
   }
 }
-
-// Carrito es un array con las ID de los producto
-export function cart(carrito){
-  return function (dispatch) {
-    return carrito.map(p => {
-      fetch(`http://localhost:1337/productos/${p.productId}`)
-      .then(res => res.json())
-      .then(data => { 
-        return data
-      })
-    })
-    .then(productos => {
-      if(productos !== undefined){
-        dispatch({ type: CART, payload: productos })
-      }
-    })
-  }
-} 
-
-
 
 // Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed rhoncus lectus. Suspendisse potenti. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus lorem neque, ornare a dui nec, dignissim suscipit ipsum.
