@@ -22,6 +22,7 @@ server.post('/:idusuario', function(req, res) {
         })
 });
 
+//Falta vincular con usuario
 server.post('/producto/:idproducto', function(req, res) {
     const idProduct = req.params.idproducto;
     
@@ -41,6 +42,26 @@ server.post('/producto/:idproducto', function(req, res) {
         res.send('Se agrego el producto a la carrito');
     })
 })
+
+//Falta vincular con usuario
+server.get('/productos', function(req, res) {
+
+    Orden.findOne({
+        where: {
+            estado: 'pendiente'
+        }
+    }) 
+    .then(carrito => {
+        Ordenproducto.findAll({
+            where: {
+                ordenId: carrito.id
+            }
+        })
+        .then(products => {
+            return res.status(200).send(products);    
+        })
+    });        
+});
 
 server.put('/:id', function(req, res) {
     const estado = req.body.estado;

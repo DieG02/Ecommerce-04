@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import { connect } from 'react-redux';
-import { getProductsCart } from '../actions/actionsCart.js';
+import { getProductsCart, cart } from '../actions/actionsCart.js';
 import ItemCart from './ItemCart.js';
 import './Cart.css';
 
-function ListCart({ carrito, getProductsCart }) {
+function ListCart({ carrito, productosCarrito, getProductsCart, cart }) {
 
   useEffect(() => {getProductsCart()},[getProductsCart])  
+  useEffect(() => {cart(carrito)},[cart]);
 
   return (
     <div style={{display: 'flex'}}>
       <div className="contenedor">
         <h2>Shopping Cart</h2>
         <div className="border-top border-bottom border-secondary">
-          {carrito.map(p => 
+          {productosCarrito.map(p => 
             <ItemCart
               id={p.id}
               img={p.imagen}  
@@ -55,4 +56,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getProductsCart })(ListCart);
+export default connect(mapStateToProps, { getProductsCart, cart })(ListCart);

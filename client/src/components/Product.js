@@ -31,10 +31,5 @@ export function Product ({ id, name, img, addToCart }) {
   )
 };
 
-function mapStateToProps(state){
-  return {
-      carrito : state.carrito.carrito
-  }
-}
 
-export default connect(mapStateToProps, { addToCart })(Product)
+export default connect(null, { addToCart })(Product)

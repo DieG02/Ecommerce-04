@@ -20,7 +20,7 @@ export default function Admin(){
             <td>Otto</td>
             <td>nombreapellidofecha@gmail.com</td>
             <td className="botones">  
-              <button type="button" className="btn btn-success btn-sm">Editar</button>
+              <button type="button" className="btn btn-success btn-sm">Ver Perfil</button>
               <button type="button" className="btn btn-danger btn-sm">Eliminar</button>
             </td>
           </tr>
@@ -29,7 +29,7 @@ export default function Admin(){
             <td>Otto</td>
             <td>nombreapellidofecha@gmail.com</td>
             <td className="botones">   
-              <button type="button" className="btn btn-success btn-sm">Editar</button>
+              <button type="button" className="btn btn-success btn-sm">Ver Perfil</button>
               <button type="button" className="btn btn-danger btn-sm">Eliminar</button>
             </td>
           </tr>
@@ -38,7 +38,7 @@ export default function Admin(){
             <td>Otto</td>
             <td>nombreapellidofecha@gmail.com</td>
             <td className="botones">   
-              <button type="button" className="btn btn-success btn-sm">Editar</button>
+              <button type="button" className="btn btn-success btn-sm">Ver Perfil</button>
               <button type="button" className="btn btn-danger btn-sm">Eliminar</button>
             </td>
           </tr>
