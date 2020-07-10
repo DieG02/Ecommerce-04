@@ -1,4 +1,4 @@
-import { ADD_TO_CART, GET_PRODUCTS_CART, CART} from '../actions/actionsCart';
+import { ADD_TO_CART, GET_PRODUCTS_CART } from '../actions/actionsCart';
 
 const initialState = {
     carrito: []

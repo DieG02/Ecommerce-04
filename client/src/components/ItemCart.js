@@ -8,24 +8,27 @@ export default function ItemCart({ id, img, name, description, price}) {
 
   return (
     <div className="flex-container">
-      <div className="items">
+      <div className="imagen-container">
         <img 
           className="imgExample"
           src={img || 'https://placehold.it/300x400&text=Portada'}
           alt="Demo Producto"
         />
       </div>
-      <div className="items texto">
+
+      <div className="data-container">
         <h5>{name}</h5>
-        <span>{description}</span>
-        <p>$ {price}</p>
+        <p>{description}</p>
+        <form className="form-group" className="form-container">
+          <span>${price}</span>
+          <input type="number" className="form-control" min="1" value={cant || 1} onChange={e => setCant(e.target.value)}/>
+        </form>
       </div>
-      <div className="form-group" className=" items input">
-        <input type="number" className="form-control" min="1" value={cant || 1} onChange={e => setCant(e.target.value)}/>
+
+      <div className="boton-container">
+      <button type="button" class="btn btn-danger">X</button>
       </div>
-      <a onMouseOver={e => e.target.style.cursor = 'pointer'}>
-        <img src={close} alt="Borrar del carrito"></img>
-      </a>
+
     </div>
   );
 }

@@ -168,7 +168,7 @@ useEffect( () => {
         <div className="input-group input-group-sm mb-3">
         <div className="input-group-prepend">
             <button className="btn btn-outline-secondary" type="button" onClick={e => {
-              alert('Se agrego la imagen ' + input.img);
+              alert('Se agrego la imagen ' + input.imagen);
             }}>+</button>
           </div>
             <input 
