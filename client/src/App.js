@@ -11,6 +11,7 @@ import ProductByCategory from './components/ProductByCategory.js';
 import AddUser from './components/AddUser.js';
 import Nav from './components/Nav.js';
 import Usuario from './components/Usuario'
+import EditarUsuario from './components/EditarUsuario';
 
 function App() {
   
@@ -160,7 +161,7 @@ const [product, setProduct] = useState([]);
       <Route
         exact path='/usuario/perfil/edit/:id'
         component={({match}) => 
-        <Usuario id = {match.params.id}/>}
+        <EditarUsuario id = {match.params.id}/>}
         />
 
       </header>
