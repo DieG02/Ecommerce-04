@@ -4,13 +4,15 @@ import { getUser } from '../actions/actionsUser.js';
 import { edit } from '../images/iconEdit.png';
 import { Form } from 'react-bootstrap'
 
-export function Usuario ({ id, getUser, nombre, apellido, nombreusuario, email, password }) {
+export function Usuario ({ usuario, id, getUser }) {
 
   useEffect(()=>{
     getUser(id)},
-    [id, getUser])
+    [id, getUser]);
 
-  return (
+    console.log(usuario);
+
+  return ( 
     
   <Form>
     <br></br>
@@ -22,23 +24,19 @@ export function Usuario ({ id, getUser, nombre, apellido, nombreusuario, email, 
     <fieldset disabled>
           <Form.Group>
             <Form.Label htmlFor="disabledTextInput">Nombre</Form.Label>
-            <Form.Control id="disabledTextInput" placeholder={nombre} />
+            <Form.Control id="disabledTextInput" value={usuario.nombre} />
           </Form.Group>
           <Form.Group>
             <Form.Label htmlFor="disabledTextInput">Apellido</Form.Label>
-            <Form.Control id="disabledTextInput" placeholder={apellido} />
+            <Form.Control id="disabledTextInput" value={usuario.apellido} />
           </Form.Group>
           <Form.Group>
             <Form.Label htmlFor="disabledTextInput">Nombre de usuario</Form.Label>
-            <Form.Control id="disabledTextInput" placeholder={nombreusuario} />
+            <Form.Control id="disabledTextInput" value={usuario.nombreusuario} />
           </Form.Group>
           <Form.Group>
             <Form.Label htmlFor="disabledTextInput">Email</Form.Label>
-            <Form.Control id="disabledTextInput" placeholder={email} />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label htmlFor="disabledTextInput">Contraseña</Form.Label>
-            <Form.Control id="disabledTextInput" placeholder={password} />
+            <Form.Control id="disabledTextInput" value={usuario.email} />
           </Form.Group>
     </fieldset>
   </Form>
@@ -47,7 +45,7 @@ export function Usuario ({ id, getUser, nombre, apellido, nombreusuario, email, 
 
 function mapStateToProps(state){
   return {
-      usuario : state.usuario
+      usuario : state.usuario.usuario
   }
 }
 

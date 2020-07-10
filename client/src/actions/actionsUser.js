@@ -9,8 +9,6 @@ export function getUser(id) { // no funciona
         .then(res => res.json())
         .then((data) => {
             if (data !== undefined) {
-                // console.log(JSON.stringify(data));
-                console.log(data) 
                 dispatch({ type: GET_USER, payload: data })
             } else {
                 alert('No se encontró el usuario!')
