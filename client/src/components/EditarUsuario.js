@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { editUser } from '../actions/actionsUser';
+import { editUser, getUser } from '../actions/actionsUser';
 
-function EditarUsuario({ editUser }){
+function EditarUsuario({ id, editUser, usuario, getUser }){
 
     const [input, setInput] = useState({
         email: "",
@@ -20,6 +20,9 @@ function EditarUsuario({ editUser }){
         })
     }
 
+    useEffect( () => {
+        getUser(id)},
+        [getUser, id])
 
     return(
     <div>
@@ -34,7 +37,7 @@ function EditarUsuario({ editUser }){
                     type="number" 
                     className="form-control" 
                     min="0" 
-                    placeholder="Ej: 1"
+                    value={usuario.id}
                     name= "id"
                     disabled
                 />
@@ -42,11 +45,11 @@ function EditarUsuario({ editUser }){
             <div className="form-group col-md-3">
                 <label>Nombre</label>
                 <input 
-                    className="form-control" 
-                    placeholder="Nombre"
+                    className="form-control"
+                    type= "text"
+                    value={usuario.nombre}
                     name= "nombre"
                     onChange={inputChange}
-                    required
                 />
             </div>
 
@@ -54,10 +57,9 @@ function EditarUsuario({ editUser }){
                 <label>Apellido</label>
                 <input 
                     className="form-control" 
-                    placeholder="Apellido"
+                    value={usuario.apellido}
                     name= "apellido"
                     onChange={inputChange}
-                    required
                 />
             </div>
 
@@ -65,10 +67,9 @@ function EditarUsuario({ editUser }){
                 <label>Email</label>
                 <input 
                     className="form-control" 
-                    placeholder="Ej: henry@gmail.com"
+                    value={usuario.email}
                     name= "email"
                     onChange={inputChange}
-                    required
                 />
             </div>
 
@@ -76,10 +77,9 @@ function EditarUsuario({ editUser }){
                 <label>Nombre de Usuario</label>
                 <input 
                     className="form-control" 
-                    placeholder="Ej: alex93 (requerido)"
+                    value={usuario.nombreusuario}
                     name= "nombreusuario"
                     onChange={inputChange}
-                    required
                 />
             </div>
 
@@ -87,11 +87,10 @@ function EditarUsuario({ editUser }){
                 <label>Contraseña</label>
                 <input 
                     className="form-control" 
-                    placeholder="Contraseña(requerido)"
+                    value={usuario.contraseña}
                     type= "password"
                     name= "contraseña"
                     onChange= {inputChange}
-                    required
                 />
             </div>
 
@@ -99,10 +98,9 @@ function EditarUsuario({ editUser }){
                 <label>Foto de Perfil</label>
                 <input 
                     className="form-control" 
-                    placeholder="Foto de perfil"
+                    value={usuario.foto}
                     name= "foto"
                     onChange= {inputChange}
-                    required
                 />
             </div>
 
@@ -112,5 +110,11 @@ function EditarUsuario({ editUser }){
     </div>
 )}
 
-export default connect(null, { editUser })(EditarUsuario);
+const mapStateToProps = (state) => {
+    return {
+        usuario: state.usuario.usuario
+    };
+  };
+
+export default connect(mapStateToProps, { editUser, getUser })(EditarUsuario);
 

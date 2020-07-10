@@ -10,8 +10,6 @@ export function Usuario ({ usuario, id, getUser }) {
     getUser(id)},
     [id, getUser]);
 
-    console.log(usuario);
-
   return ( 
     
   <Form>

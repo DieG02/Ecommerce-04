@@ -39,7 +39,7 @@ useEffect( () => {
   [detailProduct, id])
 
   return(
-    <div>
+    <div >
       <form onSubmit={
           (e) => {
             e.preventDefault();
@@ -51,7 +51,7 @@ useEffect( () => {
             <input 
               type="number" 
               className="form-control" 
-              min="0" 
+              min="0"
               placeholder= {producto.id}
               name="id"
               disabled

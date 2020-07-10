@@ -5,8 +5,7 @@ const Op = Sequelize.Op;
 
 server.get('/', function (req, res){
     Usuario.findAll()
-        .then(function(usuarios) {
-            console.log(JSON.stringify(usuarios)); 
+        .then(function(usuarios) { 
             return res.status(200).json(usuarios);
         });
 });
