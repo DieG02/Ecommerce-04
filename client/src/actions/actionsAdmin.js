@@ -1,20 +1,20 @@
-export const GET_USSERS = 'GET_USSERS';
-export const EDIT_USSER = 'EDIT_USSER';
-export const DELETE_USSER = 'DELETE_USSER';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const EDIT_USER = 'EDIT_USER'; //Cambiar por ver perfil (sin password)
+export const DELETE_USER = 'DELETE_USER';
 
-export function getUssers(){
+export function getAllUsers(){
   return function (dispatch){
     return fetch('http://localhost:1337/usuario')
       .then(res => res.json())
       .then(data => {
         if(data !== undefined){
-          dispatch({ type: GET_USSERS, payload: data })
+          dispatch({ type: GET_ALL_USERS, payload: data })
         }
     })
   }
 }
 
-export function editUsser(id, data){
+export function editUser(id, data){
   return function (dispatch){
     return fetch(`http://localhost:1337/usuario/${id}`, {
       method: 'PUT', 
@@ -24,13 +24,13 @@ export function editUsser(id, data){
     .then(res => {
       if(res !== undefined){
         alert('Se ha editado la información de este usuario!');
-        dispatch({ type: EDIT_USSER })
+        dispatch({ type: EDIT_USER })
       }
     })
   }
 }
 
-export function deleteUsser(id){
+export function deleteUser(id){
   return function (dispatch){
     return fetch(`http://localhost:1337/usuario/${id}`,{
       method: 'DELETE', 
@@ -40,7 +40,7 @@ export function deleteUsser(id){
       .then(data => {
         if(data !== undefined){
           alert('Se ha eliminado a este usuario!');
-          dispatch({ type: DELETE_USSER })
+          dispatch({ type: DELETE_USER })
         }
     })
   }

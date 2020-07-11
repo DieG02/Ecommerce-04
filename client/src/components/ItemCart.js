@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import './Cart.css';
-import close from '../images/iconCloseH.png';
 
 export default function ItemCart({ id, img, name, description, price}) {
 

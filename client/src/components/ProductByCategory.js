@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Product from './Product.js';
 import './Product.css'
 import { connect } from 'react-redux';
