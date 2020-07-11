@@ -39,7 +39,7 @@ useEffect( () => {
   [detailProduct, id])
 
   return(
-<div>
+    <div >
       <form onSubmit={
           (e) => {
             e.preventDefault();

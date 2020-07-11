@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { editUser } from '../actions/actionsUser';
+import { editUser, getUser } from '../actions/actionsUser';
 
-function EditarUsuario({ editUser }){
+function EditarUsuario({ id, editUser, usuario, getUser }){
 
-    const [input, setInput] = useState({
-        email: "",
-        nombre: "",
-        apellido: "",
-        contraseña: "",
-        nombreusuario: "",
-        foto: ""
-    });
+    const [input, setInput] = useState({});
+
+    useEffect(() => {
+        setInput(usuario);
+      }, [usuario]);
 
     const inputChange = function(e){
+        console.log(e.target.name)
+        console.log(e.target.value)   
         setInput({
             ...input,
             [e.target.name] : e.target.value
         })
     }
 
+    useEffect( () => {
+        getUser(id)},
+        [getUser, id])
 
     return(
     <div>
         <form onSubmit={ e => {
             e.preventDefault();
-            editUser(input);
+            editUser(input.id, input);
         }}>
         <div className="form-row">
             <div className="form-group col-md-3">
@@ -34,7 +36,7 @@ function EditarUsuario({ editUser }){
                     type="number" 
                     className="form-control" 
                     min="0" 
-                    placeholder="Ej: 1"
+                    value={input.id}
                     name= "id"
                     disabled
                 />
@@ -42,11 +44,11 @@ function EditarUsuario({ editUser }){
             <div className="form-group col-md-3">
                 <label>Nombre</label>
                 <input 
-                    className="form-control" 
-                    placeholder="Nombre"
+                    className="form-control"
+                    type= "text"
+                    value={input.nombre} // cambie esto y no funciona
                     name= "nombre"
-                    onChange={inputChange}
-                    required
+                    onChange={inputChange} // cambie esto y no funca
                 />
             </div>
 
@@ -54,10 +56,9 @@ function EditarUsuario({ editUser }){
                 <label>Apellido</label>
                 <input 
                     className="form-control" 
-                    placeholder="Apellido"
+                    value={input.apellido}
                     name= "apellido"
                     onChange={inputChange}
-                    required
                 />
             </div>
 
@@ -65,10 +66,9 @@ function EditarUsuario({ editUser }){
                 <label>Email</label>
                 <input 
                     className="form-control" 
-                    placeholder="Ej: henry@gmail.com"
+                    value={input.email}
                     name= "email"
                     onChange={inputChange}
-                    required
                 />
             </div>
 
@@ -76,10 +76,9 @@ function EditarUsuario({ editUser }){
                 <label>Nombre de Usuario</label>
                 <input 
                     className="form-control" 
-                    placeholder="Ej: alex93 (requerido)"
+                    value={input.nombreusuario}
                     name= "nombreusuario"
                     onChange={inputChange}
-                    required
                 />
             </div>
 
@@ -87,11 +86,10 @@ function EditarUsuario({ editUser }){
                 <label>Contraseña</label>
                 <input 
                     className="form-control" 
-                    placeholder="Contraseña(requerido)"
+                    value={input.contraseña}
                     type= "password"
                     name= "contraseña"
                     onChange= {inputChange}
-                    required
                 />
             </div>
 
@@ -99,10 +97,9 @@ function EditarUsuario({ editUser }){
                 <label>Foto de Perfil</label>
                 <input 
                     className="form-control" 
-                    placeholder="Foto de perfil"
+                    value={input.foto}
                     name= "foto"
                     onChange= {inputChange}
-                    required
                 />
             </div>
 
@@ -112,5 +109,11 @@ function EditarUsuario({ editUser }){
     </div>
 )}
 
-export default connect(null, { editUser })(EditarUsuario);
+const mapStateToProps = (state) => {
+    return {
+        usuario: state.usuario.usuario
+    };
+  };
+
+export default connect(mapStateToProps, { editUser, getUser })(EditarUsuario);
 
