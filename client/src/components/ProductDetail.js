@@ -10,25 +10,31 @@ function ProductDetail ({ id, detailProduct, producto }) {
     [id, detailProduct])
 
   return (
-    <div className="container" >
-      <div class="row">
-        <div class="col-8">
-          <div className="card-deck">  
-            <div className="card">
-              <img className="card-img-top productView" src={producto.imagen} alt=""/>
-            </div>
+    <div className="mi-contenedor">
+      <div className="img-container">
+        <img src={producto.imagen} alt="Imagen en detalle"/>
+      </div>
+      <div className="data-container">
+        <div className="nombre-container">
+          <h2>{producto.nombre}</h2>
+          <p>Vale por una review *****</p>
+        </div>
+        <div className="precio-container">
+          <h4>$ {producto.precio}</h4>
+          <p>Disponibilidad {producto.stock}</p>
+        </div>
+        <div className="info-container">
+          <h5>Descripcion del producto</h5>
+          <p> {producto.descripcion || 'Este producto no tiene descripción'} </p>  
+          <div className="color-talle">
+            <span> Color: {producto.color} </span>
+            <span> Talle: {producto.talle} </span>
           </div>
         </div>
-          <div className="propiedades" class="col-4">
-              <h3 className="text">{producto.nombre}</h3>
-              <h2 className="text">$ {producto.precio}</h2>
-              <br/>
-                <p className="text"> {producto.descripcion}</p>  
-              <h6 className="text">Color: {producto.color} </h6>
-              <h6 className="text">Talle: {producto.talle} </h6>
-            <button className="btn btn-outline-dark my-2 my-sm-0">Comprar</button>
-          </div>
-      </div>
+        <div className="btn-container">
+          <button className="btn btn-outline-success">Añadir al carrito</button> 
+        </div>         
+      </div>           
     </div>
   )
 };

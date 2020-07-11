@@ -35,13 +35,11 @@ export function deleteUser(id){
     return fetch(`http://localhost:1337/usuario/${id}`,{
       method: 'DELETE', 
       headers:{'Content-Length': '0'}
-    })
-      .then(res => res.json())
-      .then(data => {
-        if(data !== undefined){
-          alert('Se ha eliminado a este usuario!');
-          dispatch({ type: DELETE_USER })
-        }
+    })   
+    .then(() => {       
+        alert('Se ha eliminado al usuario');               
+        window.location.replace('http://localhost:3000/admin');
+        return dispatch({ type: DELETE_USER })
     })
   }
 }

@@ -1,4 +1,4 @@
-import { ADD_TO_CART, GET_PRODUCTS_CART } from '../actions/actionsCart';
+import { ADD_TO_CART, GET_PRODUCTS_CART, DELETE_FROM_CART } from '../actions/actionsCart';
 
 const initialState = {
     carrito: []
@@ -10,13 +10,19 @@ export default (state = initialState, action) => {
         return {
             ...state,
             carrito: action.payload
-        };
+        }
     }
-     if (action.type === GET_PRODUCTS_CART) {
+    if (action.type === GET_PRODUCTS_CART) {
         return {
             ...state,
             carrito: action.payload
-        };
+        }
+    }
+    if (action.type === DELETE_FROM_CART ) {
+        return {
+            ...state,
+            carrito: action.payload
+        }
     }
 
     return state;

@@ -87,5 +87,32 @@ server.put('/:id', function(req, res) {
 
 });
 
+// Ruta para sacar un producto del carrito
+server.delete('/productos/:idProducto', (req, res) => {
+
+    const id = req.params.idProducto;
+
+    Orden.findOne({
+        where: {
+            estado: 'pendiente'
+        },
+    }) 
+    .then(carrito => {
+        if(carrito !== null){
+            Ordenproducto.destroy({ 
+                where: { 
+                    ordenId: carrito.dataValues.id,
+                    productId: id, 
+                }
+            })
+            .then(productoEliminado => {
+                return res.send('Se elimino del carrito!')
+            })
+        } else{
+            return res.send('No se pudo eliminar del carrito!')
+        }
+    })   
+});
+
 
 module.exports = server;

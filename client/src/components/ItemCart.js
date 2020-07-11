@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { deleteFromCart } from '../actions/actionsCart.js';
 import './Cart.css';
 
-export default function ItemCart({ id, img, name, description, price}) {
+export function ItemCart({ id, img, name, description, price, deleteFromCart }) {
 
   const [cant, setCant] = useState(0);
 
@@ -15,9 +17,9 @@ export default function ItemCart({ id, img, name, description, price}) {
         />
       </div>
 
-      <div className="data-container">
+      <div className="datos-container">
         <h5>{name}</h5>
-        <p>{description}</p>
+        <p>{description || 'Este producto no tiene descripción'}</p>
         <form className="form-group" className="form-container">
           <span>${price}</span>
           <input type="number" className="form-control" min="1" value={cant || 1} onChange={e => setCant(e.target.value)}/>
@@ -25,9 +27,13 @@ export default function ItemCart({ id, img, name, description, price}) {
       </div>
 
       <div className="boton-container">
-      <button type="button" class="btn btn-danger">X</button>
+        <button type="button" class="btn btn-danger" onClick={() => deleteFromCart(id)}>X</button>
       </div>
 
     </div>
   );
 }
+
+
+export default connect(null, { deleteFromCart })(ItemCart);
+

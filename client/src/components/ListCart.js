@@ -9,9 +9,9 @@ function ListCart({ carrito, getProductsCart}) {
   useEffect(() => {getProductsCart()},[getProductsCart])  
 
   return (
-    <div style={{display: 'flex'}}>
-      <div className="contenedor">
-        <h2>Shopping Cart</h2>
+    <div className="principal-container">
+      <div className="products-container">
+        <h2>Mi Carrito</h2>
         <div className="border-top border-bottom border-secondary">
           {carrito.map(p => 
             <ItemCart
@@ -24,26 +24,28 @@ function ListCart({ carrito, getProductsCart}) {
           )}
         </div>
       </div>
-      <div className="contenedor subcontenedor">
+      <div className="total-container">
         <h3>Summary</h3>
-        <div className="border-top border-bottom border-secondary">
-          <div className="subtotal">
+        <div className="border-top border-bottom border-secondary" >
+          <div className="subcontainer">
             <div>
-              <p>SUBTOTAL</p>
-              <p>ENVIO</p>
-              <p>IMPUESTOS</p>        
+              <span>SUBTOTAL</span>
+              <span>$ sub</span>
             </div>
-            <div className="p">
-              <p>$ sub</p>
-              <p>FREE</p>
-              <p>$ %5</p>
+            <div>
+              <span>ENVIO</span>
+              <span>FREE</span>
+            </div>
+            <div>
+              <span>IMPUESTOS</span>
+              <span>$%5</span>
             </div>
           </div>
         </div>
-        <div className="subtotal total">
-          <p>TOTAL</p>
-          <p>$suma</p>
-        </div>
+        <div className="total">
+          <span>TOTAL</span>
+          <span className="precio-final">$suma</span>
+        </div>      
       </div>
     </div>
   );
