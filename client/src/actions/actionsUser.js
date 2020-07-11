@@ -37,7 +37,8 @@ export function userAdd (input){
 }
 
 export function editUser(id, input){ 
-    return function (dispatch) {
+
+    return function (dispatch) {        
         return fetch(`http://localhost:1337/usuario/${id}`, {
             method: 'PUT',
             body: JSON.stringify(input), 
@@ -47,8 +48,8 @@ export function editUser(id, input){
         }).then((res) => {
             if (res.status === 200){
                 dispatch({ type: EDIT_USER })
-                return window.location.replace('http://localhost:3000/usuario/perfil/:id')
+                return window.location.replace(`http://localhost:3000/usuario/perfil/${id}`)
             }
-        }).catch(alert('No se pudo editar el usuario!'));
+        }).catch(() => alert('No se pudo editar el usuario!'));
     }
 }

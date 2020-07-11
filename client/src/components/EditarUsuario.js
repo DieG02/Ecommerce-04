@@ -4,16 +4,15 @@ import { editUser, getUser } from '../actions/actionsUser';
 
 function EditarUsuario({ id, editUser, usuario, getUser }){
 
-    const [input, setInput] = useState({
-        email: "",
-        nombre: "",
-        apellido: "",
-        contraseña: "",
-        nombreusuario: "",
-        foto: ""
-    });
+    const [input, setInput] = useState({});
+
+    useEffect(() => {
+        setInput(usuario);
+      }, [usuario]);
 
     const inputChange = function(e){
+        console.log(e.target.name)
+        console.log(e.target.value)   
         setInput({
             ...input,
             [e.target.name] : e.target.value
@@ -28,7 +27,7 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
     <div>
         <form onSubmit={ e => {
             e.preventDefault();
-            editUser(input);
+            editUser(input.id, input);
         }}>
         <div className="form-row">
             <div className="form-group col-md-3">
@@ -37,7 +36,7 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                     type="number" 
                     className="form-control" 
                     min="0" 
-                    value={usuario.id}
+                    value={input.id}
                     name= "id"
                     disabled
                 />
@@ -47,9 +46,9 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                 <input 
                     className="form-control"
                     type= "text"
-                    value={usuario.nombre}
+                    value={input.nombre} // cambie esto y no funciona
                     name= "nombre"
-                    onChange={inputChange}
+                    onChange={inputChange} // cambie esto y no funca
                 />
             </div>
 
@@ -57,7 +56,7 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                 <label>Apellido</label>
                 <input 
                     className="form-control" 
-                    value={usuario.apellido}
+                    value={input.apellido}
                     name= "apellido"
                     onChange={inputChange}
                 />
@@ -67,7 +66,7 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                 <label>Email</label>
                 <input 
                     className="form-control" 
-                    value={usuario.email}
+                    value={input.email}
                     name= "email"
                     onChange={inputChange}
                 />
@@ -77,7 +76,7 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                 <label>Nombre de Usuario</label>
                 <input 
                     className="form-control" 
-                    value={usuario.nombreusuario}
+                    value={input.nombreusuario}
                     name= "nombreusuario"
                     onChange={inputChange}
                 />
@@ -87,7 +86,7 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                 <label>Contraseña</label>
                 <input 
                     className="form-control" 
-                    value={usuario.contraseña}
+                    value={input.contraseña}
                     type= "password"
                     name= "contraseña"
                     onChange= {inputChange}
@@ -98,7 +97,7 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                 <label>Foto de Perfil</label>
                 <input 
                     className="form-control" 
-                    value={usuario.foto}
+                    value={input.foto}
                     name= "foto"
                     onChange= {inputChange}
                 />
