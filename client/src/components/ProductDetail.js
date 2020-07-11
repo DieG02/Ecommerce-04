@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import './ProductDetail.css'
 import { connect } from 'react-redux';
 import { detailProduct } from '../actions/actionsProductos.js';
+import { addToCart } from '../actions/actionsCart.js';
 
-function ProductDetail ({ id, detailProduct, producto }) {
+function ProductDetail ({ id, detailProduct, addToCart, producto }) {
   
   useEffect(()=>{
     detailProduct(id)},
@@ -32,7 +33,7 @@ function ProductDetail ({ id, detailProduct, producto }) {
           </div>
         </div>
         <div className="btn-container">
-          <button className="btn btn-outline-success">Añadir al carrito</button> 
+          <button className="btn btn-outline-success" onClick={() => addToCart(id)}>Añadir al carrito</button> 
         </div>         
       </div>           
     </div>
@@ -45,4 +46,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect (mapStateToProps,{detailProduct})(ProductDetail)
+export default connect (mapStateToProps,{ detailProduct, addToCart })(ProductDetail)

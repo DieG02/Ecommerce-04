@@ -3,6 +3,9 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+.productView{
+    background-size: cover;
+}
 .productCard{
     width: 200px;
     height: 300px;
@@ -22,9 +25,6 @@
     right: 5px;
     width: 27px;
     height: 25px;
-}
-.productView{
-    background-size: cover;
 }
 .card{
     margin-left: 0px !important;

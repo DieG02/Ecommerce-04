@@ -3,7 +3,10 @@
     background-color: rgba(255, 255, 255, 0.931);
     max-width: 950px;
 }
-
+.img-container{
+    margin: auto 0px;
+    margin-left: 10px;
+}
 .img-container img{
     max-width: 600px;
     max-height: 600px;
@@ -63,6 +66,7 @@
     padding-right: 15px;
     margin: 0px auto;
     margin-top: 45px;
+    margin-bottom: 20px;
 }
 .btn-container button{
     padding: 7px 75px !important;
