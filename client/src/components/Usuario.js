@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getUser } from '../actions/actionsUser.js';
-import { edit } from '../images/iconEdit.png';
-import { Form } from 'react-bootstrap'
+import edit from '../images/iconEdit.png';
+import { Form } from 'react-bootstrap';
+import './Usuario.css';
 
 export function Usuario ({ usuario, id, getUser }) {
 
   useEffect(()=>{
     getUser(id)},
     [id, getUser]);
+
 
   return ( 
     
@@ -18,6 +20,7 @@ export function Usuario ({ usuario, id, getUser }) {
     <br></br>
     <a title="Editar" className="iconleft" href={`http://localhost:3000/usuario/perfil/edit/${id}`}>
             <img src={edit} alt="Editar"/>
+            Editar
     </a>
     <fieldset disabled>
           <Form.Group>
