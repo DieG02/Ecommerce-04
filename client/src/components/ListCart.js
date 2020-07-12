@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
 import { connect } from 'react-redux';
-import { getProductsCart} from '../actions/actionsCart.js';
+import { getProductsCart } from '../actions/actionsCart.js';
 import ItemCart from './ItemCart.js';
 import './Cart.css';
 
-function ListCart({ carrito, getProductsCart}) {
+function ListCart({ carrito, getProductsCart }) {
 
   useEffect(() => {getProductsCart()},[getProductsCart])  
+
+  let subtotal = 0;
+  carrito.map(p => {
+    return subtotal += p.precio;
+  })
+  let impuestos = subtotal * 0.05;  //Impuesto del %5 como ejemplo
 
   return (
     <div className="principal-container">
@@ -19,7 +25,8 @@ function ListCart({ carrito, getProductsCart}) {
               img={p.imagen}  
               name={p.nombre}
               description={p.descripcion} 
-              price={p.precio}              
+              price={p.precio}    
+              stock={p.stock}          
             />
           )}
         </div>
@@ -30,7 +37,7 @@ function ListCart({ carrito, getProductsCart}) {
           <div className="subcontainer">
             <div>
               <span>SUBTOTAL</span>
-              <span>$ sub</span>
+              <span>$ {subtotal}</span>
             </div>
             <div>
               <span>ENVIO</span>
@@ -38,13 +45,13 @@ function ListCart({ carrito, getProductsCart}) {
             </div>
             <div>
               <span>IMPUESTOS</span>
-              <span>$%5</span>
+              <span>$ {impuestos}</span>
             </div>
           </div>
         </div>
         <div className="total">
           <span>TOTAL</span>
-          <span className="precio-final">$suma</span>
+          <span className="precio-final">$ {subtotal + impuestos}</span>
         </div>      
       </div>
     </div>

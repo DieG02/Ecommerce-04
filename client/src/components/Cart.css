@@ -49,13 +49,6 @@
 }
 
 
-
-
-
-
-
-
-
 .flex-container{
   display: flex;
   background-color: #d4e4f39f;
@@ -63,22 +56,22 @@
   padding: 10px 20px 10px 20px;
 }
 .imagen-container{
-  margin-top: auto;
-  margin-left: auto;
-  width: 175px;
-  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .imagen-container img{
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 170px;
+  max-height: 170px;
 }
 
 .datos-container{
+  margin-left: 20px;
   padding-right: 20px;
   width: 500px;
 }
 .datos-container h5{
-  font-size: 27px;
+  font-size: 25px;
   color: #131313;
   padding-left: 0px;
   padding-bottom: 10px;
@@ -87,7 +80,7 @@
 .datos-container p{
   text-align: justify;
   line-height: 20px;
-  font-size: 17px;
+  font-size: 15px;
   padding-bottom: 10px;
   margin-bottom: 0px;
 }
@@ -95,16 +88,21 @@
 .form-container{
   display: flex;
 }
-.form-container span{
-  font-size: 1.3em;
+.form-container > span{
+  font-size: 35px;
   font-weight: bold;
 }
-.form-container input{
-  margin-left: 20px;
-  width: 5em !important;
-  height: 2em !important;
+.form-container .editar{
+  margin-top: 12px;
+  margin-left: 25px;
+  width: 120px;
+} 
+.form-container .editar button{
+  border-radius: 0px 5px 5px 0px !important;
 }
-
+.form-container .editar small{
+  font-size: 13px;
+}
 .boton-container{
   position: relative;
   right: -10px;

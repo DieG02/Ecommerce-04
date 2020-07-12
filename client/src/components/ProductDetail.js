@@ -22,14 +22,14 @@ function ProductDetail ({ id, detailProduct, addToCart, producto }) {
         </div>
         <div className="precio-container">
           <h4>$ {producto.precio}</h4>
-          <p>Disponibilidad {producto.stock}</p>
+          <p>Stock disponible {producto.stock}</p>
         </div>
         <div className="info-container">
           <h5>Descripcion del producto</h5>
           <p> {producto.descripcion || 'Este producto no tiene descripción'} </p>  
           <div className="color-talle">
-            <span> Color: {producto.color} </span>
-            <span> Talle: {producto.talle} </span>
+            <span> Colores <div style={{backgroundColor: producto.color, width: '20px', height: '20px'}}></div> </span>
+            <span> Talle {producto.talle} </span>
           </div>
         </div>
         <div className="btn-container">

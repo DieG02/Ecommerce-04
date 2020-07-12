@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
-import { deleteFromCart } from '../actions/actionsCart.js';
+import { deleteFromCart, setCount } from '../actions/actionsCart.js';
 import './Cart.css';
 
-export function ItemCart({ id, img, name, description, price, deleteFromCart }) {
+export function ItemCart({ id, img, name, description, price, stock, deleteFromCart, setCount }) {
 
-  const [cant, setCant] = useState(0);
+  const [cant, addCant] = useState(0);
 
   return (
     <div className="flex-container">
@@ -20,14 +20,32 @@ export function ItemCart({ id, img, name, description, price, deleteFromCart }) 
       <div className="datos-container">
         <h5>{name}</h5>
         <p>{description || 'Este producto no tiene descripción'}</p>
-        <form className="form-group" className="form-container">
+        <form className="form-container form-group ">
           <span>${price}</span>
-          <input type="number" className="form-control" min="1" value={cant || 1} onChange={e => setCant(e.target.value)}/>
+          <div className="editar input-group input-group-sm mb-3">
+            <input title="Cantidad" className="form-control" id="cantidad" placeholder={'1'} 
+              onChange={e => {
+                if(e.target.value > 0) addCant(e.target.value);
+                else{ 
+                  addCant(1);
+                  e.target.placeholder = 1;
+                }
+            }}/>
+            <div className="input-group-append">
+              <button className="btn btn-outline-success" type="button" 
+                onClick={() => {
+                  setCount(id, cant);         
+                  document.getElementById('cantidad').placeholder = cant;
+                  document.getElementById('cantidad').value = '';
+              }}>Fijar</button>
+            </div>
+            <small>Disponible {stock}</small>
+          </div>  
         </form>
       </div>
 
       <div className="boton-container">
-        <button type="button" class="btn btn-danger" onClick={() => deleteFromCart(id)}>X</button>
+        <button type="button" className="btn btn-danger" onClick={() => deleteFromCart(id)}>X</button>
       </div>
 
     </div>
@@ -35,5 +53,5 @@ export function ItemCart({ id, img, name, description, price, deleteFromCart }) 
 }
 
 
-export default connect(null, { deleteFromCart })(ItemCart);
+export default connect(null, { deleteFromCart, setCount })(ItemCart);
 

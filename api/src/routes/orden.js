@@ -22,7 +22,7 @@ server.post('/:idusuario', function(req, res) {
         })
 });
 
-//Falta vincular con usuario
+// Agrega producto al carrito (Falta vincular con usuario)
 server.post('/producto/:idproducto', function(req, res) {
     const idProduct = req.params.idproducto;
     
@@ -43,9 +43,8 @@ server.post('/producto/:idproducto', function(req, res) {
     })
 })
 
-//Falta vincular con usuario
+// Encuentra el carrito (Falta vincular con usuario)
 server.get('/productos', function(req, res) {
-
     Orden.findOne({
         where: {
             estado: 'pendiente'
@@ -63,33 +62,30 @@ server.get('/productos', function(req, res) {
     });        
 });
 
-server.put('/:id', function(req, res) {
-    const estado = req.body.estado;
-    const cantidad = req.body.cantidad;
-    const id = req.params.id;
-
+// Ruta para setear a cantidad dentro del carrito
+server.put('/:id/:cantidad', function(req, res) {
+    const { id, cantidad} = req.params;
     Orden.findOne({
+        where: { estado: 'pendiente' }
+    })
+    .then(carrito => {
+        Ordenproducto.findOne({
             where: {
-                id: id
+                ordenId: carrito.dataValues.id,
+                productId: id, 
             }
-        }).then(function(product) {
-            Orden.update({
-                estado: estado,
-                cantidad: cantidad,
-            })
+        }) 
+        .then(product => {
+            product.update({ cantidad: cantidad })
         })
-        .then(() => {
-            return res.send('Se actualizo la orden!')
-        })
-        .catch(() => {
-            return res.status(400).send('No se pudo actualizar la orden!');
-        })
-
+    })
+    .then(() => { return res.send("Se agrego mas unidades al carrito") })
+    .catch(() => { return res.status(400).send('No hay mas unidades de este articulo!') })
 });
+
 
 // Ruta para sacar un producto del carrito
 server.delete('/productos/:idProducto', (req, res) => {
-
     const id = req.params.idProducto;
 
     Orden.findOne({
@@ -105,7 +101,7 @@ server.delete('/productos/:idProducto', (req, res) => {
                     productId: id, 
                 }
             })
-            .then(productoEliminado => {
+            .then(() => {
                 return res.send('Se elimino del carrito!')
             })
         } else{
@@ -113,6 +109,8 @@ server.delete('/productos/:idProducto', (req, res) => {
         }
     })   
 });
+
+
 
 
 module.exports = server;
