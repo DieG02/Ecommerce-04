@@ -4,21 +4,13 @@ import { editProduct, detailProduct } from '../actions/actionsProductos.js';
 
 function ProductEdit({ id, producto, editProduct, detailProduct }){
 
-const [input, setInput] = useState({
-  id: id,
-  nombre: "",
-  descripcion: "",
-  talle: "",
-  color: "",
-  precio: "",
-  imagen: "",
-  stock: "",
-});
+const [input, setInput] = useState({});
 
 const[category, setCategory] = useState({
-  categoria:"",
-  accion:""
+  // categoria:"",
+  // accion:""
 })
+
 
 const inputChange = function(e){
     setInput({
@@ -38,12 +30,21 @@ useEffect( () => {
   detailProduct(id)},
   [detailProduct, id])
 
+  useEffect(() => {
+    setInput(producto);
+  }, [producto]);
+
+  // useEffect(() => {
+  //   setCategory(categoria);
+  // }, [categoria]);
+
+
   return(
     <div >
       <form onSubmit={
           (e) => {
             e.preventDefault();
-            editProduct(id, input, category);
+            editProduct(id, input, input.producto);
       }}>
         <div className="form-row">
           <div className="form-group col-md-2">
@@ -52,6 +53,7 @@ useEffect( () => {
               type="number" 
               className="form-control" 
               min="0"
+              value={input.id}
               placeholder= {producto.id}
               name="id"
               disabled
@@ -62,8 +64,8 @@ useEffect( () => {
             <input 
               className="form-control" 
               type= "text"
-              placeholder= "nombre del producto"
-              value= {producto.nombre}
+              value={input.nombre}
+              placeholder= {producto.nombre}
               name="nombre"
               onChange= {inputChange}
             />
@@ -76,8 +78,8 @@ useEffect( () => {
           <input 
             className="form-control" 
             type= "text"
+            value={input.descripcion}
             placeholder= "descripcion del producto"
-            value= {producto.descripcion}
             name="descripcion" 
             onChange= {inputChange}
           />
@@ -91,6 +93,7 @@ useEffect( () => {
             <input
                 type= "text"
                 className="form-control" 
+                value={input.accion}
                 placeholder="agregar/eliminar"
                 name= "accion"
                 onChange= {setCategoryChange}/>
@@ -98,6 +101,7 @@ useEffect( () => {
                 type= "text"
                 className="form-control" 
                 placeholder="Ej: remeras"
+                value={input.categoria}
                 name= "categoria"
                 onChange= {setCategoryChange}/>
             </div>
@@ -111,7 +115,7 @@ useEffect( () => {
               <input 
                 className="form-control" 
                 placeholder= "precio del producto"
-                value= {producto.precio}
+                value= {input.precio}
                 name= "precio"
                 aria-label="Default" 
                 aria-describedby="inputGroup-sizing-default"
@@ -139,6 +143,7 @@ useEffect( () => {
                 className="form-control"
                 aria-label="" 
                 aria-describedby="basic-addon1"
+                value= {input.color}
                 name="color"
                 onChange= {inputChange} 
                 />  
@@ -150,7 +155,7 @@ useEffect( () => {
               className="form-control" 
               type= "number"
               placeholder= "cantidad de producto disponible"
-              value= {producto.stock}
+              value= {input.stock}
               name="stock"
               onChange= {inputChange} 
               />
@@ -161,7 +166,7 @@ useEffect( () => {
               className="form-control"
               type= "text"
               placeholder= "ej: M o 37"
-              value= {producto.talle} 
+              value= {input.talle} 
               name="talle" 
               onChange= {inputChange} 
             />
@@ -182,7 +187,7 @@ useEffect( () => {
               aria-label="Small" 
               aria-describedby="inputGroup-sizing-sm" 
               placeholder= "imagen del producto"
-              value= {producto.img}
+              value= {input.img}
               name="imagen"
               onChange= {inputChange}
             />
