@@ -12,11 +12,15 @@ const Orden = (sequelize, S) => {
         estado: {
             type: S.STRING,
             allowNull: false,
-            unique: true,
         },
+        
         cantidad_producto: {
             type: S.INTEGER,
-            
+        },
+        
+        total: {
+            type: S.REAL,
+
         }
     },
     {timestamps: false});

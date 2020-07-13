@@ -9,6 +9,17 @@ server.get('/', function(req, res) {
         });
 });
 
+// Ruta para obtener TODAS las ordenes.
+server.get('/all', function(req, res) {
+    Orden.findAll({
+        where: {
+            estado:'cerrado'
+        }
+    }).then(function(orders) {
+            return res.status(200).send(orders);
+        });
+});
+
 server.post('/:idusuario', function(req, res) {
     Orden.create({
             estado: "cerrado",

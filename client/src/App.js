@@ -14,6 +14,7 @@ import Admin from './components/Admin.js';
 import Usuario from './components/Usuario.js';
 import AddUser from './components/AddUser.js';
 import EditarUsuario from './components/EditarUsuario.js';
+import AdminOrdenes from './components/AdminOrdenes.js';
 
 function App() {
   
@@ -61,7 +62,6 @@ function App() {
         }
       />
 
-
       <Route
         exact path='/cart'
         component={() => <ListCart/>}
@@ -96,6 +96,11 @@ function App() {
       <Route
         exact path='/admin'
         component={() => <Admin/>}
+      />
+
+      <Route
+        exact path='/admin/ordenes'
+        component={() => <AdminOrdenes/>}
       />
       </header>
     </div>
