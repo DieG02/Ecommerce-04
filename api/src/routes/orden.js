@@ -20,6 +20,22 @@ server.get('/all', function(req, res) {
         });
 });
 
+// Ruta para obtener detalles de una orden
+server.get('/:idOrden', function(req, res) {
+    var id = req.params.idOrden
+
+    Orden.findOne({
+        where: {
+            id: id
+            // estado:'cerrado'
+        }
+    }).then(function(order) {
+            return res.status(200).send(order);
+    }).catch(() => {
+        return res.status(400).send('No se pudo encontrar la orden!')
+    })
+});
+
 server.post('/:idusuario', function(req, res) {
     Orden.create({
             estado: "cerrado",

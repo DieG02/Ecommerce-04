@@ -3,6 +3,7 @@ export const EDIT_USER = 'EDIT_USER'; //Cambiar por ver perfil (sin password)
 export const VIEW_USER = 'VIEW_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const GET_ORDERS = 'GET_ORDERS';
+export const GET_ORDER = 'GET_ORDER';
 
 export function getAllUsers(){
   return function (dispatch){
@@ -68,6 +69,18 @@ export function getAllOrders(){
       .then(data => {
         if(data !== undefined){
           dispatch({ type: GET_ORDERS, payload: data })
+        }
+    })
+  }
+}
+
+export function getOrderDetail(id){
+  return function (dispatch){
+    return fetch(`http://localhost:1337/changuito/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        if(data !== undefined){
+          dispatch({ type: GET_ORDER, payload: data })
         }
     })
   }
