@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getAllUsers, deleteUser } from '../actions/actionsAdmin.js';
+import { getAllUsers, viewUser, deleteUser } from '../actions/actionsAdmin.js';
 import './Admin.css';
 
-export function Admin({ usuarios, getAllUsers, deleteUser }){
+export function Admin({ usuarios, getAllUsers, deleteUser, viewUser }){
 
   useEffect(() => { getAllUsers() },[getAllUsers])  
 
@@ -28,7 +28,7 @@ export function Admin({ usuarios, getAllUsers, deleteUser }){
                 <td>{user.apellido}</td>
                 <td>{user.email}</td>
                 <td className="botones">  
-                  <button type="button" className="btn btn-success btn-sm">Ver Perfil</button>
+                  <button type="button" className="btn btn-success btn-sm" onClick={() => viewUser(user.id)}>Ver Perfil</button>
                   <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteUser(user.id)}>Eliminar</button>
                 </td>
               </tr>        
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getAllUsers, deleteUser })(Admin);
+export default connect(mapStateToProps, { getAllUsers, deleteUser, viewUser })(Admin);

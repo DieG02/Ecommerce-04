@@ -4,21 +4,10 @@ import { editProduct, detailProduct } from '../actions/actionsProductos.js';
 
 function ProductEdit({ id, producto, editProduct, detailProduct }){
 
-const [input, setInput] = useState({
-  id: id,
-  nombre: "",
-  descripcion: "",
-  talle: "",
-  color: "",
-  precio: "",
-  imagen: "",
-  stock: "",
-});
+const [input, setInput] = useState({});
 
-const[category, setCategory] = useState({
-  categoria:"",
-  accion:""
-})
+const[category, setCategory] = useState({})
+
 
 const inputChange = function(e){
     setInput({
@@ -38,12 +27,16 @@ useEffect( () => {
   detailProduct(id)},
   [detailProduct, id])
 
+  useEffect(() => {
+    setInput(producto);
+  }, [producto]);
+
   return(
     <div >
       <form onSubmit={
           (e) => {
             e.preventDefault();
-            editProduct(id, input, category);
+            editProduct(id, input, input.producto);
       }}>
         <div className="form-row">
           <div className="form-group col-md-2">
@@ -51,6 +44,8 @@ useEffect( () => {
             <input 
               type="number" 
               className="form-control" 
+              min="0"
+              value={input.id}
               placeholder={producto.id}
               name="id"
               disabled
@@ -61,7 +56,8 @@ useEffect( () => {
             <input 
               className="form-control" 
               type="text"
-              value={input.nombre || producto.nombre}
+              value={input.nombre}
+              placeholder={producto.nombre}
               name="nombre"
               onChange={inputChange}
               required
@@ -75,7 +71,8 @@ useEffect( () => {
           <input 
             className="form-control" 
             type="text"
-            value={input.descripcion || producto.descripcion}
+            value={input.descripcion}
+            placeholder="Descripcion del producto"
             name="descripcion" 
             onInput={inputChange}
           />
@@ -87,8 +84,9 @@ useEffect( () => {
             <label>Categoría</label>
             <div className="input-group mb-3">
             <input
-                type= "text"
+                type="text"
                 className="form-control" 
+                value={input.accion}
                 placeholder="agregar/eliminar"
                 name="accion"
                 onInput={setCategoryChange}/>
@@ -96,8 +94,9 @@ useEffect( () => {
                 type="text"
                 className="form-control" 
                 placeholder="Ej: Deportes"
+                value={input.categoria}
                 name="categoria"
-                onInput={setCategoryChange}/>
+                onChange= {setCategoryChange}/>
             </div>
           </div>       
           <div className="form-group col-md-5">
@@ -108,10 +107,12 @@ useEffect( () => {
               </div>
               <input 
                 className="form-control" 
+                placeholder="Precio del producto"
+                value={input.precio}
                 name="precio"
-                value={input.precio || producto.precio}
-                onInput={inputChange}
-                required
+                aria-label="Default" 
+                aria-describedby="inputGroup-sizing-default"
+                onChange={inputChange}
               />
             </div>
           </div>
@@ -131,9 +132,11 @@ useEffect( () => {
               </div>
               <input 
                 type="color" 
-                className="form-control"            
+                className="form-control"
+                aria-label="" 
+                aria-describedby="basic-addon1"
+                value={input.color}
                 name="color"
-                value={input.color || producto.color}
                 onInput={inputChange} 
                 />  
             </div>
@@ -143,9 +146,9 @@ useEffect( () => {
             <input 
               className="form-control" 
               type="number"
-              placeholder={'Cantidad disponible'} 
+              placeholder="Disponible"
+              value={input.stock}
               name="stock"
-              value={input.stock || producto.stock}
               onInput={inputChange} 
               />
           </div>
@@ -154,9 +157,9 @@ useEffect( () => {
             <input 
               className="form-control"
               type="text"
-              placeholder={'Ej: 30,32 o S,M'} 
+              placeholder="Ej: SM o 20"
+              value={input.talle} 
               name="talle" 
-              value={input.talle || producto.talle}
               onInput={inputChange} 
             />
           </div>
@@ -169,13 +172,16 @@ useEffect( () => {
             <button 
               className="btn btn-outline-secondary" 
               onClick={() => alert('Se agrego la imagen ' + input.imagen)}
-              type="button" >+
+              type="button">+
             </button>
           </div>
             <input 
               type="text" 
               className="form-control" 
-              placeholder={'Una imagen es requerida'}
+              aria-label="Small" 
+              aria-describedby="inputGroup-sizing-sm" 
+              placeholder="Imagen (requerido)"
+              value= {input.imagen}
               name="imagen"
               onInput={inputChange}
             />
@@ -194,3 +200,48 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps,{editProduct, detailProduct})(ProductEdit)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
