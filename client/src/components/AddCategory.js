@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { addCategory } from '../actions/actionsCategorias';
 
-export default function ProductAdd({ addCategory }){
+function CategoryAdd({ addCategory }){
 
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
@@ -11,7 +13,7 @@ export default function ProductAdd({ addCategory }){
     nombre: name,
     descripcion: description,
   }
-    
+
   return(
     <div>
       <form onSubmit={ e => {
@@ -28,7 +30,7 @@ export default function ProductAdd({ addCategory }){
               placeholder="Ej: 1"
               // value={id} 
               onChange={e => setId(e.target.value)}
-              required
+              disabled
             />
           </div>
           <div className="form-group col-md-9">
@@ -57,5 +59,6 @@ export default function ProductAdd({ addCategory }){
     </div>
   )
 }
- 
+
+export default connect(null, { addCategory })(CategoryAdd);
 

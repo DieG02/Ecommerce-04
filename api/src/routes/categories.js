@@ -24,13 +24,13 @@ server.get('/', function(req, res) {
 });
 
 server.get('/:id', function(req, res) {
-    Category.findByPk(req.params.id)
-        .then((categoria) => {
-            categoria.getProduct({ categoria }).then((productos) => {
-                return res.send(productos)
-            });
-        })
-})
+        Category.findByPk(req.params.id)
+            .then((categoria) => {
+                categoria.getProduct({ categoria }).then((productos) => {
+                    return res.send(productos)
+                });
+            })
+    });
 
 server.put('/:id', function(req, res){   
     var id = req.params.id;

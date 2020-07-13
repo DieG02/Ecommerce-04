@@ -1,41 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './ProductDetail.css'
+import { connect } from 'react-redux';
+import { detailProduct } from '../actions/actionsProductos.js';
+import { addToCart } from '../actions/actionsCart.js';
 
-export default function ProductDetail ({ match }) {
-  const { id } = match.params;
-
-  const [product, setProduct] = useState({});
-
-  useEffect(() => {
-    fetch(`http://localhost:1337/productos/${id}`)
-    .then(res => res.json())
-    .then((data) => {
-      if(data !== undefined){
-        setProduct(data);
-      }
-    });
-  }, []);
+function ProductDetail ({ id, detailProduct, addToCart, producto }) {
+  
+  useEffect(()=>{
+    detailProduct(id)},
+    [id, detailProduct])
 
   return (
-    <div className="container" >
-      <div class="row">
-        <div class="col-8">
-          <div className="card-deck">  
-            <div className="card">
-              <img className="card-img-top productView" src={product.imagen} alt=""/>
-            </div>
+    <div className="mi-contenedor">
+      <div className="img-container">
+        <img src={producto.imagen} alt="Imagen en detalle"/>
+      </div>
+      <div className="data-container">
+        <div className="nombre-container">
+          <h2>{producto.nombre}</h2>
+          <p>Vale por una review *****</p>
+        </div>
+        <div className="precio-container">
+          <h4>$ {producto.precio}</h4>
+          <p>Stock disponible {producto.stock}</p>
+        </div>
+        <div className="info-container">
+          <h5>Descripcion del producto</h5>
+          <p> {producto.descripcion || 'Este producto no tiene descripción'} </p>  
+          <div className="color-talle">
+            <span> Colores <div style={{backgroundColor: producto.color, width: '20px', height: '20px'}}></div> </span>
+            <span> Talle {producto.talle} </span>
           </div>
         </div>
-          <div className="propiedades" class="col-4">
-              <h3 className="text">{product.nombre}</h3>
-              <h2 className="text">$ {product.precio}</h2>
-              <br/>
-                <p className="text"> {product.descripcion}</p>  
-              <h6 className="text">Color: {product.color} </h6>
-              <h6 className="text">Talle: {product.talle} </h6>
-            <button className="btn btn-outline-dark my-2 my-sm-0">Comprar</button>
-          </div>
-      </div>
+        <div className="btn-container">
+          <button className="btn btn-outline-success" onClick={() => addToCart(id)}>Añadir al carrito</button> 
+        </div>         
+      </div>           
     </div>
   )
 };
+
+function mapStateToProps(state){
+  return {
+      producto : state.producto.producto
+  }
+}
+
+export default connect (mapStateToProps,{ detailProduct, addToCart })(ProductDetail)

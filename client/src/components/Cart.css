@@ -1,0 +1,115 @@
+.principal-container{
+  display: flex;
+  background-color: none;
+}
+
+
+.products-container{
+  background-color: #ffffff;
+  padding: 1em;
+  color: #555;
+  text-align: left;
+  margin-right: 20px;
+}
+
+
+.total-container{
+  background-color: #fff;
+  padding: 1em;
+  color: #777;
+  text-align: left;
+  min-width: 300px;
+  max-height: 275px;
+}
+.total-container h3{
+  padding-bottom: 4px;
+}
+.subcontainer{
+  margin-top: 15px;
+  margin-bottom: 10px; 
+}
+.subcontainer div{
+  display: flex;
+  justify-content: space-between;
+}
+.subcontainer span{
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+.total{
+  margin: 13px auto;
+  font-size: 23px;
+  display: flex;
+  justify-content: space-between;
+}
+.total .precio-final{
+  font-weight: bold;
+  margin-top: -3px;
+  font-size: 25px;
+}
+
+
+.flex-container{
+  display: flex;
+  background-color: #d4e4f39f;
+  margin: 1em 0em;
+  padding: 10px 20px 10px 20px;
+}
+.imagen-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imagen-container img{
+  max-width: 170px;
+  max-height: 170px;
+}
+
+.datos-container{
+  margin-left: 20px;
+  padding-right: 20px;
+  width: 500px;
+}
+.datos-container h5{
+  font-size: 25px;
+  color: #131313;
+  padding-left: 0px;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
+.datos-container p{
+  text-align: justify;
+  line-height: 20px;
+  font-size: 15px;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
+
+.form-container{
+  display: flex;
+}
+.form-container > span{
+  font-size: 35px;
+  font-weight: bold;
+}
+.form-container .editar{
+  margin-top: 12px;
+  margin-left: 25px;
+  width: 120px;
+} 
+.form-container .editar button{
+  border-radius: 0px 5px 5px 0px !important;
+}
+.form-container .editar small{
+  font-size: 13px;
+}
+.boton-container{
+  position: relative;
+  right: -10px;
+  top: -7px;
+}
+.boton-container button{
+  background-color: #ff1111b7;
+  border-color: none;
+  padding: 1px 8px !important;
+}

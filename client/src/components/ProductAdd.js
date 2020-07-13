@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { addProduct } from '../actions/actionsProductos.js';
 
-export default function ProductAdd({ addProduct }){
+function ProductAdd({ addProduct }){
+  // const [name, setName] = useState({
+  //   name: "",
+  //   description:"",
+  //   stock: "",
+  //   talle: "",
+  //   color: "",
+  //   price: "",
+  //   img: ""
+  // });
+
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -38,8 +50,8 @@ export default function ProductAdd({ addProduct }){
             />
           </div>
         </div>
- 
- 
+
+
         <div className="form-group">
           <label>Descripción</label>
           <input 
@@ -87,7 +99,7 @@ export default function ProductAdd({ addProduct }){
               </div>
               <input 
                 className="form-control" 
-                 placeholder="Precio del Producto" 
+                placeholder="Precio del Producto" 
                 aria-label="Default" 
                 aria-describedby="inputGroup-sizing-default" 
                 onChange={e => setPrice(e.target.value)} 
@@ -107,7 +119,7 @@ export default function ProductAdd({ addProduct }){
       
         <label>Imágenes</label>
         <div className="input-group input-group-sm mb-3">
-         <div className="input-group-prepend">
+          <div className="input-group-prepend">
             <button className="btn btn-outline-secondary" type="button" onClick={e => {
               alert('Se agrego la imagen ' + img);
             }}>+</button>
@@ -131,5 +143,6 @@ export default function ProductAdd({ addProduct }){
     </div>
   )
 }
- 
+
+export default connect(null,{addProduct})(ProductAdd)
 
