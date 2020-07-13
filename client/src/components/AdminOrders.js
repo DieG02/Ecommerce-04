@@ -9,7 +9,7 @@ import './Admin.css';
 export function AdminOrders({ orders, getAllOrders }){
 
   useEffect(() => { getAllOrders() },[getAllOrders])  
-
+console.log(orders)
   return(
     <div className="contenedor">
       <h2>ADMINISTRADOR</h2>
@@ -31,7 +31,7 @@ export function AdminOrders({ orders, getAllOrders }){
                 <td>{order.id}</td>
                 <td> $ {order.total}</td>
                 <td className="botones">  
-                  <NavLink to="/admin/ordenes/detail">
+                  <NavLink to="/admin/ordenes/detail/${id}">
                     <button type="button" className="btn btn-success btn-sm" onClick={() => 'prueba'}>Ver en detalle</button>
                   </NavLink>
                 </td>

@@ -26,8 +26,11 @@ server.get('/:idOrden', function(req, res) {
 
     Orden.findOne({
         where: {
-            id: id
-            // estado:'cerrado'
+            id: id,
+            estado:'cerrado'
+        }, 
+        include: {
+            model: Ordenproducto, as: 'idProduct'
         }
     }).then(function(order) {
             return res.status(200).send(order);

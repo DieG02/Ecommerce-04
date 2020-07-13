@@ -4,10 +4,9 @@ import { getOrderDetail } from '../actions/actionsAdmin.js';
 
 export function OrderDetail({ id, order, getOrderDetail }){
 
-    console.log(JSON.stringify(order))
-
     useEffect(() => { getOrderDetail(id) },[getOrderDetail, id])
 
+    console.log(JSON.stringify(order))
 
     return(
         <div className="contenedor">
@@ -19,6 +18,7 @@ export function OrderDetail({ id, order, getOrderDetail }){
                 <th scope="col" className="item1">ID USUARIO</th>
                 <th scope="col" className="item2">ID ORDEN</th>
                 <th scope="col" className="item2">ESTADO</th>
+                <th scope="col" className="item2">PRODUCTO</th>
                 <th scope="col" className="item2">CANTIDAD DEL PRODUCTO</th>
                 <th scope="col" className="item3">MONTO</th>
               </tr>
@@ -28,6 +28,7 @@ export function OrderDetail({ id, order, getOrderDetail }){
                 <th scope="row">{order.usuarioId}</th>
                 <td>{order.id}</td>
                 <td> {order.estado}</td>
+                <td> {order.cantidad_producto}</td>
                 <td> {order.cantidad_producto}</td>
                 <td> $ {order.total}</td>
                 <td className="botones">  
