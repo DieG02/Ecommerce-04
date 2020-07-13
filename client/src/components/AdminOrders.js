@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getAllOrders } from '../actions/actionsAdmin.js';
 import './Admin.css';
 
+
 export function AdminOrders({ orders, getAllOrders }){
 
   useEffect(() => { getAllOrders() },[getAllOrders])  
@@ -26,9 +27,9 @@ export function AdminOrders({ orders, getAllOrders }){
               <tr>
                 <th scope="row">{order.usuarioId}</th>
                 <td>{order.id}</td>
-                <td>{order.total}</td>
+                <td> $ {order.total}</td>
                 <td className="botones">  
-                  <button type="button" className="btn btn-success btn-sm" onClick="location.href='/detalleDeOrden'">Ver en detalle</button>
+                  <button type="button" className="btn btn-success btn-sm" onClick={() => 'prueba'}>Ver en detalle</button>
                   {/* <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteUser(order.id)}>Eliminar</button> */}
                 </td>
               </tr>        

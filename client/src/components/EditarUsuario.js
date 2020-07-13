@@ -46,9 +46,9 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                 <input 
                     className="form-control"
                     type= "text"
-                    value={input.nombre} // cambie esto y no funciona
+                    value={input.nombre}
                     name= "nombre"
-                    onChange={inputChange} // cambie esto y no funca
+                    onChange={inputChange}
                 />
             </div>
 
@@ -92,17 +92,6 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                     onChange= {inputChange}
                 />
             </div>
-
-            <div className="form-group col-md-6">
-                <label>Foto de Perfil</label>
-                <input 
-                    className="form-control" 
-                    value={input.foto}
-                    name= "foto"
-                    onChange= {inputChange}
-                />
-            </div>
-
         </div>
         <button type="submit" className="btn btn-primary">Guardar</button>
     </form>
