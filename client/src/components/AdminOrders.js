@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getAllOrders, deleteUser } from '../actions/actionsAdmin.js';
+import { getAllOrders } from '../actions/actionsAdmin.js';
 import './Admin.css';
 
-export function AdminOrdenes({ orders, getAllOrders, usuarios }){
+export function AdminOrders({ orders, getAllOrders }){
 
   useEffect(() => { getAllOrders() },[getAllOrders])  
 
@@ -28,7 +28,7 @@ export function AdminOrdenes({ orders, getAllOrders, usuarios }){
                 <td>{order.id}</td>
                 <td>{order.total}</td>
                 <td className="botones">  
-                  <button type="button" className="btn btn-success btn-sm">Ver en detalle</button>
+                  <button type="button" className="btn btn-success btn-sm" onClick="location.href='/detalleDeOrden'">Ver en detalle</button>
                   {/* <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteUser(order.id)}>Eliminar</button> */}
                 </td>
               </tr>        
@@ -44,8 +44,7 @@ export function AdminOrdenes({ orders, getAllOrders, usuarios }){
 const mapStateToProps = (state) => {
   return {
       orders: state.administrador.orders,
-      usuarios: state
   };
 };
 
-export default connect(mapStateToProps, { getAllOrders })(AdminOrdenes);
+export default connect(mapStateToProps, { getAllOrders })(AdminOrders);
