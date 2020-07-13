@@ -10,9 +10,7 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
         setInput(usuario);
       }, [usuario]);
 
-    const inputChange = function(e){
-        console.log(e.target.name)
-        console.log(e.target.value)   
+    const inputChange = function(e){  
         setInput({
             ...input,
             [e.target.name] : e.target.value
