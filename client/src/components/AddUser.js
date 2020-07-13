@@ -20,97 +20,58 @@ function CrearUsuario({ addUser }){
         })
     }
 
-
     return(
-    <div>
-        <form onSubmit={ e => {
+      <div>
+        <form onSubmit={e => {
             e.preventDefault();
             addUser(input);
         }}>
-        <div className="form-row">
-            <div className="form-group col-md-3">
-                <label>Id</label>
-                <input 
-                    type="number" 
-                    className="form-control" 
-                    min="0" 
-                    placeholder="Ej: 1"
-                    name= "id"
-                    disabled
-                />
+          <div class="form-row">
+            <div className="col-md-2 mb-3">
+              <label>Id</label>
+              <input type="number" className="form-control"  min="1"  placeholder="Auto" name= "id" disabled/>
             </div>
-            <div className="form-group col-md-3">
-                <label>Nombre</label>
-                <input 
-                    className="form-control" 
-                    placeholder="Nombre"
-                    name= "nombre"
-                    onChange={inputChange}
-                    required
-                />
+            <div class="col-md-5 mb-3">
+              <label>Nombre</label>
+              <input class="form-control" placeholder="Nombre" name= "nombre" onChange={inputChange} required/>
             </div>
+            <div class="col-md-5 mb-3">
+              <label>Apellido</label>
+              <input class="form-control" placeholder="Apellido" name= "apellido" onChange={inputChange} required/>
+            </div>
+          </div>
+    
+       
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+              <label>Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+                <input class="form-control" placeholder="soyHenry@gmail.com" name= "email" onChange={inputChange} required/>
+              </div>         
+            </div>
+          </div>
 
-            <div className="form-group col-md-3">
-                <label>Apellido</label>
-                <input 
-                    className="form-control" 
-                    placeholder="Apellido"
-                    name= "apellido"
-                    onChange={inputChange}
-                    required
-                />
-            </div>
 
-            <div className="form-group col-md-3">
-                <label>Email</label>
-                <input 
-                    className="form-control" 
-                    placeholder="Ej: henry@gmail.com"
-                    name= "email"
-                    onChange={inputChange}
-                    required
-                />
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label>Nombre usuario</label>
+              <input class="form-control" placeholder="henry27" name="nombreusuario" onChange={inputChange} required/>
             </div>
-
-            <div className="form-group col-md-3">
-                <label>Nombre de Usuario</label>
-                <input 
-                    className="form-control" 
-                    placeholder="Ej: alex93 (requerido)"
-                    name= "nombreusuario"
-                    onChange={inputChange}
-                    required
-                />
+            <div class="col-md-6 mb-3">
+              <label>Contraseña</label>
+              <input type= "password"  class="form-control" placeholder="Requerido" name= "contraseña" onChange= {inputChange} required/>
             </div>
+          </div>
 
-            <div className="form-group col-md-3">
-                <label>Contraseña</label>
-                <input 
-                    className="form-control" 
-                    placeholder="Contraseña(requerido)"
-                    type= "password"
-                    name= "contraseña"
-                    onChange= {inputChange}
-                    required
-                />
-            </div>
-
-            <div className="form-group col-md-6">
-                <label>Foto de Perfil</label>
-                <input 
-                    className="form-control" 
-                    placeholder="Foto de perfil"
-                    name= "foto"
-                    onChange= {inputChange}
-                    required
-                />
-            </div>
-
-        </div>
-        <button type="submit" className="btn btn-primary">Crear usuario</button>
-    </form>
-    </div>
-)}
+          <button type="submit" className="btn btn-success">Registrarse</button>
+        </form>       
+      </div>
+    )
+}
 
 export default connect(null, { addUser })(CrearUsuario);
+
 

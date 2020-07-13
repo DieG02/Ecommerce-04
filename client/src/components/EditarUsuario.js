@@ -93,16 +93,6 @@ function EditarUsuario({ id, editUser, usuario, getUser }){
                 />
             </div>
 
-            <div className="form-group col-md-6">
-                <label>Foto de Perfil</label>
-                <input 
-                    className="form-control" 
-                    value={input.foto}
-                    name= "foto"
-                    onChange= {inputChange}
-                />
-            </div>
-
         </div>
         <button type="submit" className="btn btn-primary">Guardar</button>
     </form>

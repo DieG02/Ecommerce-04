@@ -1,5 +1,6 @@
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const EDIT_USER = 'EDIT_USER'; //Cambiar por ver perfil (sin password)
+export const VIEW_USER = 'VIEW_USER';
 export const DELETE_USER = 'DELETE_USER';
 
 export function getAllUsers(){
@@ -29,6 +30,21 @@ export function editUser(id, data){
     })
   }
 }
+
+export function viewUser(id) {
+  return function(dispatch) {
+      return fetch(`http://localhost:1337/usuario/${id}`)
+      .then(res => res.json())
+      .then(data => {
+          if (data !== undefined) {
+            window.location.replace(`http://localhost:3000/usuario/perfil/${id}`);
+            return dispatch({ type: VIEW_USER })        
+          } else {
+              alert('No se puede mostrar este usuario!')
+          }
+      });
+  }
+};
 
 export function deleteUser(id){
   return function (dispatch){
