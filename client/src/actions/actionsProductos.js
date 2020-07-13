@@ -65,8 +65,8 @@ export function editProduct(id, input, category){
             },
         }).then((res) => {
             if (res.status === 200){
-                dispatch({ type: EDIT_PRODUCT })
-                return window.location.replace('http://localhost:3000')
+                window.location.replace('http://localhost:3000');
+                return dispatch({ type: EDIT_PRODUCT })
             } else {
                 alert("no se realizo la accion!")
             }
