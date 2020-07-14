@@ -12,7 +12,9 @@ export function addToCart(id){
     })
     .then(data => {
       if(data !== undefined){
-        alert('Se ha agregado al carrito!');            
+        console.log(data);
+        console.log(data.body);
+        console.log(data.headers)  
         dispatch({ type: ADD_TO_CART, payload: data })
       }
     })
@@ -34,14 +36,14 @@ export function getProductsCart(){
 
 // Seteamos la cantidad de unidades por producto
 export function setCount(id, cantidad){
-  if(!cantidad) cantidad = 1;
+  if(!cantidad || cantidad === 0) cantidad = 1;
   return function(dispatch){
     return fetch(`http://localhost:1337/changuito/${id}/${cantidad}`, {
       method: 'PUT', 
       headers:{'Content-Length': 0}
     }).then(res => {
       if(res.status === 200){   
-          dispatch({ type: SET_COUNT }) 
+          return dispatch({ type: SET_COUNT, payload: cantidad }) 
       } else {
           alert('No hay más unidades disponibles');
       }

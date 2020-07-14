@@ -20,40 +20,6 @@ server.get('/all', function(req, res) {
         });
 });
 
-server.post('/:idusuario', function(req, res) {
-    Orden.create({
-            estado: "cerrado",
-            usuarioId: req.params.idusuario
-        })
-        .then(() => {
-            return res.send('Se creo una nueva orden!')
-        })
-        .catch(() => {
-            return res.status(400).send('No se pudo crear la orden!')
-        })
-});
-
-// Agrega producto al carrito (Falta vincular con usuario)
-server.post('/producto/:idproducto', function(req, res) {
-    const idProduct = req.params.idproducto;
-    
-    Orden.findOrCreate({
-        where: {
-            estado: 'pendiente'
-        }
-    })
-    .then(orden => {
-        Ordenproducto.create({
-            cantidad: 1,
-            productId: idProduct,
-            ordenId: orden[0].dataValues.id
-        })
-    })
-    .then(() => {
-        res.send('Se agrego el producto a la carrito');
-    })
-})
-
 // Encuentra el carrito (Falta vincular con usuario)
 server.get('/productos', function(req, res) {
     Orden.findOne({
@@ -72,6 +38,84 @@ server.get('/productos', function(req, res) {
         }
     });        
 });
+
+
+// Devulve la cantidad del producto en el carrito
+server.get('/productos/:idProducto', function(req, res) {
+    const { idProduct } = req.params.idProduct
+
+    Orden.findOne({
+        where: { estado: 'pendiente' }
+    })
+    .then(carrito => {
+        Ordenproducto.findOne({
+            where: {
+                ordenId: carrito.dataValues.id,
+                productId: idProduct, 
+            }
+        }) 
+        .then(product => {
+            console.log(product);
+            console.log(product.cantidad);
+            return res.send(product.cantidad);
+        })
+    })     
+});
+
+
+
+server.post('/:idusuario', function(req, res) {
+    Orden.create({
+            estado: "cerrado",
+            usuarioId: req.params.idusuario
+        })
+        .then(() => {
+            return res.send('Se creo una nueva orden!')
+        })
+        .catch(() => {
+            return res.status(400).send('No se pudo crear la orden!')
+        })
+});
+
+// Agrega producto al carrito (Falta vincular con usuario)
+server.post('/producto/:idproducto', function(req, res) {
+    const idProduct = req.params.idproducto;
+    
+    Orden.findOne({
+        where: { estado: 'pendiente' }
+    })
+    .then(carrito => {
+        Ordenproducto.findOne({
+            where: {
+                ordenId: carrito.dataValues.id,
+                productId: idProduct, 
+            }
+        }) 
+        .then(product => {
+            product.update({ cantidad: product.cantidad + 1 })
+        })
+        .then(() => {
+            return res.send('Se agrego otra unidad al carrito');
+        })
+    })
+
+    Orden.findOrCreate({
+        where: { estado: 'pendiente' }
+    })
+    .then(orden => {
+        Ordenproducto.create({
+            cantidad: 1,
+            productId: idProduct,
+            ordenId: orden[0].dataValues.id
+        })
+    })
+    .then(() => {
+        return res.send('Se agrego el producto a la carrito');
+    })
+})
+
+
+
 
 // Ruta para setear a cantidad dentro del carrito
 server.put('/:id/:cantidad', function(req, res) {
@@ -93,6 +137,7 @@ server.put('/:id/:cantidad', function(req, res) {
     .then(() => { return res.send("Se agrego mas unidades al carrito") })
     .catch(() => { return res.status(400).send('No hay mas unidades de este articulo!') })
 });
+
 
 
 // Ruta para sacar un producto del carrito

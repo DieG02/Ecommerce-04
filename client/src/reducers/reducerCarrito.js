@@ -2,7 +2,7 @@ import { ADD_TO_CART, GET_PRODUCTS_CART, SET_COUNT, DELETE_FROM_CART } from '../
 
 const initialState = {
     carrito: [],
-    producto: {}
+    cantidad: []
 }
 
 
@@ -22,6 +22,7 @@ export default (state = initialState, action) => {
     if (action.type === SET_COUNT) {
         return {
             ...state,
+            cantidad: action.payload
         }
     }
     if (action.type === DELETE_FROM_CART ) {

@@ -3,9 +3,18 @@ import { connect } from 'react-redux';
 import { deleteFromCart, setCount } from '../actions/actionsCart.js';
 import './Cart.css';
 
-export function ItemCart({ id, img, name, description, price, stock, deleteFromCart, setCount }) {
+export function ItemCart({ cantidad, id, img, name, description, price, stock, deleteFromCart, setCount }) {
 
   const [cant, addCant] = useState(0);
+
+  function getCount(id){
+    if(!cantidad || cantidad === 0) cantidad = 1;
+      return fetch(`http://localhost:1337/changuito/productos/${id}`)
+      .then(res => {
+          console.log(res)
+          return res
+      })
+  }
 
   return (
     <div className="flex-container">
@@ -23,19 +32,13 @@ export function ItemCart({ id, img, name, description, price, stock, deleteFromC
         <form className="form-container form-group ">
           <span>${price}</span>
           <div className="editar input-group input-group-sm mb-3">
-            <input title="Cantidad" className="form-control" id="cantidad" placeholder={'1'} 
-              onChange={e => {
-                if(e.target.value > 0) addCant(e.target.value);
-                else{ 
-                  addCant(1);
-                  e.target.placeholder = 1;
-                }
-            }}/>
+            <input type="number" min="1" max={stock} title="Cantidad" className="form-control" id="cantidad" placeholder="1"
+              onChange={e => addCant(e.target.value)}/>
             <div className="input-group-append">
               <button className="btn btn-outline-success" type="button" 
                 onClick={() => {
                   setCount(id, cant);         
-                  document.getElementById('cantidad').placeholder = cant;
+                  document.getElementById('cantidad').placeholder = getCount(id);
                   document.getElementById('cantidad').value = '';
               }}>Fijar</button>
             </div>
@@ -53,5 +56,11 @@ export function ItemCart({ id, img, name, description, price, stock, deleteFromC
 }
 
 
-export default connect(null, { deleteFromCart, setCount })(ItemCart);
+const mapStateToProps = (state) => {
+  return {
+      cantidad: state.carrito.cantidad
+  };
+};
+
+export default connect(mapStateToProps, { deleteFromCart, setCount })(ItemCart);
 
