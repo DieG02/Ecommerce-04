@@ -31,7 +31,7 @@ console.log(orders)
                 <td>{order.id}</td>
                 <td> $ {order.total}</td>
                 <td className="botones">  
-                  <NavLink to="/admin/ordenes/detail/${id}">
+                  <NavLink to={`/admin/ordenes/detail/${order.id}`}>
                     <button type="button" className="btn btn-success btn-sm" onClick={() => 'prueba'}>Ver en detalle</button>
                   </NavLink>
                 </td>

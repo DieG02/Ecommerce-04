@@ -30,7 +30,7 @@ server.get('/:idOrden', function(req, res) {
             estado:'cerrado'
         }, 
         include: {
-            model: Ordenproducto, as: 'idProduct'
+            model: Product, as: 'product'
         }
     }).then(function(order) {
             return res.status(200).send(order);

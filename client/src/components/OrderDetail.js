@@ -6,7 +6,7 @@ export function OrderDetail({ id, order, getOrderDetail }){
 
     useEffect(() => { getOrderDetail(id) },[getOrderDetail, id])
 
-    console.log(JSON.stringify(order))
+    console.log(order)
 
     return(
         <div className="contenedor">
