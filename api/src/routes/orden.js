@@ -20,6 +20,8 @@ server.get('/all', function(req, res) {
         });
 });
 
+
+
 // Encuentra el carrito (Falta vincular con usuario)
 server.get('/productos', function(req, res) {
     Orden.findOne({
@@ -40,6 +42,28 @@ server.get('/productos', function(req, res) {
     });        
 });
 
+// Ruta para obtener detalles de una orden
+server.get('/:idOrden', function(req, res) {
+    var id = req.params.idOrden
+
+    Orden.findOne({
+        where: {
+            id: id,
+            estado:'cerrado'
+        }, 
+        include: {
+            model: Product, as: 'product'
+        }
+    })
+    .then(function(order) {
+        console.log(order)
+        return res.status(200).send(order.product);
+    })
+    .catch(() => {
+        return res.status(400).send('No se pudo encontrar la orden!')
+    })
+});
+
 
 // Devulve la cantidad del producto en el carrito
 server.get('/productos/:idProducto', function(req, res) {
@@ -56,13 +80,10 @@ server.get('/productos/:idProducto', function(req, res) {
             }
         }) 
         .then(product => {
-            console.log(product);
-            console.log(product.cantidad);
             return res.send(product.cantidad);
         })
     })     
 });
-
 
 
 server.post('/:idusuario', function(req, res) {
@@ -77,6 +98,7 @@ server.post('/:idusuario', function(req, res) {
             return res.status(400).send('No se pudo crear la orden!')
         })
 });
+
 
 // Agrega producto al carrito (Falta vincular con usuario)
 server.post('/producto/:idproducto', function(req, res) {
