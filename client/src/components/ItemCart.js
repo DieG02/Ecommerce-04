@@ -7,15 +7,6 @@ export function ItemCart({ cantidad, id, img, name, description, price, stock, d
 
   const [cant, addCant] = useState(0);
 
-  function getCount(id){
-    if(!cantidad || cantidad === 0) cantidad = 1;
-      return fetch(`http://localhost:1337/changuito/productos/${id}`)
-      .then(res => {
-          console.log(res)
-          return res
-      })
-  }
-
   return (
     <div className="flex-container">
       <div className="imagen-container">
@@ -38,7 +29,7 @@ export function ItemCart({ cantidad, id, img, name, description, price, stock, d
               <button className="btn btn-outline-success" type="button" 
                 onClick={() => {
                   setCount(id, cant);         
-                  document.getElementById('cantidad').placeholder = getCount(id);
+                  // document.getElementById('cantidad').placeholder = ;
                   document.getElementById('cantidad').value = '';
               }}>Fijar</button>
             </div>

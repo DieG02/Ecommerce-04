@@ -12,9 +12,6 @@ export function addToCart(id){
     })
     .then(data => {
       if(data !== undefined){
-        console.log(data);
-        console.log(data.body);
-        console.log(data.headers)  
         dispatch({ type: ADD_TO_CART, payload: data })
       }
     })

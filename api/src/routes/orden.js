@@ -31,6 +31,7 @@ server.get('/productos', function(req, res) {
         }
     }) 
     .then(carrito => {
+        console.log(carrito)
         if(carrito !== null){
             return res.send(carrito.product)
         } else{
