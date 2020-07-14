@@ -32,9 +32,12 @@ server.get('/:idOrden', function(req, res) {
         include: {
             model: Product, as: 'product'
         }
-    }).then(function(order) {
-            return res.status(200).send(order);
-    }).catch(() => {
+    })
+    .then(function(order) {
+        console.log(order)
+        return res.status(200).send(order.product);
+    })
+    .catch(() => {
         return res.status(400).send('No se pudo encontrar la orden!')
     })
 });
