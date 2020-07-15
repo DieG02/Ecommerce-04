@@ -17,12 +17,19 @@ import EditarUsuario from './components/EditarUsuario.js';
 import AdminOrders from './components/AdminOrders.js';
 import OrderDetail from './components/OrderDetail.js';
 
+import LoginForm from './components/LoginForm.js';
+
 function App() {
   
   return ( 
     <div className="App">
     <Nav />
     <header className="App-header">
+
+      <Route
+        exact path='/login'
+        render={() => <LoginForm/>}
+      />
 
       <Route
         exact path='/'
