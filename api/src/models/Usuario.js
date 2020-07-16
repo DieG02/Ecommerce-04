@@ -37,8 +37,9 @@ const Usuario = (sequelize, S) => {
             allowNull: false
         },
 
-        foto: {
+        rango: {
             type: S.STRING,
+            allowNull: false
         }
 
     },
