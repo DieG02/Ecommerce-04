@@ -3,31 +3,94 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const routes = require('./routes/index');
 const morgan = require('morgan');
+const { Usuario } = require('./models/index');
+const passport = require('passport');
+const session = require('express-session')
+const LocalStrategy = require('passport-local').Strategy;
 
 require('./models');
-
 const server = express();
 
 server.name = 'API';
 
-server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-server.use(bodyParser.json({ limit: '50mb' }));
-server.use(cookieParser());
+server.use(express.urlencoded({ extended: true }))
+
 server.use(morgan('dev'));
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); //para que me permita editar los productos
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
+
+passport.use(new LocalStrategy({
+  usernameField: 'nombreusuario',
+  passwordField: 'conraseña'
+}, function (username, password, done){
+    Usuario.findOne({
+      where: {
+        nombreusuario: username,
+      }
+    })
+    .then(user => {
+      if(!user){
+        return done(null, false, { message: `${user} no esta registrado` })
+      }
+      if(user.contraseña !== password){
+        return done(null, false, { message: 'Contraseña incorrecta' })
+      }
+      return done(null, user);
+    })
+    .catch(err => {
+      done(err);
+    })
+  }
+));
+
+
+passport.serializeUser((user, done) => {
+  console.log(user);
+  done(null, user.id)
+});
+
+passport.deserializeUser((id, done) => {
+  Usuario.findByPk(id)
+         .then(user => {
+           done(null, user)
+         })
+         .catch(err => {
+           done(err)
+         })
+});
+
+
+server.use(session({
+    secret: 'mi primera ecommerce',
+    resave: false
+  }
+));
+
+server.use(passport.initialize());
+server.use(passport.session());
+
+
+server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+server.use(bodyParser.json({ limit: '50mb' }));
+server.use(cookieParser());
+
+
+// Comprobar el usuario
+server.use((req, res, next) => {
+  console.log(req.session);
+  next();
+})
+
+
+/// --- --- ///
 server.use('/', routes);
 
-//Configuración de la autenticación
-server.get('/', (req, res) => {
-
-})
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
