@@ -5,7 +5,7 @@ export default function LoginForm(){
   const [ user, setUser ] = useState({});
 
   function login(input){  
-    return fetch('http://localhost:1337/auth/login', {
+    return fetch('http://localhost:1337/usuario/login', {
         method: 'POST', 
         body: JSON.stringify(input), 
         headers:{ 'Content-Type': 'application/json' }
@@ -35,12 +35,12 @@ export default function LoginForm(){
               <span className="input-group-text" id="inputGroup-sizing-default">@</span>
             </div>
             <input 
-              type="email" 
-              name="email" 
+              type="text" 
+              name="usuario" 
               className="form-control" 
               style={{width: '350px'}}
-              placeholder="Ej: nombreapellido@gmail.com" 
-              onChange={e => setUser({...user, email: e.target.value})}
+              placeholder="henry27" 
+              onChange={e => setUser({...user, usuario: e.target.value})}
               required/>
           </div>  
         </div>
@@ -57,7 +57,7 @@ export default function LoginForm(){
             </div>  
           </div>
         
-        <input type="submit"  className="btn btn-danger" value="Enviar"/>
+        <input type="submit"  className="btn btn-danger" value="Log In"/>
       </form>
     </div>
   )
