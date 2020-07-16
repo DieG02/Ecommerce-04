@@ -21,7 +21,6 @@ server.get('/all', function(req, res) {
 });
 
 
-
 // Encuentra el carrito (Falta vincular con usuario)
 server.get('/productos', function(req, res) {
     Orden.findOne({
@@ -41,6 +40,30 @@ server.get('/productos', function(req, res) {
         }
     });        
 });
+
+//Ruta para agregar ordenes con estado cerrado, solo sirve para comprobar que funciona
+//el componente que renderiza la orden en detalle desde el back.
+// server.post('/producto/:idproducto', function(req, res) {
+//     const idProduct = req.params.idproducto;
+    
+//     Orden.findOne({
+//         where: { estado: 'cerrado' }
+//     })
+//     .then(carrito => {
+//         Ordenproducto.findOne({
+//             where: {
+//                 ordenId: carrito.dataValues.id,
+//                 productId: idProduct, 
+//             }
+//         }) 
+//         .then(product => {
+//             product.update({ cantidad: product.cantidad + 1 })
+//         })
+//         .then(() => {
+//             return res.send('Se agrego otra unidad al carrito');
+//         })
+        
+// });
 
 // Ruta para obtener detalles de una orden
 server.get('/:idOrden', function(req, res) {
@@ -136,8 +159,6 @@ server.post('/producto/:idproducto', function(req, res) {
         return res.send('Se agrego el producto a la carrito');
     })
 })
-
-
 
 
 // Ruta para setear a cantidad dentro del carrito

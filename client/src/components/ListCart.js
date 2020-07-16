@@ -6,7 +6,7 @@ import './Cart.css';
 
 function ListCart({ carrito, getProductsCart }) {
 
-  useEffect(() => {getProductsCart()},[getProductsCart])  
+  useEffect(() => {getProductsCart()},[getProductsCart])
 
   let subtotal = 0;
   carrito.map(p => {
@@ -52,7 +52,7 @@ function ListCart({ carrito, getProductsCart }) {
         <div className="total">
           <span>TOTAL</span>
           <span className="precio-final">$ {subtotal + impuestos}</span>
-        </div>      
+        </div> 
       </div>
     </div>
   );
