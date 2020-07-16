@@ -1,32 +1,10 @@
-import React, { useState} from 'react';
+import React from 'react';
 
 export default function LoginForm(){
 
-  const [ user, setUser ] = useState({});
-
-  function login(input){  
-    return fetch('http://localhost:1337/usuario/login', {
-        method: 'POST', 
-        body: JSON.stringify(input), 
-        headers:{ 'Content-Type': 'application/json' }
-    }).then(res => {
-      if(res.status === 200){   
-        return window.location.replace('http://localhost:3000')
-      } else {
-        alert('email o contraseña incorrecta');
-      }
-    })
-  }
-
   return(
     <div>
-      <form action="/login" method="POST"
-        onSubmit={e => {
-          e.preventDefault();
-          login(user) 
-        }
-      }>
-
+      <form action="http://localhost:1337/usuario/login" method="POST">
 
         <div className="form-group col-md-12">
           <h3 style={{paddingBottom: '20px'}}>Log In</h3>
@@ -36,11 +14,10 @@ export default function LoginForm(){
             </div>
             <input 
               type="text" 
-              name="usuario" 
+              name="username" 
               className="form-control" 
               style={{width: '350px'}}
-              placeholder="henry27" 
-              onChange={e => setUser({...user, usuario: e.target.value})}
+              placeholder="henry27"            
               required/>
           </div>  
         </div>
@@ -52,7 +29,6 @@ export default function LoginForm(){
                 name="password" 
                 className="form-control" 
                 placeholder="Contraseña" 
-                onChange={e => setUser({...user, password: e.target.value})}
                 required/>
             </div>  
           </div>

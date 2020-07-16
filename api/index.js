@@ -25,7 +25,7 @@ const { conn } = require('../api/src/models/index.js');
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(1337, () => {
-    console.log('Server listening at 1337'); // eslint-disable-line no-console
+    console.log('Server is listening at port 1337'); // eslint-disable-line no-console
   });
 });
 

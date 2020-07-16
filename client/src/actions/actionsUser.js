@@ -5,7 +5,7 @@ export const EDIT_USER = 'EDIT_USER';
 
 export function getUser(id) {
     return function(dispatch) {
-        return fetch(`http://localhost:1337/usuario/${id}`)
+        return fetch(`http://localhost:1337/usuario/${id}`, { credentials: 'include' })
         .then(res => res.json())
         .then((data) => {
             if (data !== undefined) {
@@ -42,6 +42,7 @@ export function editUser(id, input){
         return fetch(`http://localhost:1337/usuario/${id}`, {
             method: 'PUT',
             body: JSON.stringify(input), 
+            credentials: 'include',
             headers:{
             'Content-Type': 'application/json'
         },

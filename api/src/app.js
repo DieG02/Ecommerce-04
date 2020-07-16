@@ -10,15 +10,13 @@ const LocalStrategy = require('passport-local').Strategy;
 
 require('./models');
 const server = express();
-
 server.name = 'API';
 
 server.use(express.urlencoded({ extended: true }))
-
 server.use(morgan('dev'));
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); //para que me permita editar los productos
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
@@ -26,8 +24,8 @@ server.use((req, res, next) => {
 
 
 passport.use(new LocalStrategy({
-  usernameField: 'nombreusuario',
-  passwordField: 'conraseña'
+  usernameField: 'username',
+  passwordField: 'password'
 }, function (username, password, done){
     Usuario.findOne({
       where: {
@@ -51,10 +49,8 @@ passport.use(new LocalStrategy({
 
 
 passport.serializeUser((user, done) => {
-  console.log(user);
   done(null, user.id)
 });
-
 passport.deserializeUser((id, done) => {
   Usuario.findByPk(id)
          .then(user => {
@@ -68,27 +64,26 @@ passport.deserializeUser((id, done) => {
 
 server.use(session({
     secret: 'mi primera ecommerce',
-    resave: false
+    resave: false,  
+    saveUninitialized: true
   }
 ));
 
+
 server.use(passport.initialize());
 server.use(passport.session());
-
-
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 
-
 // Comprobar el usuario
 server.use((req, res, next) => {
   console.log(req.session);
-  next();
+  next()
 })
 
 
-/// --- --- ///
+/// --- ULTIMO --- ///
 server.use('/', routes);
 
 

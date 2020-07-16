@@ -4,6 +4,21 @@ const Sequelize = require ('sequelize');
 const passport = require('passport');
 const Op = Sequelize.Op;
 
+
+function loggedIn(req, res, next){
+    console.log(req.user);
+    console.log(req.isAuthenticated());
+    if(req.isAuthenticated()) return next();
+    else{
+        return res.json({
+            loggedIn: false,
+            isAdmin: false,
+            message: 'Not authenticated'
+        })
+    }
+}
+
+// Muestra todos los usuarios (Admin)
 server.get('/', function (req, res){
     Usuario.findAll()
         .then(function(usuarios) { 
@@ -11,7 +26,8 @@ server.get('/', function (req, res){
         });
 });
 
-server.get('/:idUsuario', function (req, res){
+// Ver un usuario en particular (Admin - User)
+server.get('/:idUsuario', loggedIn, function (req, res){
     const id = req.params.idUsuario;
     Usuario.findOne({
         where:{
@@ -25,24 +41,21 @@ server.get('/:idUsuario', function (req, res){
         })
 });
 
+// Crea un usuario
 server.post('/', function (req, res){
         Usuario.create(req.body);
         res.send("El usuario se creo!");
 });
 
-
 // Autenticación a la ruta /login
 server.post('/login', 
-    passport.authenticate('local'),
-    function (req, res){
-        res.json({
-            success: true,
-            user: req.user
-        })
-    }
-)
+  passport.authenticate('local', { failureRedirect: 'http://localhost:3000/login' }),
+  function(req, res) {
+    res.redirect('http://localhost:3000')
+});
 
-server.put('/:idUsuario', function(req, res){
+// Actualiza el usuario ( User - Admin )
+server.put('/:idUsuario', loggedIn, function(req, res){
     const id = req.params.idUsuario;
 
     Usuario.findOne({
@@ -53,14 +66,14 @@ server.put('/:idUsuario', function(req, res){
         usuario.update(req.body)
     })
     .then(() => {
-        return res.send("El usuario se editó!")
+        return res.send("El usuario se ha editado!")
     })
     .catch(() => {
         return res.status(400).send("no se ha podido editar el usuario!")
     })
 });
 
-// Ruta para eliminar al usuario funcionando.
+// Ruta para eliminar al usuario funcionando (Admin - User)
 server.delete('/:idUsuario', (req, res) => {
     const id = req.params.idUsuario;
     Usuario.destroy({

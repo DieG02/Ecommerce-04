@@ -8,7 +8,7 @@ export const PRODUCT_BY_CATEGORY = 'PRODUCT_BY_CATEGORY';
 //Buscar todo
 export function getAll() {
         return function(dispatch) {
-            return fetch(`http://localhost:1337/productos`)
+            return fetch(`http://localhost:1337/productos`, { credentials: 'include' })
             .then(res => res.json())
             .then((data) => {
                 if (data !== undefined) {

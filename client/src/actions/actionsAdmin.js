@@ -22,6 +22,7 @@ export function editUser(id, data){
     return fetch(`http://localhost:1337/usuario/${id}`, {
       method: 'PUT', 
       body: JSON.stringify(data), 
+      credentials: 'include',
       headers:{'Content-Type': 'application/json'}
     })
     .then(res => {
@@ -35,11 +36,11 @@ export function editUser(id, data){
 
 export function viewUser(id) {
   return function(dispatch) {
-      return fetch(`http://localhost:1337/usuario/${id}`)
+      return fetch(`http://localhost:1337/usuario/${id}`, { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
           if (data !== undefined) {
-            window.location.replace(`http://localhost:3000/usuario/perfil/${id}`);
+            window.location.replace(`http://localhost:3000/usuario/perfil/${id}`, { credentials: 'include' });
             return dispatch({ type: VIEW_USER })        
           } else {
               alert('No se puede mostrar este usuario!')
@@ -52,7 +53,8 @@ export function deleteUser(id){
   return function (dispatch){
     return fetch(`http://localhost:1337/usuario/${id}`,{
       method: 'DELETE', 
-      headers:{'Content-Length': '0'}
+      credentials: 'include',
+      headers:{ 'Content-Length': '0' }
     })   
     .then(() => {       
         alert('Se ha eliminado al usuario');               
