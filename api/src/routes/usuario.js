@@ -1,6 +1,7 @@
 const server = require('express').Router();
 const { Usuario } = require('../models/index');
 const Sequelize = require ('sequelize');
+const passport = require('passport');
 const Op = Sequelize.Op;
 
 server.get('/', function (req, res){
@@ -28,6 +29,18 @@ server.post('/', function (req, res){
         Usuario.create(req.body);
         res.send("El usuario se creo!");
 });
+
+
+// Autenticación a la ruta /login
+server.post('/login', 
+    passport.authenticate('local'),
+    function (req, res){
+        res.json({
+            success: true,
+            user: req.user
+        })
+    }
+)
 
 server.put('/:idUsuario', function(req, res){
     const id = req.params.idUsuario;

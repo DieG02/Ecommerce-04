@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getAllOrders } from '../actions/actionsAdmin.js';
+import { NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './Admin.css';
 
 
 export function AdminOrders({ orders, getAllOrders }){
 
   useEffect(() => { getAllOrders() },[getAllOrders])  
-
+console.log(orders)
   return(
     <div className="contenedor">
       <h2>ADMINISTRADOR</h2>
@@ -29,8 +31,9 @@ export function AdminOrders({ orders, getAllOrders }){
                 <td>{order.id}</td>
                 <td> $ {order.total}</td>
                 <td className="botones">  
-                  <button type="button" className="btn btn-success btn-sm" onClick={() => 'prueba'}>Ver en detalle</button>
-                  {/* <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteUser(order.id)}>Eliminar</button> */}
+                  <NavLink to={`/admin/ordenes/detail/${order.id}`}>
+                    <button type="button" className="btn btn-success btn-sm" onClick={() => 'prueba'}>Ver en detalle</button>
+                  </NavLink>
                 </td>
               </tr>        
             )}

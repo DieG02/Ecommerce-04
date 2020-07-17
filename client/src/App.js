@@ -15,6 +15,9 @@ import Usuario from './components/Usuario.js';
 import AddUser from './components/AddUser.js';
 import EditarUsuario from './components/EditarUsuario.js';
 import AdminOrders from './components/AdminOrders.js';
+import OrderDetail from './components/OrderDetail.js';
+
+import LoginForm from './components/LoginForm.js';
 
 function App() {
   
@@ -22,6 +25,11 @@ function App() {
     <div className="App">
     <Nav />
     <header className="App-header">
+
+      <Route
+        exact path='/login'
+        render={() => <LoginForm/>}
+      />
 
       <Route
         exact path='/'
@@ -102,6 +110,13 @@ function App() {
         exact path='/admin/ordenes'
         component={() => <AdminOrders/>}
       />
+
+      <Route
+        exact path='/admin/ordenes/detail/:id'
+        component={({match}) => 
+          <OrderDetail id={match.params.id}/>
+        }                   
+      />  
       </header>
     </div>
   );
