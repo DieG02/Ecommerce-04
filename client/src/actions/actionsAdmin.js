@@ -7,7 +7,7 @@ export const GET_ORDER = 'GET_ORDER';
 
 export function getAllUsers(){
   return function (dispatch){
-    return fetch('http://localhost:1337/usuario')
+    return fetch('http://localhost:1337/usuario/admin')
       .then(res => res.json())
       .then(data => {
         if(data !== undefined){
