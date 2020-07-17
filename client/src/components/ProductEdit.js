@@ -36,7 +36,7 @@ useEffect( () => {
       <form onSubmit={
           (e) => {
             e.preventDefault();
-            editProduct(id, input, input.producto);
+            editProduct(id, input, category);
       }}>
         <div className="form-row">
           <div className="form-group col-md-2">

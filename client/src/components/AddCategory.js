@@ -27,7 +27,7 @@ function CategoryAdd({ addCategory }){
               type="number" 
               className="form-control" 
               min="0" 
-              placeholder="Ej: 1"
+              placeholder="Auto"
               // value={id} 
               onChange={e => setId(e.target.value)}
               disabled

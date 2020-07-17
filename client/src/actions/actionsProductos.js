@@ -52,29 +52,27 @@ export function editProduct(id, input, category){
         return fetch(`http://localhost:1337/productos/${id}`, {
             method: 'PUT',
             body: JSON.stringify(input), 
-            headers:{
-            'Content-Type': 'application/json'
-        },
-        }).then((res)=>{
-        if(res.status === 200){
-            fetch(`http://localhost:1337/productos/pxcategoria/${id}`, {
-                method: 'PUT',
-                body: JSON.stringify(category), 
-                headers:{
-                'Content-Type': 'application/json'
-            },
-        }).then((res) => {
+            headers:{ 'Content-Type': 'application/json' }
+        })
+        .then(res => {
+            if(category){
+                fetch(`http://localhost:1337/productos/pxcategoria/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify(category), 
+                    headers:{ 'Content-Type': 'application/json' }
+                })
+                .then(res => {
+                    if (res.status === 200){
+                        window.location.replace('http://localhost:3000');
+                        return dispatch({ type: EDIT_PRODUCT })
+                    } 
+                })
+            }
             if (res.status === 200){
                 window.location.replace('http://localhost:3000');
                 return dispatch({ type: EDIT_PRODUCT })
-            } else {
-                alert("no se realizo la accion!")
-            }
+            }     
         })
-        } else {
-            alert('No se edito el producto!');
-        }
-    })
     }
 }
 
