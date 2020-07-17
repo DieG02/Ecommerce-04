@@ -37,7 +37,7 @@ const Usuario = (sequelize, S) => {
             allowNull: false
         },
 
-        rango: {
+        rol: {
             type: S.STRING,
             allowNull: false
         }

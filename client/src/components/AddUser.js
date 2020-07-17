@@ -10,7 +10,7 @@ function CrearUsuario({ addUser }){
         apellido: "",
         contraseña: "",
         nombreusuario: "",
-        rango: "Usuario"
+        rol: "Usuario"
     });
 
     const inputChange = function(e){
