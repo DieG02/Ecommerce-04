@@ -1,5 +1,4 @@
 export const GET_ALL_USERS = 'GET_ALL_USERS';
-export const EDIT_USER = 'EDIT_USER'; //Cambiar por ver perfil (sin password)
 export const VIEW_USER = 'VIEW_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const GET_ORDERS = 'GET_ORDERS';
@@ -7,7 +6,7 @@ export const GET_ORDER = 'GET_ORDER';
 
 export function getAllUsers(){
   return function (dispatch){
-    return fetch('http://localhost:1337/usuario/admin')
+    return fetch('http://localhost:1337/usuario/admin', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         if(data !== undefined){
@@ -17,25 +16,9 @@ export function getAllUsers(){
   }
 }
 
-export function editUser(id, data){
-  return function (dispatch){
-    return fetch(`http://localhost:1337/usuario/${id}`, {
-      method: 'PUT', 
-      body: JSON.stringify(data), 
-      headers:{'Content-Type': 'application/json'}
-    })
-    .then(res => {
-      if(res !== undefined){
-        alert('Se ha editado la información de este usuario!');
-        dispatch({ type: EDIT_USER })
-      }
-    })
-  }
-}
-
 export function viewUser(id) {
   return function(dispatch) {
-    return fetch(`http://localhost:1337/usuario/${id}`)
+    return fetch(`http://localhost:1337/usuario/admin/${id}`, { credentials: 'include' })
     .then(res => res.json())
     .then(data => {
       if (data !== undefined) {
@@ -50,7 +33,7 @@ export function viewUser(id) {
 
 export function deleteUser(id){
   return function (dispatch){
-    return fetch(`http://localhost:1337/usuario/${id}`,{
+    return fetch(`http://localhost:1337/usuario/admin/${id}`,{
       method: 'DELETE', 
       credentials: 'include',
       headers:{ 'Content-Length': '0' }
