@@ -4,6 +4,7 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const DETAIL_PRODUCT = 'DETAIL_PRODUCT';
 export const PRODUCT_BY_CATEGORY = 'PRODUCT_BY_CATEGORY';
+export const ADD_REVIEW = 'ADD_REVIEW';
 
 //Buscar todo
 export function getAll() {
@@ -97,5 +98,27 @@ export function productByCategory(id){
             dispatch({ type: PRODUCT_BY_CATEGORY, payload: data })
         }
         });
+    }
+}
+
+
+// action para agregar review
+
+export function addReview (idProduct, data){
+    return function (dispatch){
+        return fetch(`http://localhost:1337/review/${idProduct}`, {
+            method: 'POST', 
+            body: JSON.stringify(data), 
+            headers:{
+            'Content-Type': 'application/json'
+            }
+        }).then((res)=>{
+        if(res.status === 200){   
+            dispatch({ type: ADD_REVIEW, payload: data }) 
+            // return window.location.replace('http://localhost:3000')
+        } else {
+            alert('No se agrego la review!');
+        }
+        })
     }
 }

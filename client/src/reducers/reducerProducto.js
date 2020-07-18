@@ -1,4 +1,4 @@
-import {GET_PRODUCTS, SEARCH_PRODUCTS, ADD_PRODUCT, EDIT_PRODUCT, DETAIL_PRODUCT, PRODUCT_BY_CATEGORY} from '../actions/actionsProductos';
+import {GET_PRODUCTS, SEARCH_PRODUCTS, ADD_PRODUCT, EDIT_PRODUCT, DETAIL_PRODUCT, PRODUCT_BY_CATEGORY, ADD_REVIEW} from '../actions/actionsProductos';
 
 const initialState = {
     productos: [],
@@ -46,6 +46,13 @@ export default (state = initialState, action) => {
         return {
             ...state,
             productos: action.payload
+        };
+    }
+
+    if (action.type === ADD_REVIEW) {
+        return {
+            ...state,
+            producto: action.payload
         };
     }
 
