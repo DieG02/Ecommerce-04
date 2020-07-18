@@ -36,10 +36,10 @@ server.post('/', function (req, res){
 
 // Ver mi perfil
 server.get('/:idUsuario', loggedIn, function (req, res){
-    const id = req.params.idUsuario;
+    // const id = req.params.idUsuario;
     Usuario.findOne({
         where:{
-            id: id
+            id: req.user.id
         }
     })
     .then(function(usuario) {
@@ -52,10 +52,10 @@ server.get('/:idUsuario', loggedIn, function (req, res){
 
 // Actualizar perfil
 server.put('/:idUsuario', loggedIn, function(req, res){
-    const id = req.params.idUsuario;
+    // const id = req.params.idUsuario;
     Usuario.findOne({
         where:{
-            id: id
+            id: req.user.id
         }
     }).then(function(usuario){ 
         usuario.update(req.body)
@@ -70,10 +70,10 @@ server.put('/:idUsuario', loggedIn, function(req, res){
 
 // Eliminar cuenta
 server.delete('/:idUsuario', loggedIn, function (req, res){
-    const id = req.params.idUsuario;
+    // const id = req.params.idUsuario;
     Usuario.destroy({
         where: { 
-            id: id 
+            id: req.user.id 
         }
     })
     .then(usuarioEliminado => {

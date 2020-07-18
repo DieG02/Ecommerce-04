@@ -45,7 +45,7 @@ server.put('/:idUsuario', isAdmin, function(req, res){
   Usuario.findOne({
     where:{ id: id }
   }).then(usuario => { 
-    usuario.update({ rango: 'Admin'})
+    usuario.update({ rol: 'Admin'})
   })
   .then(() => {
     return res.send("Ahora es Adminisrador")
