@@ -20,10 +20,9 @@ server.post('/login',
     res.redirect('http://localhost:3000')
 });
 server.get('/logout', function(req, res) {
- //req.logout() viene en passport
  req.logout();
- //después de hacer log out redirige a la portada
- res.redirect('http://localhost:3000/login');
+ //No estaría funcionando este redireccionamiento, desde el front --> /login
+ res.redirect('/');
 });
 
 

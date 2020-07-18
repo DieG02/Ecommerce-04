@@ -19,7 +19,7 @@ function Settings(){
         <img src={iconShopB} alt="Carrito" className="Icon" width="30px"/>
       </a>
        <a 
-        href="/logout" 
+        href="/login" 
         onClick={() =>  {
           fetch('http://localhost:1337/usuario/logout', { credentials: 'include' })
         }}
