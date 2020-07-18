@@ -2,6 +2,7 @@ export const ADD_USER = 'ADD_USER';
 export const GET_USER = 'GET_USER';
 export const GET_USER_LOGGED = 'GET_USER_LOGGED';
 export const EDIT_USER = 'EDIT_USER';
+export const DELETE_USER = 'DELETE_USER';
 
 
 export function addUser (input){
@@ -68,4 +69,23 @@ export function editUser(id, input){
         }).catch(() => alert('No se pudo editar el usuario!'));
     }
 }
+
+export function deleteUser(id){ 
+    return function (dispatch) {     
+        console.log(id);   
+        return fetch(`http://localhost:1337/usuario/${id}`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers:{ 'Content-Length': '0' }
+        })
+        .then(res => {
+            if (res.status === 200){
+                return dispatch({ type: DELETE_USER })
+            }
+        })
+        .catch(() => alert('Hubo un error al eliminar su cuenta'));
+    }
+}
+
+
 

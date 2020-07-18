@@ -1,4 +1,4 @@
-import { ADD_USER, GET_USER, GET_USER_LOGGED,EDIT_USER } from '../actions/actionsUser';
+import { ADD_USER, GET_USER, GET_USER_LOGGED, EDIT_USER, DELETE_USER } from '../actions/actionsUser';
 
 const initialState = {
     usuarios: [],
@@ -33,6 +33,13 @@ export default (state = initialState, action) => {
         return {
             ...state,
             usuario: action.payload
+        };
+    }
+
+    if (action.type === DELETE_USER) {
+        return {
+            ...state,
+            usuarios: action.payload
         };
     }
 

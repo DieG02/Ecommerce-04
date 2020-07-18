@@ -8,7 +8,7 @@ function loggedIn(req, res, next){
     if(req.isAuthenticated()) return next();
     else{
         return res.json({
-            loggedIn: false,
+            isLogin: false,
         })
     }
 }
@@ -68,11 +68,11 @@ server.put('/:idUsuario', loggedIn, function(req, res){
 });
 
 // Eliminar cuenta
-server.delete('/:idUsuario', loggedIn, function (req, res){
-    // const id = req.params.idUsuario;
+server.delete('/:idUsuario', function (req, res){
+    const id = req.params.idUsuario;
     Usuario.destroy({
         where: { 
-            id: req.user.id 
+            id: id 
         }
     })
     .then(usuarioEliminado => {

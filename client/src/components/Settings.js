@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react';
 import iconUser from '../images/iconUsuario.png';
 import { connect } from 'react-redux';
-import { getUserLogged } from '../actions/actionsUser.js';
+import { getUserLogged, deleteUser } from '../actions/actionsUser.js';
 
 
-function Settings({ logged, getUserLogged }){
+function Settings({ logged, getUserLogged, deleteUser }){
 
   useEffect(() => {getUserLogged()},[getUserLogged]) 
   console.log(logged);
   return (
     <div>
-       <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src={iconUser} alt='Usuario' width="30px"/>
               </a>
               <div className="dropdown-menu dropdown-menu-right">
+
                 {logged.rol ? 
                   <div>
                     <span className="dropdown-item" href="/">Signed as <b>{logged.nombreusuario}</b></span>
@@ -24,7 +25,7 @@ function Settings({ logged, getUserLogged }){
                   </div>               
                 : null}
                       
-                {logged.loggedIn === false ?   
+                {logged.isLogin === false ?   
                   <div>
                     <a className="dropdown-item" href="/usuario/add">Registrarse</a>
                     <div className="dropdown-divider"/>
@@ -42,9 +43,12 @@ function Settings({ logged, getUserLogged }){
                       className="dropdown-item" href="/login">Cerrar Sesión
                     </a>
                     <div className="dropdown-divider"/>
-                    <a className="dropdown-item" href="/usuario/delete">Eliminar cuenta</a>
+                    <a onClick={() => deleteUser(logged.id)}
+                      className="dropdown-item" href="/login">Eliminar cuenta
+                    </a>
                   </div>
-                : null}               
+                : null}  
+
               </div>
             </li>
         </ul>
@@ -59,4 +63,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, { getUserLogged })(Settings);
+export default connect(mapStateToProps, { getUserLogged, deleteUser })(Settings);
