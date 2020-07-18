@@ -35,6 +35,7 @@ server.post('/login',
 
 // Muestra todos los usuarios 
 server.get('/admin', isAdmin, function (req, res){
+  console.log(req.user.dataValues)
   Usuario.findAll()
     .then(usuarios => { 
       return res.status(200).json(usuarios)
@@ -42,7 +43,7 @@ server.get('/admin', isAdmin, function (req, res){
 });
 
 // Ver un usuario en particular
-server.get('/admin/:idUsuario', function (req, res){
+server.get('/admin/:idUsuario', isAdmin, function (req, res){
   const id = req.params.idUsuario;
   Usuario.findOne({
     where:{ id: id }
@@ -53,7 +54,7 @@ server.get('/admin/:idUsuario', function (req, res){
 });
 
 // Promueve a Admin
-server.put('/admin/:idUsuario',  function(req, res){
+server.put('/admin/:idUsuario', isAdmin, function(req, res){
   const id = req.params.idUsuario;
 
   Usuario.findOne({
@@ -70,7 +71,7 @@ server.put('/admin/:idUsuario',  function(req, res){
 });
 
 // Eliminar al usuario
-server.delete('/admin/:idUsuario', (req, res) => {
+server.delete('/admin/:idUsuario', isAdmin, (req, res) => {
   const id = req.params.idUsuario;
   Usuario.destroy({
     where: { id: id }

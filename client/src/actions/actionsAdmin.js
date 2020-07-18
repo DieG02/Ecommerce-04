@@ -48,7 +48,7 @@ export function deleteUser(id){
 
 export function getAllOrders(){
   return function (dispatch){
-    return fetch('http://localhost:1337/changuito/all')
+    return fetch('http://localhost:1337/changuito/all', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         if(data !== undefined){
@@ -60,7 +60,7 @@ export function getAllOrders(){
 
 export function getOrderDetail(id){
   return function (dispatch){
-    return fetch(`http://localhost:1337/changuito/${id}`)
+    return fetch(`http://localhost:1337/changuito/${id}`, { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         if(data !== undefined){
