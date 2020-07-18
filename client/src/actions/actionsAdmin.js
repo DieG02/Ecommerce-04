@@ -4,6 +4,7 @@ export const VIEW_USER = 'VIEW_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const GET_ORDERS = 'GET_ORDERS';
 export const GET_ORDER = 'GET_ORDER';
+export const PROMOTE_USER = 'PROMOTE_USER';
 
 export function getAllUsers(){
   return function (dispatch){
@@ -83,5 +84,23 @@ export function getOrderDetail(id){
           dispatch({ type: GET_ORDER, payload: data })
         }
     })
+  }
+}
+
+export function promoteUser(id){ 
+  return function (dispatch) {        
+      return fetch(`http://localhost:1337/usuario/${id}`, {
+          method: 'PUT',
+          body: JSON.stringify({tipo: "admin"}), 
+          headers:{
+          'Content-Type': 'application/json'
+      },
+      }).then((res) => {
+          if (res.status === 200){
+              alert('Se promovió al usuario!');
+              return dispatch({ type: PROMOTE_USER })       
+              // return window.location.replace(`http://localhost:3000/usuario/perfil/${id}`)
+          }
+      }).catch(() => alert('No se pudo promover al usuario!'));
   }
 }
