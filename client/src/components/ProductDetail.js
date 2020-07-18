@@ -41,7 +41,6 @@ function ProductDetail ({ id, detailProduct, addToCart, producto, addReview }) {
             <div className="data-container">
               <div className="nombre-container">
                 <h2>{producto.nombre}</h2>
-                <p>Vale por una review
                   <ReactStars
                     count={5}
                     onChange={ratingChanged}
@@ -51,17 +50,20 @@ function ProductDetail ({ id, detailProduct, addToCart, producto, addReview }) {
                     halfIcon={<i className="fa fa-star-half-alt"></i>}
                     fullIcon={<i className="fa fa-star"></i>}
                     activeColor="#ffd700"
-                  />
-                </p>
+                  />            
               </div>
-              <div className="form-group">
+
+              <div className="input-group input-group-sm mb-3 review">
                 <input 
                   className="form-control" 
-                  placeholder="Dejá tu comentario (Opcional)" //comentario de la review
+                  placeholder="Dejá tu comentario" //comentario de la review
                   onChange={inputChange}
                 />
-                <button type="submit" className="btn btn-primary">Añadir</button>
+                <div className="input-group-append">
+                  <button className="btn btn-info">Añadir</button>
+                </div>
               </div>
+
 
               <div className="precio-container">
                 <h4>$ {producto.precio}</h4>

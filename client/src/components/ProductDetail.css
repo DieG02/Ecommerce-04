@@ -32,6 +32,10 @@
     padding-left: 0px;
     margin-bottom: -3px;
 }
+.data-container .review{
+    margin-top:-20px;
+    padding-right: 15px;
+}
 .data-container .precio-container{
     margin-bottom: 20px;
     text-align: left;
@@ -46,23 +50,24 @@
     padding-top: 20px;
     margin-right: 15px;
     font-size: 20px;
+    line-height: 19px;
 }
 .data-container .info-container h5{
     text-align: left;
     padding-left: 0px;
     padding-bottom: 10px;
-    font-size: 22px;
+    font-size: 20px;
     color: black;
 }
 
 .color-talle{
-    margin-top: 20px;
+    margin-top: 25px;
     font-size: 18px;
     color: darkslategrey;
     font-weight: 500;
     display: flex;
     justify-content: space-between;
-    max-width: 250px;
+    max-width: 280px;
 }
 
 .btn-container{
