@@ -49,7 +49,7 @@ export function editUser(id, input){
         }).then((res) => {
             if (res.status === 200){
                 dispatch({ type: EDIT_USER })
-                return window.location.replace(`http://localhost:3000/usuario/perfil/${id}`)
+                return window.location.replace('http://localhost:3000/usuario/perfil')
             }
         }).catch(() => alert('No se pudo editar el usuario!'));
     }

@@ -76,27 +76,27 @@ function App() {
       />
 
 
-      <Route
+      {/* <Route
         exact path='/usuario/perfil'
         component={() => <Usuario />}
-      />    
+      />     */}
       <Route
         exact path='/usuario/add'
         component={() => <AddUser/>}
       />
-      <Route
+      {/* <Route
         exact path='/usuario/editar'
         component={() => <Usuario />}
-      />
+      /> */}
   
   
       <Route
-        exact path='/usuario/perfil/:id'
+        exact path='/usuario/perfil'
         component={({match}) => 
         <Usuario id = {match.params.id} />}
       />
       <Route
-        exact path='/usuario/perfil/edit/:id'
+        exact path='/usuario/perfil/edit'
         component={({match}) => 
         <EditarUsuario id = {match.params.id}/>}
       />
