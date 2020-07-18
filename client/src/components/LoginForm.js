@@ -33,7 +33,7 @@ export default function LoginForm(){
             </div>  
           </div>
         
-        <input type="submit"  className="btn btn-danger" value="Log In"/>
+        <input type="submit" className="btn btn-danger" value="Log In"/>
       </form>
     </div>
   )

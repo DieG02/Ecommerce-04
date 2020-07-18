@@ -1,8 +1,8 @@
   
 import React, { useState } from "react";
+import iconSearchH from '../images/iconSearchH.png';
 import { connect } from 'react-redux';
 import { onSearch } from '../actions/actionsProductos.js';
-import iconSearchH from '../images/iconSearchH.png';
 
 function SearchBar({onSearch}) {
 

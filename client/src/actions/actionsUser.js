@@ -1,5 +1,6 @@
 export const ADD_USER = 'ADD_USER';
 export const GET_USER = 'GET_USER';
+export const GET_USER_LOGGED = 'GET_USER_LOGGED';
 export const EDIT_USER = 'EDIT_USER';
 
 
@@ -11,13 +12,14 @@ export function addUser (input){
             headers:{
             'Content-Type': 'application/json'
             }
-        }).then((res)=>{
-        if(res.status === 200){   
-            dispatch({ type: ADD_USER }) 
-            return window.location.replace('http://localhost:3000')
-        } else {
-            alert('No se creo el usuario!');
-        }
+        })
+        .then((res)=>{
+            if(res.status === 200){   
+                dispatch({ type: ADD_USER }) 
+                return window.location.replace('http://localhost:3000/login')
+            } else {
+                alert('No se creo el usuario!');
+            }
         })
     }
 }
@@ -33,6 +35,18 @@ export function getUser(id) {
                 alert('No se encontró el usuario!')
             }
         });
+    }
+};
+
+export function getUserLogged() {
+    return function(dispatch) {
+        return fetch(`http://localhost:1337/usuario/x`, { credentials: 'include' })
+        .then(res => res.json())
+        .then(data => {
+            if (data !== undefined) {
+                dispatch({ type: GET_USER_LOGGED, payload: data })
+            } 
+        })
     }
 };
 

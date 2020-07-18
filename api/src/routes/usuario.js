@@ -21,7 +21,6 @@ server.post('/login',
 });
 server.get('/logout', function(req, res) {
  req.logout();
- //No estaría funcionando este redireccionamiento, desde el front --> /login
  res.redirect('/');
 });
 
