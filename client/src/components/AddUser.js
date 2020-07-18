@@ -67,7 +67,7 @@ function CrearUsuario({ addUser }){
           </div>
 
           <button type="submit" className="btn btn-success">Registrarse</button>
-        </form>       
+        </form>      
       </div>
     )
 }

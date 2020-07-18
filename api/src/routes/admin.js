@@ -16,7 +16,6 @@ function isAdmin(req, res, next){
     }
 }
 
-
 /// ----- ADMINISTRADOR ----- ///
 
 // Muestra todos los usuarios 
