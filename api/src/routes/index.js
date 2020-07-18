@@ -5,6 +5,7 @@ const productos = require ('./products.js');
 const categorias = require ('./categories.js');
 const ordenes = require ('./orden');
 const usuario = require ('./usuario.js');
+const admin = require ('./admin.js');
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use('/productos', productos);
 router.use('/categorias', categorias);
 router.use('/changuito', ordenes);
 router.use('/usuario', usuario);
+router.use('/admin', admin);
 
 module.exports = router;

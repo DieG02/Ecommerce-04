@@ -2,7 +2,6 @@ const server = require('express').Router();
 const { Usuario } = require('../models/index');
 const Sequelize = require ('sequelize');
 const passport = require('passport');
-const Op = Sequelize.Op;
 
 function loggedIn(req, res, next){
     console.log(req.user);
@@ -13,76 +12,19 @@ function loggedIn(req, res, next){
         })
     }
 }
-function isAdmin(req, res, next){
-    console.log(req.user);
-    if(req.isAuthenticated() && req.user.dataValues.rol === 'Admin')  return next();
-    else{
-        return res.json({
-            isAdmin: false
-        })
-    }
-}
+
+// ---------- AUTENTICACIÓN ---------- //
 server.post('/login', 
   passport.authenticate('local', { failureRedirect: 'http://localhost:3000/login' }),
   function(req, res) {
     res.redirect('http://localhost:3000')
 });
-
-
-
-
-/// ----- ADMINISTRADOR ----- ///
-
-// Muestra todos los usuarios 
-server.get('/admin', isAdmin, function (req, res){
-  console.log(req.user.dataValues)
-  Usuario.findAll()
-    .then(usuarios => { 
-      return res.status(200).json(usuarios)
-    })
+server.get('/logout', function(req, res) {
+ //req.logout() viene en passport
+ req.logout();
+ //después de hacer log out redirige a la portada
+ res.redirect('http://localhost:3000/login');
 });
-
-// Ver un usuario en particular
-server.get('/admin/:idUsuario', isAdmin, function (req, res){
-  const id = req.params.idUsuario;
-  Usuario.findOne({
-    where:{ id: id }
-  })
-  .then(usuario => {
-    return res.status(200).json(usuario)
-  })
-});
-
-// Promueve a Admin
-server.put('/admin/:idUsuario', isAdmin, function(req, res){
-  const id = req.params.idUsuario;
-
-  Usuario.findOne({
-    where:{ id: id }
-  }).then(usuario => { 
-    usuario.update({ rango: 'Admin'})
-  })
-  .then(() => {
-    return res.send("Ahora es Adminisrador")
-  })
-  .catch(() => {
-    return res.status(400).send("No se ha podido promover a Administrador")
-  })
-});
-
-// Eliminar al usuario
-server.delete('/admin/:idUsuario', isAdmin, (req, res) => {
-  const id = req.params.idUsuario;
-  Usuario.destroy({
-    where: { id: id }
-  })
-  .then(usuarioEliminado => {
-    res.json(usuarioEliminado)
-  })
-  res.send("Se ha eliminado a este usuario")
-});
-
-
 
 
 /// ----- USUARIO ----- ///

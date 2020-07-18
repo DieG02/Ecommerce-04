@@ -3,20 +3,6 @@ export const GET_USER = 'GET_USER';
 export const EDIT_USER = 'EDIT_USER';
 
 
-export function getUser(id) {
-    return function(dispatch) {
-        return fetch(`http://localhost:1337/usuario/${id}`, { credentials: 'include' })
-        .then(res => res.json())
-        .then((data) => {
-            if (data !== undefined) {
-                dispatch({ type: GET_USER, payload: data })
-            } else {
-                alert('No se encontró el usuario!')
-            }
-        });
-    }
-};
-
 export function addUser (input){
     return function (dispatch){
         return fetch('http://localhost:1337/usuario', {
@@ -36,6 +22,20 @@ export function addUser (input){
     }
 }
 
+export function getUser(id) {
+    return function(dispatch) {
+        return fetch(`http://localhost:1337/usuario/${id}`, { credentials: 'include' })
+        .then(res => res.json())
+        .then((data) => {
+            if (data !== undefined) {
+                dispatch({ type: GET_USER, payload: data })
+            } else {
+                alert('No se encontró el usuario!')
+            }
+        });
+    }
+};
+
 export function editUser(id, input){ 
 
     return function (dispatch) {        
@@ -54,3 +54,4 @@ export function editUser(id, input){
         }).catch(() => alert('No se pudo editar el usuario!'));
     }
 }
+

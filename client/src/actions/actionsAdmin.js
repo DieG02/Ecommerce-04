@@ -6,7 +6,7 @@ export const GET_ORDER = 'GET_ORDER';
 
 export function getAllUsers(){
   return function (dispatch){
-    return fetch('http://localhost:1337/usuario/admin', { credentials: 'include' })
+    return fetch('http://localhost:1337/admin', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         if(data !== undefined){
@@ -18,7 +18,7 @@ export function getAllUsers(){
 
 export function viewUser(id) {
   return function(dispatch) {
-    return fetch(`http://localhost:1337/usuario/admin/${id}`, { credentials: 'include' })
+    return fetch(`http://localhost:1337/admin/${id}`, { credentials: 'include' })
     .then(res => res.json())
     .then(data => {
       if (data !== undefined) {
@@ -33,7 +33,7 @@ export function viewUser(id) {
 
 export function deleteUser(id){
   return function (dispatch){
-    return fetch(`http://localhost:1337/usuario/admin/${id}`,{
+    return fetch(`http://localhost:1337/admin/${id}`,{
       method: 'DELETE', 
       credentials: 'include',
       headers:{ 'Content-Length': '0' }
