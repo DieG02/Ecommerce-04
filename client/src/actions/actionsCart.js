@@ -2,6 +2,7 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART';
 export const SET_COUNT = 'SET_COUNT';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
+export const SET_ORDER = 'SET_ORDER';
 
 // Buscamos la data con la ID y lo agregamos al carrito
 export function addToCart(id){
@@ -41,6 +42,27 @@ export function setCount(id, cantidad){
     }).then(res => {
       if(res.status === 200){   
           return dispatch({ type: SET_COUNT, payload: cantidad }) 
+      } else {
+          alert('No hay más unidades disponibles');
+      }
+    })
+  }
+}
+
+//Cerramos la compra
+export function setOrder(ordenId){
+  console.log(ordenId)
+  return function(dispatch){
+    return fetch(`http://localhost:1337/changuito/${ordenId}`, {
+      method: 'PUT',
+      body: JSON.stringify({estado: 'cerrado'}), 
+      headers:{
+      'Content-Type': 'application/json'
+  },
+    }).then(res => {
+      console.log(res)
+      if (res.status === 200){   
+          return dispatch({ type: SET_ORDER, payload: res }) 
       } else {
           alert('No hay más unidades disponibles');
       }

@@ -182,6 +182,24 @@ server.put('/:id/:cantidad', function(req, res) {
     .catch(() => { return res.status(400).send('No hay mas unidades de este articulo!') })
 });
 
+// Ruta para finalizar compra, setea estado en cerrado.
+server.put('/:idOrden', function(req, res) {
+    const id = req.params.idOrden;
+    
+    Orden.findOne({
+        where: {
+            id: id
+        }
+    })
+    .then(orden => {
+        orden.update({
+            estado: 'cerrado',
+        })
+    }).then(() => {
+        res.send('Se cerró la orden!');
+    })
+})
+
 
 
 // Ruta para sacar un producto del carrito
