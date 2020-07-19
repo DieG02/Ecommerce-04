@@ -64,9 +64,14 @@ function Nav({ logged, getUserLogged }) {
                     <a className="dropdown-item" href="/categorias/add">Agregar Categoría</a>
                   </div>
                 : null}
-            
             </div>
           </li>
+
+          {logged.rol === 'Admin' ? 
+            <li className="nav-item active">
+              <a className="nav-link" href="/admin">Admin</a>
+            </li>
+          : null}
         </ul>
         <SearchBar/>
         <Settings/>

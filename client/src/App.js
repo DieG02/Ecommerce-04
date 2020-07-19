@@ -91,7 +91,7 @@ function App() {
   
   
       <Route
-        exact path='/usuario/perfil'
+        exact path='/usuario/perfil/:id'
         component={({match}) => 
         <Usuario id = {match.params.id} />}
       />

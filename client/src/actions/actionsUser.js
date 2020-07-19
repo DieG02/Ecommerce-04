@@ -41,7 +41,7 @@ export function getUser(id) {
 
 export function getUserLogged() {
     return function(dispatch) {
-        return fetch(`http://localhost:1337/usuario/x`, { credentials: 'include' })
+        return fetch(`http://localhost:1337/usuario/`, { credentials: 'include' })
         .then(res => res.json())
         .then(data => {
             if (data !== undefined) {

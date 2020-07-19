@@ -27,18 +27,33 @@ server.get('/logout', function(req, res) {
 
 /// ----- USUARIO ----- ///
 
+// Ver perfil
+server.get('/', loggedIn, function (req, res){
+    Usuario.findOne({
+        where:{
+            id: req.user.id
+        }
+    })
+    .then(function(usuario) {
+        return res.status(200).json(usuario)
+    })
+    .catch(() => {
+        return res.status(400).send("El usuario no existe!")
+    })
+});
+
 // Registrarme
 server.post('/', function (req, res){
     Usuario.create(req.body);
     res.send("El usuario se creo!")
 });
 
-// Ver mi perfil
+// Ver usuario en particular
 server.get('/:idUsuario', loggedIn, function (req, res){
-    // const id = req.params.idUsuario;
+    const id = req.params.idUsuario;
     Usuario.findOne({
         where:{
-            id: req.user.id
+            id: id
         }
     })
     .then(function(usuario) {

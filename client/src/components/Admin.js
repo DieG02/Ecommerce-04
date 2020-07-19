@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getAllUsers, viewUser, deleteUser, promoteUser } from '../actions/actionsAdmin.js';
 import './Admin.css';
 
-export function Admin({ usuarios, usuario, getAllUsers, deleteUser, viewUser, editUser }){
+export function Admin({ usuarios, usuario, getAllUsers, deleteUser, viewUser }){
 
   useEffect(() => { getAllUsers() },[getAllUsers])
   
@@ -13,12 +13,6 @@ export function Admin({ usuarios, usuario, getAllUsers, deleteUser, viewUser, ed
       setInput(usuario);
     }, [usuario]);
 
-  const inputChange = function(e){  
-    setInput({
-        ...input,
-        [e.target.name] : e.target.value
-    })
-}
 
   return(
     <div className="contenedor">
@@ -34,20 +28,19 @@ export function Admin({ usuarios, usuario, getAllUsers, deleteUser, viewUser, ed
                 <th scope="col" className="item1">NOMBRE</th>
                 <th scope="col" className="item2">APELLIDO</th>
                 <th scope="col" className="item3">EMAIL</th>
-                <th scope="col" className="item4">ESTADO</th>
+                <th scope="col" className="item4">OPCIONES</th>
               </tr>
             </thead>
             <tbody>
               {usuarios.map(user => 
                 { return (
-                  <tr>
+                  <tr onClick={() => viewUser(user.id)}>
                     <th scope="row">{user.nombre}</th>
                     <td>{user.apellido}</td>
                     <td>{user.email}</td>
                     <td className="botones">  
-                      <button type="button" className="btn btn-success btn-sm" onClick={() => viewUser(user.id)}>Ver Perfil</button>
-                      <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteUser(user.id)}>Eliminar</button>
-                      <button type="button" className="btn btn-warning btn-sm" onClick={() => promoteUser(user.id)}>Promover</button> 
+                      <button type="button" className="btn btn-success btn-sm"  onClick={() => promoteUser(user.id)}>Promover</button>
+                      <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteUser(user.id)}>Eliminar</button>                     
                     </td>
                   </tr>        
                 )}
