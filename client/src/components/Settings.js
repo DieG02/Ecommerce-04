@@ -7,7 +7,7 @@ import { getUserLogged, deleteUser } from '../actions/actionsUser.js';
 function Settings({ logged, getUserLogged, deleteUser }){
 
   useEffect(() => {getUserLogged()},[getUserLogged]) 
-  console.log(logged);
+  // console.log(logged);
   return (
     <div>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">

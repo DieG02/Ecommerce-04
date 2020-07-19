@@ -72,7 +72,6 @@ export function editUser(id, input){
 
 export function deleteUser(id){ 
     return function (dispatch) {     
-        console.log(id);   
         return fetch(`http://localhost:1337/usuario/${id}`, {
             method: 'DELETE',
             credentials: 'include',

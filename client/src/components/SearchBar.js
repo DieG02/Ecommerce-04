@@ -16,18 +16,17 @@ function SearchBar({onSearch}) {
           e.preventDefault();
           onSearch(name);
         }}>              
-        <div className="input-group mr-sm-2">
+        <div className="input-group input-group-sm mr-sm-2" style={{width: '250px'}}>
           <div className="input-group-prepend">
             <button 
               className="btn btn-primary my-2 my-sm-0" 
-              type="submit"
-              
+              type="submit"         
               onMouseOut={() => {path[0].src = iconSearchH}} 
               style={{
                 borderRight: 'none',
                 padding: '4px 6px'
                 }}>
-              <img src={iconSearchH} className="icono" alt="Buscar" width="25"/>
+              <img src={iconSearchH} className="icono" alt="Buscar" width="17"/>
             </button>
           </div>
           <input 

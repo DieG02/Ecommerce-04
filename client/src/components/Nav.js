@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar.js';
 import CategoryList from './CategoryList.js';
 import Settings from './Settings.js';
+import { connect } from 'react-redux';
+import { getUserLogged } from '../actions/actionsUser.js';
 
-
-function Nav({ onSearch }) {
+function Nav({ logged, getUserLogged }) {
 
   const [category, setCategory] = useState([]);
   useEffect(() => {
@@ -16,6 +17,9 @@ function Nav({ onSearch }) {
       }
     });
   }, []);
+
+  useEffect(() => {getUserLogged()},[getUserLogged]) 
+  // console.log(logged)
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,26 +34,17 @@ function Nav({ onSearch }) {
             <a className="nav-link" href="/catalogo">Catálogo<span className="sr-only">(current)</span></a>
           </li>
 
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Productos
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="/producto/add">Añadir</a> 
-              <a className="dropdown-item" href="/producto/delete">Eliminar</a>
-            </div>
-          </li>
-
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Usuario
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="/usuario/perfil">Ver perfil</a> 
-              <a className="dropdown-item" href="/usuario/add">Crear Usuario</a>
-              <a className="dropdown-item" href="/usuario/delete">Eliminar Usuario</a>
-            </div>
-          </li>
+          {logged.rol === 'Admin' ? 
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Productos
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="/producto/add">Añadir</a> 
+                <a className="dropdown-item" href="/producto/delete">Eliminar</a>
+              </div>
+            </li>
+          : null}
           
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,16 +57,29 @@ function Nav({ onSearch }) {
                     id={item.id}
                   />
                 )}
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="/categorias/add">Agregar Categoría</a>
+
+                {logged.rol === 'Admin' ? 
+                  <div>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" href="/categorias/add">Agregar Categoría</a>
+                  </div>
+                : null}
+            
             </div>
           </li>
         </ul>
-        <SearchBar onSearch={onSearch}/>
+        <SearchBar/>
         <Settings/>
       </div>
     </nav>
   );
 };
 
-export default Nav;
+
+const mapStateToProps = (state) => {
+  return {
+    logged: state.usuario.logged
+  }
+};
+
+export default connect(mapStateToProps, { getUserLogged })(Nav);
