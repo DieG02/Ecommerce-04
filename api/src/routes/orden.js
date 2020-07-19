@@ -32,7 +32,6 @@ server.get('/productos', function(req, res) {
         }
     }) 
     .then(carrito => {
-        console.log(carrito)
         if(carrito !== null){
             return res.send(carrito.product)
         } else{
@@ -79,7 +78,6 @@ server.get('/:idOrden', function(req, res) {
         }
     })
     .then(function(order) {
-        console.log(order)
         return res.status(200).send(order.product);
     })
     .catch(() => {

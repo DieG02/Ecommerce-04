@@ -10,7 +10,7 @@ const Review = (sequelize, S) => {
         },
         
         puntuacion: {
-            type: S.INTEGER,
+            type: S.DECIMAL,
             allowNull: false,
         },
         

@@ -75,7 +75,8 @@ server.put('/pxcategoria/:id', function(req, res){
                 } else {
                     res.status(404).send("Categoria o producto invalidos!");
                 };
-            }).catch(() => res.sendStatus(400));   
+            })
+            .catch(() => res.sendStatus(400));   
         }
         
         if (accion = "eliminar") {
@@ -86,7 +87,8 @@ server.put('/pxcategoria/:id', function(req, res){
                 } else {
                     res.status(404).send("Categoria o producto invalidos!");
                 };
-            }).catch(() => res.sendStatus(400));
+            })
+            .catch(() => res.sendStatus(400));
         }
     }
 });

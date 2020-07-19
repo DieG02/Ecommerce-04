@@ -34,9 +34,7 @@ export function addProduct (data){
         return fetch('http://localhost:1337/productos', {
             method: 'POST', 
             body: JSON.stringify(data), 
-            headers:{
-            'Content-Type': 'application/json'
-            }
+            headers:{ 'Content-Type': 'application/json' }
         }).then((res)=>{
         if(res.status === 200){   
             dispatch({ type: ADD_PRODUCT, payload: data }) 
@@ -94,31 +92,30 @@ export function productByCategory(id){
         return fetch(`http://localhost:1337/categorias/${id}`)
         .then(res => res.json())
         .then((data) => {
-        if(data !== undefined){
-            dispatch({ type: PRODUCT_BY_CATEGORY, payload: data })
-        }
-        });
+            if(data !== undefined){
+                dispatch({ type: PRODUCT_BY_CATEGORY, payload: data })
+            }
+        })
     }
 }
 
 
-// action para agregar review
-
-export function addReview (idProduct, data){
+export function addReview (idProduct, input){
     return function (dispatch){
+        console.log(input)
         return fetch(`http://localhost:1337/review/${idProduct}`, {
             method: 'POST', 
-            body: JSON.stringify(data), 
-            headers:{
-            'Content-Type': 'application/json'
+            credentials: 'include',
+            body: JSON.stringify(input),
+            headers:{ 'Content-Type': 'application/json' }
+        })
+        .then(res => {
+            if(res.status === 200){  
+                alert('Se agrego su comentario');
+                return dispatch({ type: ADD_REVIEW }) 
+            } else {
+                alert('No se agrego el comentario!');
             }
-        }).then((res)=>{
-        if(res.status === 200){   
-            dispatch({ type: ADD_REVIEW, payload: data }) 
-            // return window.location.replace('http://localhost:3000')
-        } else {
-            alert('No se agrego la review!');
-        }
         })
     }
 }

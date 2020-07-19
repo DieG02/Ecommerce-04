@@ -7,7 +7,7 @@ const passport = require('passport');
 // La autenticación le llega por medio del FrontEnd ---> { credentials: include }
 
 function isAdmin(req, res, next){
-    console.log(req.user);
+    console.log(req.user.dataValues);
     if(req.isAuthenticated() && req.user.rol === 'Admin')  return next();
     else{
         return res.json({

@@ -4,7 +4,7 @@ const Sequelize = require ('sequelize');
 const passport = require('passport');
 
 function loggedIn(req, res, next){
-    console.log(req.user);
+    if(req.user) console.log(req.user.dataValues);
     if(req.isAuthenticated()) return next();
     else{
         return res.json({

@@ -18,8 +18,8 @@ router.use('/auth', authRouter);
 router.use('/productos', productos);
 router.use('/categorias', categorias);
 router.use('/changuito', ordenes);
-router.use('/usuario', usuario);
-router.use('/admin', admin);
 router.use('/review', review);
+router.use('/admin', admin);
+router.use('/usuario', usuario);
 
 module.exports = router;
