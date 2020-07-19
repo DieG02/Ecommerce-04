@@ -1,0 +1,45 @@
+{
+    "email":"nombreejemplo1@gmail.com",
+    "nombre":"Toni",
+    "apellido": "Tralice",
+    "nombreusuario": "henry",
+    "contraseña": "1234",
+    "rol": "Admin"
+}
+
+
+{
+    "email":"nombreapellido2@gmail.com",
+    "nombre":"Ailenl",
+    "apellido": "Grimaldi",
+    "nombreusuario": "ailen",
+    "contraseña": "1234",
+    "rol": "Usuario"
+}
+
+{
+    "email":"nombreapellido3@gmail.com",
+    "nombre":"Diego",
+    "apellido": "Bautista",
+    "nombreusuario": "diego",
+    "contraseña": "1234",
+    "rol": "Usuario"
+}
+{
+    "email":"nombreapellido4@gmail.com",
+    "nombre":"Dionisio",
+    "apellido": "Hernandez",
+    "nombreusuario": "dionisio",
+    "contraseña": "1234",
+    "rol": "Usuario"
+}
+
+{
+    "email":"nombreapellido5@gmail.com",
+    "nombre":"Nahuel",
+    "apellido": "Mendez",
+    "nombreusuario": "nahuel",
+    "contraseña": "1234",
+    "rol": "Usuario"
+}
+
