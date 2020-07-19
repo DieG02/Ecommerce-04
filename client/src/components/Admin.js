@@ -1,25 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { getAllUsers, viewUser, deleteUser, promoteUser } from '../actions/actionsAdmin.js';
+import { getAllUsers, viewUser, promoteUser, deleteUser } from '../actions/actionsAdmin.js';
 import './Admin.css';
 
-export function Admin({ usuarios, usuario, getAllUsers, deleteUser, viewUser }){
+export function Admin({ usuarios, getAllUsers, viewUser, promoteUser, deleteUser   }){
 
-  useEffect(() => { getAllUsers() },[getAllUsers])
-  
-  const [input, setInput] = useState({});
-
-  useEffect(() => {
-      setInput(usuario);
-    }, [usuario]);
-
+  useEffect(() => { getAllUsers() }, [getAllUsers]);
 
   return(
     <div className="contenedor">
-       <form onSubmit={ e => {
-            e.preventDefault();
-            promoteUser(input.id, input);
-        }}>
+       <form>
           <h2>ADMINISTRADOR</h2>
           <h5>Lista de todos los usuarios</h5>
           <table className="table table-striped table-hover">
@@ -33,19 +23,18 @@ export function Admin({ usuarios, usuario, getAllUsers, deleteUser, viewUser }){
             </thead>
             <tbody>
               {usuarios.map(user => 
-                { return (
+                {return (
                   <tr onClick={() => viewUser(user.id)}>
                     <th scope="row">{user.nombre}</th>
                     <td>{user.apellido}</td>
                     <td>{user.email}</td>
                     <td className="botones">  
-                      <button type="button" className="btn btn-success btn-sm"  onClick={() => promoteUser(user.id)}>Promover</button>
+                      <button type="button" className="btn btn-success btn-sm" onClick={() => promoteUser(user.id)}>Promover</button>
                       <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteUser(user.id)}>Eliminar</button>                     
                     </td>
                   </tr>        
                 )}
-              )}
-          
+              )}        
           </tbody>
         </table>
       </form>

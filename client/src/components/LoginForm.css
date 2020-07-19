@@ -1,0 +1,23 @@
+h3{
+  position: relative;
+  top: -30px;
+}
+.login-form{
+  width: 400px;
+}
+#bottom div a{
+  position: relative;
+  left: -35px;
+  top: -5px;
+  font-size: 18px;
+  color: #0c76f0e7;
+}
+#bottom div a:hover{
+  color: #5ebfffe7;
+  text-decoration: none;
+}
+#input{
+  position: relative;
+  left: -48px;
+  padding: 5px 40px !important;
+}

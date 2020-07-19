@@ -73,18 +73,17 @@ export function getOrderDetail(id){
 
 export function promoteUser(id){ 
   return function (dispatch) {        
-      return fetch(`http://localhost:1337/usuario/${id}`, {
+      return fetch(`http://localhost:1337/admin/${id}`, {
           method: 'PUT',
-          body: JSON.stringify({tipo: "admin"}), 
-          headers:{
-          'Content-Type': 'application/json'
-      },
-      }).then((res) => {
-          if (res.status === 200){
-              alert('Se promovió al usuario!');
-              return dispatch({ type: PROMOTE_USER })       
-              // return window.location.replace(`http://localhost:3000/usuario/perfil/${id}`)
-          }
-      }).catch(() => alert('No se pudo promover al usuario!'));
+          credentials: 'include',
+          headers:{'Content-Length': 0}
+      })
+      .then(res => {
+        if (res.status === 200){
+          alert('Se promovió al usuario!');
+          return dispatch({ type: PROMOTE_USER })       
+        }
+      })
+      .catch(err => console.log(err));
   }
 }
