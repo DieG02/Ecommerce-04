@@ -2,12 +2,14 @@ const server = require('express').Router();
 const { Orden, Product, Ordenproducto } = require('../models/index');
 const Sequelize = require ('sequelize');
 
-server.get('/', function(req, res) {
-    Orden.findAll()
-        .then(function(products) {
-            return res.status(200).send(products);
-        });
-});
+function loggedIn(req, res, next){
+    if(req.isAuthenticated()) return next();
+    else{
+        return res.json({
+            isLogin: false,
+        })
+    }
+}
 
 // Ruta para obtener TODAS las ordenes.
 server.get('/all', function(req, res) {
@@ -20,8 +22,7 @@ server.get('/all', function(req, res) {
         });
 });
 
-
-// Encuentra el carrito (Falta vincular con usuario)
+// Encuentra el carrito
 server.get('/productos', function(req, res) {
     Orden.findOne({
         where: {
@@ -40,30 +41,6 @@ server.get('/productos', function(req, res) {
     });        
 });
 
-//Ruta para agregar ordenes con estado cerrado, solo sirve para comprobar que funciona
-//el componente que renderiza la orden en detalle desde el back.
-// server.post('/producto/:idproducto', function(req, res) {
-//     const idProduct = req.params.idproducto;
-    
-//     Orden.findOne({
-//         where: { estado: 'cerrado' }
-//     })
-//     .then(carrito => {
-//         Ordenproducto.findOne({
-//             where: {
-//                 ordenId: carrito.dataValues.id,
-//                 productId: idProduct, 
-//             }
-//         }) 
-//         .then(product => {
-//             product.update({ cantidad: product.cantidad + 1 })
-//         })
-//         .then(() => {
-//             return res.send('Se agrego otra unidad al carrito');
-//         })
-        
-// });
-
 // Ruta para obtener detalles de una orden
 server.get('/:idOrden', function(req, res) {
     var id = req.params.idOrden
@@ -77,14 +54,14 @@ server.get('/:idOrden', function(req, res) {
             model: Product, as: 'product'
         }
     })
-    .then(function(order) {
+    .then(order => {
+        console.log(order)
         return res.status(200).send(order.product);
     })
     .catch(() => {
         return res.status(400).send('No se pudo encontrar la orden!')
     })
 });
-
 
 // Devulve la cantidad del producto en el carrito
 server.get('/productos/:idProducto', function(req, res) {
@@ -106,11 +83,11 @@ server.get('/productos/:idProducto', function(req, res) {
     })     
 });
 
-
+// Cerramos orden
 server.post('/:idusuario', function(req, res) {
     Orden.create({
             estado: "cerrado",
-            usuarioId: req.params.idusuario
+            usuarioId: req.params.idusuario || req.user.id
         })
         .then(() => {
             return res.send('Se creo una nueva orden!')
@@ -120,19 +97,23 @@ server.post('/:idusuario', function(req, res) {
         })
 });
 
-
-// Agrega producto al carrito (Falta vincular con usuario)
-server.post('/producto/:idproducto', function(req, res) {
+// Agrega producto al carrito (Vinculado con un usuario)
+server.post('/producto/:idproducto', loggedIn, function(req, res) {
     const idProduct = req.params.idproducto;
-    
+
     Orden.findOne({
-        where: { estado: 'pendiente' }
+        where: { 
+            estado: 'pendiente',
+            usuarioId: req.user.id  
+        }
     })
     .then(carrito => {
+        console.log('Encontramos el carrito y +1')
+        console.log(carrito)
         Ordenproducto.findOne({
             where: {
-                ordenId: carrito.dataValues.id,
                 productId: idProduct, 
+                ordenId: carrito.dataValues.id
             }
         }) 
         .then(product => {
@@ -144,20 +125,25 @@ server.post('/producto/:idproducto', function(req, res) {
     })
 
     Orden.findOrCreate({
-        where: { estado: 'pendiente' }
+        where: { 
+            estado: 'pendiente',
+            total: 0,
+            usuarioId: req.user.id 
+        }
     })
     .then(orden => {
+        console.log('Creamos el carrito')
+        console.log(orden)
         Ordenproducto.create({
             cantidad: 1,
             productId: idProduct,
-            ordenId: orden[0].dataValues.id
+            ordenId: orden[0].dataValues.id 
         })
     })
     .then(() => {
         return res.send('Se agrego el producto a la carrito');
     })
 })
-
 
 // Ruta para setear a cantidad dentro del carrito
 server.put('/:id/:cantidad', function(req, res) {
@@ -183,22 +169,40 @@ server.put('/:id/:cantidad', function(req, res) {
 // Ruta para finalizar compra, setea estado en cerrado.
 server.put('/:idOrden', function(req, res) {
     const id = req.params.idOrden;
-    
-    Orden.findOne({
-        where: {
-            id: id
-        }
+    let total = 0;
+
+    // Obtenemos todos los productos de la orden
+    Ordenproducto.findAll({
+        where: { ordenId: id }
     })
-    .then(orden => {
-        orden.update({
-            estado: 'cerrado',
+    .then(products => {
+        products.map( p => {
+            Product.findOne({
+                where: { id : p.productId}
+            })
+            .then(propiedades => {
+                console.log(total);
+                total += (propiedades.precio * p.cantidad);
+            })
         })
-    }).then(() => {
-        res.send('Se cerró la orden!');
+    })    
+    .then(() => {
+        Orden.findOne({
+            where: {
+                id: id
+            }
+        })
+        .then(orden => {
+            orden.update({
+                total: total,
+                estado: 'cerrado',
+            })
+        }).then(() => {
+            res.send('Se cerró la orden!');
+        })
     })
+    
 })
-
-
 
 // Ruta para sacar un producto del carrito
 server.delete('/productos/:idProducto', (req, res) => {

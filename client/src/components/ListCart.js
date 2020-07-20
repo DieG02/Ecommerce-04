@@ -9,21 +9,14 @@ import './Cart.css';
 function ListCart({ carrito, getProductsCart, setOrder }) {
 
   useEffect(() => {getProductsCart()},[getProductsCart])
-  useEffect(() => {setOrder()},[setOrder])
-
-  // console.log(carrito)
-   var ordenId = carrito.map(p => p.ordenproducto.ordenId)
-  console.log(ordenId)
-
-  // carrito.map(p => console.log(p.ordenproducto.ordenId))
-
+  let ordenId;
+  if(carrito.length) ordenId = carrito[0].ordenproducto.ordenId;
+  
   let subtotal = 0;
   carrito.map(p => {
     return subtotal += p.precio;
   })
   let impuestos = subtotal * 0.05;  //Impuesto del %5 como ejemplo
-
- 
 
   return (
     <div className="principal-container">
@@ -42,7 +35,7 @@ function ListCart({ carrito, getProductsCart, setOrder }) {
           )}
         </div>
         <div className="comprar">
-        <Button className="comprar" color="success" size="lg" onClick={() => setOrder(ordenId)} >Comprar</Button>{}
+          <Button className="comprar" color="success" size="lg" onClick={() => setOrder(ordenId)}>Comprar</Button>
         </div>
       </div>
       <div className="total-container">

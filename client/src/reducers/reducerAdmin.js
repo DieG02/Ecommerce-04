@@ -1,4 +1,4 @@
-import { GET_ALL_USERS, DELETE_USER, GET_ORDERS, VIEW_USER, GET_ORDER, PROMOTE_USER } from '../actions/actionsAdmin.js';
+import { GET_ALL_USERS, DELETE_USER, GET_ORDERS, VIEW_USER, GET_ORDER_DETAIL, PROMOTE_USER } from '../actions/actionsAdmin.js';
 
 const initialState = {
     usuarios: [],
@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
       orders: action.payload
     };
   }
-  if (action.type === GET_ORDER) {
+  if (action.type === GET_ORDER_DETAIL) {
     return {
       ...state,
       order: action.payload

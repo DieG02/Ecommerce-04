@@ -8,6 +8,7 @@ export const SET_ORDER = 'SET_ORDER';
 export function addToCart(id){
   return function (dispatch){
     return fetch(`http://localhost:1337/changuito/producto/${id}`, {
+        credentials: 'include',
         method: 'POST', 
         headers:{'Content-Length': 0}
     })
@@ -49,22 +50,20 @@ export function setCount(id, cantidad){
   }
 }
 
-//Cerramos la compra
+// Cerramos un carrito ---> orden
 export function setOrder(ordenId){
-  console.log(ordenId)
   return function(dispatch){
     return fetch(`http://localhost:1337/changuito/${ordenId}`, {
       method: 'PUT',
-      body: JSON.stringify({estado: 'cerrado'}), 
-      headers:{
-      'Content-Type': 'application/json'
-  },
-    }).then(res => {
-      console.log(res)
+      headers:{'Content-Length': 0}
+    })
+    .then(res => {
       if (res.status === 200){   
-          return dispatch({ type: SET_ORDER, payload: res }) 
+        console.log(ordenId)
+        window.location.replace('http://localhost:3000/cart');
+        return dispatch({ type: SET_ORDER, payload: res }) 
       } else {
-          alert('No hay más unidades disponibles');
+        alert('No hay más unidades disponibles');
       }
     })
   }
@@ -87,4 +86,3 @@ export function deleteFromCart(id){
 
 
 
-// Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed rhoncus lectus. Suspendisse potenti. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus lorem neque, ornare a dui nec, dignissim suscipit ipsum.

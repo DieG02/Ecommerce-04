@@ -14,10 +14,6 @@ const Orden = (sequelize, S) => {
             allowNull: false,
         },
         
-        cantidad_producto: {
-            type: S.INTEGER,
-        },
-        
         total: {
             type: S.REAL,
 

@@ -2,7 +2,7 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const VIEW_USER = 'VIEW_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const GET_ORDERS = 'GET_ORDERS';
-export const GET_ORDER = 'GET_ORDER';
+export const GET_ORDER_DETAIL = 'GET_ORDER_DETAIL';
 export const PROMOTE_USER = 'PROMOTE_USER';
 
 export function getAllUsers(){
@@ -65,7 +65,7 @@ export function getOrderDetail(id){
       .then(res => res.json())
       .then(data => {
         if(data !== undefined){
-          dispatch({ type: GET_ORDER, payload: data })
+          dispatch({ type: GET_ORDER_DETAIL, payload: data })
         }
     })
   }

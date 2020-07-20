@@ -105,12 +105,10 @@ function App() {
         exact path='/admin'
         component={() => <Admin/>}
       />
-
       <Route
         exact path='/admin/ordenes'
         component={() => <AdminOrders/>}
       />
-
       <Route
         exact path='/admin/ordenes/detail/:id'
         component={({match}) => 
