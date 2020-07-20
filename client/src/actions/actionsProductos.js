@@ -102,7 +102,6 @@ export function productByCategory(id){
 
 export function addReview (idProduct, input){
     return function (dispatch){
-        console.log(input)
         return fetch(`http://localhost:1337/review/${idProduct}`, {
             method: 'POST', 
             credentials: 'include',

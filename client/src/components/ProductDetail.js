@@ -5,11 +5,11 @@ import { detailProduct, addReview } from '../actions/actionsProductos.js';
 import { addToCart } from '../actions/actionsCart.js';
 import ReactStars from "react-rating-stars-component";
 
-function ProductDetail ({ id, detailProduct, addToCart, producto, addReview }) {
+function ProductDetail ({ id, detailProduct, addToCart, producto, addReview, logged }) {
   
   const [review, setReview] = useState({});
   useEffect(() => { detailProduct(id) }, [id, detailProduct]);
-  
+
   return (
     <div>
       <div className="mi-contenedor">
@@ -17,33 +17,42 @@ function ProductDetail ({ id, detailProduct, addToCart, producto, addReview }) {
           <img src={producto.imagen} alt="Imagen en detalle"/>
         </div>
         <div className="data-container">
+
+      
           <div className="nombre-container">
             <h2>{producto.nombre}</h2>
+
+            {logged.rol === 'Usuario' ? 
               <ReactStars
-                count={5}
-                onChange={ rating => 
-                  setReview({ ...review, puntuacion: rating}) 
+                  count={5}
+                  onChange={ rating => 
+                    setReview({ ...review, puntuacion: rating}) 
+                  }
+                  size={24}
+                  isHalf={true}
+                  emptyIcon={<i className="far fa-star"></i>}
+                  halfIcon={<i className="fa fa-star-half-alt"></i>}
+                  fullIcon={<i className="fa fa-star"></i>}
+                  activeColor="#ffd700"
+                />             
+            : null}          
+          </div>
+
+          {logged.rol === 'Usuario' ? 
+            <div className="input-group input-group-sm mb-3 review">
+              <input 
+                className="form-control" 
+                placeholder="Dejá tu comentario"
+                onChange={ e => 
+                  setReview({ ...review, comentario: e.target.value}) 
                 }
-                size={24}
-                isHalf={true}
-                emptyIcon={<i className="far fa-star"></i>}
-                halfIcon={<i className="fa fa-star-half-alt"></i>}
-                fullIcon={<i className="fa fa-star"></i>}
-                activeColor="#ffd700"
-              />            
-          </div>
-          <div className="input-group input-group-sm mb-3 review">
-            <input 
-              className="form-control" 
-              placeholder="Dejá tu comentario" //comentario de la review
-              onChange={ e => 
-                setReview({ ...review, comentario: e.target.value}) 
-              }
-            />
-            <div className="input-group-append">
-              <button className="btn btn-info" onClick={() => addReview(id, review)}>Añadir</button>
+              />
+              <div className="input-group-append">
+                <button className="btn btn-info" onClick={() => addReview(id, review)}>Añadir</button>
+              </div>
             </div>
-          </div>
+          : null}
+          
           <div className="precio-container">
             <h4>$ {producto.precio}</h4>
             <p>Stock disponible {producto.stock}</p>
@@ -58,7 +67,7 @@ function ProductDetail ({ id, detailProduct, addToCart, producto, addReview }) {
           </div>
           <div className="btn-container">
             <button className="btn btn-outline-success" onClick={() => addToCart(id)}>Añadir al carrito</button> 
-          </div>         
+          </div>      
         </div>           
       </div>
     </div>
@@ -69,7 +78,8 @@ function ProductDetail ({ id, detailProduct, addToCart, producto, addReview }) {
 function mapStateToProps(state){
   return {
       producto: state.producto.producto,
-      reviews: state.producto.reviews
+      reviews: state.producto.reviews,
+      logged: state.usuario.logged
   }
 }
 
