@@ -15,7 +15,7 @@ function Usuario ({ usuario, logged, id, getUser, getUserLogged }) {
       <br></br>
       <h2> Datos del Usuario </h2>
       <br></br>
-      <a title="Editar" className="iconleft" href={`http://localhost:3000/usuario/perfil/edit/${id}`}>
+      <a title="Editar" className="iconleft" href={`http://localhost:3000/usuario/perfil/edit/${id || logged.id}`}>
         <img src={edit} alt="Editar"/>Editar
       </a>
       <fieldset disabled>

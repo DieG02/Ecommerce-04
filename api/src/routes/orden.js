@@ -169,7 +169,7 @@ server.put('/:id/:cantidad', function(req, res) {
 // Ruta para finalizar compra, setea estado en cerrado.
 server.put('/:idOrden', function(req, res) {
     const id = req.params.idOrden;
-    let total = 0;
+    let totalFinal = 0;
 
     // Obtenemos todos los productos de la orden
     Ordenproducto.findAll({
@@ -181,8 +181,7 @@ server.put('/:idOrden', function(req, res) {
                 where: { id : p.productId}
             })
             .then(propiedades => {
-                console.log(total);
-                total += (propiedades.precio * p.cantidad);
+                return totalFinal += propiedades.precio * p.cantidad;
             })
         })
     })    
@@ -194,7 +193,7 @@ server.put('/:idOrden', function(req, res) {
         })
         .then(orden => {
             orden.update({
-                total: total,
+                total: totalFinal,
                 estado: 'cerrado',
             })
         }).then(() => {

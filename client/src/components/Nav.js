@@ -68,9 +68,15 @@ function Nav({ logged, getUserLogged }) {
           </li>
 
           {logged.rol === 'Admin' ? 
-            <li className="nav-item active">
-              <a className="nav-link" href="/admin">Admin</a>
-            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin
+              </a>
+              <div className="dropdown-menu">
+                <a className="dropdown-item" href="/admin">Ver usuarios</a> 
+                <a className="dropdown-item" href="/admin/ordenes">Ver ordenes</a>
+              </div>
+            </li>         
           : null}
         </ul>
         <SearchBar/>

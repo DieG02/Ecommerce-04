@@ -5,7 +5,7 @@ import ItemCart2 from './ItemCartForOrderDetail.js';
 
 export function OrderDetail({ id, order, getOrderDetail }){
 
-    useEffect(() => { getOrderDetail(id) },[])
+    useEffect(() => { getOrderDetail(id) }, [])
 
     return(
         <div className="contenedor">
