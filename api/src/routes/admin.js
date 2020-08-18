@@ -1,7 +1,6 @@
 const server = require('express').Router();
 const { Usuario } = require('../models/index');
 const Sequelize = require ('sequelize');
-const passport = require('passport');
 
 
 // La autenticación le llega por medio del FrontEnd ---> { credentials: include }

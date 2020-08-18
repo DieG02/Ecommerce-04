@@ -23,7 +23,8 @@ const server = require('../api/src/app');
 const { conn } = require('../api/src/models/index.js');
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+// false: para que no se vacie la base de datos tras una modificacion en back
+conn.sync({ force: false }).then(() => {
   server.listen(1337, () => {
     console.log('Server is listening at port 1337'); // eslint-disable-line no-console
   });
