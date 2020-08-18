@@ -28,7 +28,6 @@ function CategoryAdd({ addCategory }){
               className="form-control" 
               min="0" 
               placeholder="Auto"
-              // value={id} 
               onChange={e => setId(e.target.value)}
               disabled
             />
@@ -38,7 +37,6 @@ function CategoryAdd({ addCategory }){
             <input 
               className="form-control" 
               placeholder="Nombre de la categoría"
-              // value={name} 
               onChange={e => setName(e.target.value)}
               required
             />
@@ -50,7 +48,6 @@ function CategoryAdd({ addCategory }){
           <input 
             className="form-control" 
             placeholder="Descripción de la categoría (Opcional)"
-            // value={description} 
             onChange={e => setDescription(e.target.value)}
           />
         </div>

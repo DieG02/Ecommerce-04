@@ -3,17 +3,17 @@ const { Usuario } = require('../models/index');
 const Sequelize = require ('sequelize');
 
 
-// La autenticación le llega por medio del FrontEnd ---> { credentials: include }
-
+// La autenticación le llega por medio del FrontEnd ---> { credentials: include } con fetch, axios lo hace por default
 function isAdmin(req, res, next){
     console.log(req.user.dataValues);
     if(req.isAuthenticated() && req.user.rol === 'Admin')  return next();
     else{
-        return res.json({
-            isAdmin: false
-        })
+      return res.json({
+          isAdmin: false
+      })
     }
 }
+
 
 /// ----- ADMINISTRADOR ----- ///
 
